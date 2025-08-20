@@ -10,7 +10,6 @@
 - **Framework / Library** : `Next(App Router)` (SEO 최적화, 빠른 페이지 로딩)
 - **UI** : `Tailwind CSS` (빠른 개발, 일관된 디자인, 협업 효율 향상)
 - **State Management** : `React Query`(서버 상태 관리), `Zustand`(UI 상태 관리)
-- **~~Form Handling** : `React Hook Form` (에러 처리, 유효성 검사 용이)+ `zod`(타입 안전성과 런타임 검증 동시 제공)~~
 - **Build Tool / Bundler** : `Vite` (빠른 개발 서버와 빌드 속도, 간편한 설정)
 - **HTTP Client** : `Axios` (간결한 API 요청 처리, 응답 인터셉터로 공통 로직 관리 용이)
 
