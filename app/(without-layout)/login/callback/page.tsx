@@ -1,7 +1,6 @@
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import StepTerms from '../_components/StepTerms';
+import { useEffect } from 'react';
 import { postAPI } from '@/domains/common/api';
 
 interface ResStatus {
@@ -18,7 +17,7 @@ export default function Page() {
       console.error('인증 코드가 없습니다.');
       return;
     }
-    console.log(code);
+
     router.push('/login/step');
     const postApi = async () => {
       try {
