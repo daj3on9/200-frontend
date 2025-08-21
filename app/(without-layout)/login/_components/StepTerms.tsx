@@ -2,15 +2,8 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import StepIndicator from './StepIndicator';
 
-interface TermsState {
-  [key: string]: boolean;
-  terms: boolean;
-  privacy: boolean;
-  age: boolean;
-  marketing: boolean;
-}
-
-type termsKey = 'terms' | 'privacy' | 'age' | 'marketing';
+type TermsKey = 'terms' | 'privacy' | 'age' | 'marketing';
+type TermsState = Record<TermsKey, boolean>;
 
 interface Props {
   step: number;
@@ -25,7 +18,7 @@ export default function StepTerms({ step, setStep }: Props) {
     marketing: false,
   });
 
-  const termsList: { key: termsKey; label: string }[] = [
+  const termsList: { key: TermsKey; label: string }[] = [
     { key: 'terms', label: '이용약관 동의 (필수)' },
     { key: 'privacy', label: '개인정보 수집 및 이용 동의 (필수)' },
     { key: 'age', label: '14세 이상입니다 (필수)' },
@@ -36,7 +29,7 @@ export default function StepTerms({ step, setStep }: Props) {
 
   const isAllChecked = Object.values(selected).every(Boolean);
 
-  const toggleItem = (key: termsKey) => {
+  const toggleItem = (key: TermsKey) => {
     setSelected((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
@@ -64,7 +57,7 @@ export default function StepTerms({ step, setStep }: Props) {
                 selected[item.key] ? 'font-bold text-black' : 'text-gray-500'
               }`}
             >
-              <span className="text-xl mr-2">v</span>
+              <span className="text-xl mr-2">✓</span>
               <span className={`transition font-medium`}>{item.label}</span>
               <span className="ml-auto"> &#62;</span>
             </div>
