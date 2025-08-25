@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import QueryProvider from '@/domains/common/providers/QueryProvider';
-import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'CHERRY',
@@ -21,14 +20,11 @@ export default function RootLayout({
       <head>
         <link
           rel="stylesheet"
-          as="style"
-          crossOrigin=""
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
         />
-        <Script src="https://cdn.amplitude.com/script/df960bf97518a03cf2930a317683c073.js" />
       </head>
-      <body className="antialiased">
-        <div className="layout-container">
+      <body className="antialiased bg-fill-95">
+        <div className="layout-container bg-static-white">
           <QueryProvider>{children}</QueryProvider>
         </div>
       </body>
