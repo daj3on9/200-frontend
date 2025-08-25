@@ -1,17 +1,7 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import QueryProvider from '@/domains/common/providers/QueryProvider';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'CHERRY',
@@ -28,11 +18,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <header></header>
-        <QueryProvider>{children}</QueryProvider>
+      <head>
+        <link
+          rel="stylesheet"
+          as="style"
+          crossOrigin=""
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+        />
+        <Script src="https://cdn.amplitude.com/script/df960bf97518a03cf2930a317683c073.js" />
+      </head>
+      <body className="antialiased">
+        <div className="layout-container">
+          <QueryProvider>{children}</QueryProvider>
+        </div>
       </body>
     </html>
   );
