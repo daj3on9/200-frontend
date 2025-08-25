@@ -15,6 +15,69 @@
     Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
     'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     sans-serif;
+
+  /* Static */
+  --color-static-white: #ffffff;
+  --color-static-black: #000000;
+
+  /* Primary */
+  --color-primary-normal: #f44236;
+  --color-primary-strong: #de3c31;
+  --color-primary-heavy: #ad2f26;
+
+  /* Secondary */
+  --color-secondary-normal: #01a83f;
+  --color-secondary-strong: #019939;
+  --color-secondary-heavy: #01772d;
+
+  /* Fill */
+  --color-fill-5: #171717;
+  --color-fill-10: #222225;
+  --color-fill-20: #383d44;
+  --color-fill-30: #4a5059;
+  --color-fill-40: #5f6773;
+  --color-fill-50: #7a8493;
+  --color-fill-60: #8691a2;
+  --color-fill-70: #9ea7b5;
+  --color-fill-80: #aeb5c1;
+  --color-fill-90: #cad1db;
+  --color-fill-95: #e1e5eb;
+  --color-fill-98: #edeff2;
+  --color-fill-99: #f3f4f6;
+  /* Label */
+  --color-label-black: #000000;
+  --color-label-normal: #222225;
+  --color-label-subnormal: #383d44;
+  --color-label-alternative: #4a5059;
+  --color-label-assistive: #9b9b9b;
+  --color-label-placeholder: #c4c4c4;
+  --color-label-disable: #dcdcdc;
+  --color-label-subtle: #edeff2;
+  --color-label-subtler: #f4f4f4;
+  --color-label-link: #0068c3;
+
+  /* Interaction */
+  --color-interaction-inactive: #e1e5eb;
+  --color-interaction-disable: #cad1db;
+  --color-interaction-pressed-white: #cad1db;
+  --color-interaction-pressed-primary: #ad2f26;
+  --color-interaction-pressed-secondary: #01772d;
+
+  /* Line */
+  --color-line-black: #000000;
+  --color-line-strong: #8a8a8a;
+  --color-line-normal: #9b9b9b;
+  --color-line-subtle: #b0b0b0;
+  --color-line-subtler: #dcdcdc;
+
+  /* Divider */
+  --color-divider-strong: #edeff2;
+  --color-divider-normal: #f4f4f4;
+
+  /* Status */
+  --color-status-positive: #03aa5a;
+  --color-status-cautionary: #ff9200;
+  --color-status-negative: #e52222;
 }
 
 @layer utilities {
