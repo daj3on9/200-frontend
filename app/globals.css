@@ -1,1 +1,31 @@
 @import 'tailwindcss';
+
+:root {
+  --container-width: 390px;
+  --content-width: 360px;
+  --margin: 15px;
+  --gutter: 12px;
+}
+
+.layout-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--container-width);
+  height: 100dvh;
+  padding-left: var(--margin);
+  padding-right: var(--margin);
+}
+
+/* 컬럼 2개 */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gutter);
+}
+
+/* 컬럼 3개 */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter);
+}
