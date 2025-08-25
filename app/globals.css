@@ -3,6 +3,7 @@
 @layer base {
   body {
     font-style: normal;
+    font-family: var(--font-sans);
   }
 }
 
@@ -127,14 +128,14 @@
   /* Titles */
   .title1-b {
     font-size: 18px;
-    font-weight: 600;
-    line-height: 150%;
-    letter-spacing: -0.04em;
+    font-weight: 700;
+    line-height: 150%; /* 27px */
+    letter-spacing: -0.72px;
   }
 
   .title1-sb {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 150%; /* 27px */
     letter-spacing: -0.72px;
   }
