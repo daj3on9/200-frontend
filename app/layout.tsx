@@ -23,8 +23,8 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
         />
       </head>
-      <body className="antialiased bg-fill-95">
-        <div className="layout-container bg-static-white">
+      <body className="antialiased bg-Fill-95">
+        <div className="layout-container bg-Static-White">
           <QueryProvider>{children}</QueryProvider>
         </div>
       </body>
