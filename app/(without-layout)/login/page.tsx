@@ -12,34 +12,39 @@ export default function Page() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-white">
-      <div
-        className="absolute top-4 left-4 p-2 border border-gray-300 rounded cursor-pointer hover:bg-gray-100"
-        onClick={() => router.back()}
-      >
-        뒤로가기
+    <div className="w-full min-h-screen bg-Static-White inline-flex flex-col justify-between items-center overflow-hidden">
+      <div className="w-full px-3.5 py-3 bg-Static-White inline-flex justify-start">
+        <div className="w-6 h-6 overflow-hidden">
+          <Image
+            src={'/icons/leftarrow.svg'}
+            alt="뒤로가기 버튼"
+            width={18}
+            height={18}
+          />
+        </div>
       </div>
-
-      <div className="flex flex-col items-center text-center">
-        <Image
-          src="/Logo.png"
-          alt="체리 로고"
-          width={200}
-          height={200}
-          className="mx-auto"
-        />
-        <p className="mt-4 text-lg font-medium text-gray-700">
-          로그인이 필요한 서비스 입니다.
-        </p>
+      <div className="flex flex-col justify-center items-center gap-4">
+        <div className="w-16 h-16 relative overflow-hidden">
+          <Image
+            src={'/icons/Logo.svg'}
+            alt="체리 로고"
+            width={100}
+            height={100}
+          />
+        </div>
+        <div className="text-center justify-start text-Label-Subnormal text-2xl font-bold font-['Pretendard'] leading-7">
+          로그인이 필요한
+          <br />
+          서비스 입니다.
+        </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 w-full">
-        <button
+      <div className="self-stretch py-5 bg-yellow-300 flex flex-col justify-center items-center">
+        <div
+          className="justify-start text-Label-Normal text-base font-bold leading-normal cursor-pointer"
           onClick={kakaoLogin}
-          className="w-full py-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold text-lg"
         >
-          카카오로 시작
-        </button>
+          카카오로 시작하기
+        </div>
       </div>
     </div>
   );
