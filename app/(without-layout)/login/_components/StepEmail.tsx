@@ -6,44 +6,50 @@ import { postAPI } from '@/domains/common/api';
 interface Props {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
-  nickname: string;
-  setNickname: Dispatch<SetStateAction<string>>;
-  onSubmit: () => void;
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
 }
+
 interface ResStatus {
   isDuplicate: boolean;
 }
-export default function StepNickname({
-  step,
-  setStep,
-  nickname,
-  setNickname,
-  onSubmit,
-}: Props) {
+
+export default function StepEmail({ step, setStep, email, setEmail }: Props) {
   const [message, setMessage] = useState('중복 확인이 필요합니다.');
   const [status, setStatus] = useState<
     'default' | 'valid' | 'duplicate' | 'invalid'
   >('default');
 
   const handleCheck = async () => {
-    if (!nickname) {
-      setMessage('닉네임을 입력해주세요');
+    if (!email) {
+      setMessage('이메일을 입력해주세요');
       setStatus('invalid');
       return;
     }
+
+    const emailRegex =
+      /^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,63}$/;
+
+    if (!emailRegex.test(email)) {
+      setMessage('올바른 이메일 형식을 입력해주세요');
+      setStatus('invalid');
+      return;
+    }
+
     setStatus('valid');
+
     // TODO : api 연결 후 주석 풀기
     // try {
-    //   const res = await postAPI<ResStatus, { nickname: string }>(
-    //     '/api/check-nickname',
-    //     { nickname }
+    //   const res = await postAPI<ResStatus, { email: string }>(
+    //     '/api/check-email',
+    //     { email }
     //   );
 
     //   if (res?.isDuplicate) {
-    //     setMessage('동일한 닉네임이 존재합니다');
+    //     setMessage('동일한 이메일이 존재합니다');
     //     setStatus('duplicate');
     //   } else {
-    //     setMessage('사용 가능한 닉네임입니다');
+    //     setMessage('사용 가능한 이메일입니다');
     //     setStatus('valid');
     //   }
     // } catch (error) {
@@ -52,27 +58,21 @@ export default function StepNickname({
     // }
   };
 
-  const handleJoin = () => {
-    onSubmit();
-  };
-
   return (
     <div className="">
       <div className="w-72">
-        <h2 className="text-xl font-bold mb-4">
-          사용할 닉네임을 입력해주세요!
-        </h2>
+        <h2 className="text-xl font-bold mb-4">이메일을 입력해주세요!</h2>
         <div className="w-full max-w-md mx-auto mt-10 space-y-2">
           <div className="flex items-center border border-gray-100 bg-gray-100 rounded-md overflow-hidden h-12">
             <input
-              type="text"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-              placeholder="닉네임을 입력해주세요"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="이메일을 입력해주세요"
               className="flex-grow px-4 h-full text-sm outline-none text-gray-500"
             />
             <button
-              className="flex items-center justify-center text-black px-3 h-full text-sm font-medium "
+              className=" text-black px-6 h-full text-sm font-medium"
               onClick={handleCheck}
             >
               확인
@@ -98,7 +98,7 @@ export default function StepNickname({
             status === 'valid' ? 'bg-black' : 'bg-gray-400'
           }`}
           disabled={status !== 'valid'}
-          onClick={handleJoin}
+          onClick={() => setStep(step + 1)}
         >
           다음
         </button>

@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 import { postAPI } from '@/domains/common/api';
 
 interface ResStatus {
-  id: string | null;
+  exist: boolean;
+  ProviderID: string;
 }
 
 export default function Page() {
@@ -25,11 +26,15 @@ export default function Page() {
           '/api/auth/kakao',
           { code }
         );
+        const ProviderID = res?.ProviderID as string;
 
-        if (res?.id) {
+        if (res?.exist) {
+          await postAPI<ResStatus, { ProviderID: string }>('/api/auth/kakao', {
+            ProviderID,
+          });
           router.push('/');
         } else {
-          router.push('/login/step');
+          router.push(`/login/step?ID=${ProviderID}`);
         }
       } catch (error) {
         console.error('카카오 인증 오류:', error);
