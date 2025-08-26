@@ -11,6 +11,7 @@ export default function LoginNextBtn({ setStep, canProceed }: Props) {
         className={`w-full py-4  text-Static-White text-base font-bold bg-Primary-Normal ${
           canProceed ? '' : 'opacity-30'
         }`}
+        disabled={!canProceed}
         onClick={() => setStep((prev) => prev + 1)}
       >
         다음
