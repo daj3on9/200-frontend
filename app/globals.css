@@ -244,6 +244,13 @@
   padding-right: var(--margin);
 }
 
+.layout-container-no-padding {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--container-width);
+  height: 100dvh;
+}
+
 /* 컬럼 2개 */
 .grid-2 {
   display: grid;

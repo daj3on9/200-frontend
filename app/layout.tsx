@@ -24,7 +24,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased bg-Fill-95">
-        <div className="layout-container bg-Static-White">
+        <div className="layout-container-no-padding bg-Static-White">
           <QueryProvider>{children}</QueryProvider>
         </div>
       </body>
