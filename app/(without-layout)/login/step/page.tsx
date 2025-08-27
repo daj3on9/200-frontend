@@ -7,7 +7,8 @@ import StepEmail from '../_components/StepEmail';
 import { useSearchParams } from 'next/navigation';
 import { postAPI } from '@/domains/common/api';
 import StepEnd from '../_components/StepEnd';
-import Image from 'next/image';
+
+import LeftArrowIcon from '@/public/icons/leftarrow.svg';
 
 function StepComponent() {
   const router = useRouter();
@@ -47,11 +48,10 @@ function StepComponent() {
           }
         }}
       >
-        <Image
-          src={'/icons/leftarrow.svg'}
-          alt="뒤로가기 버튼"
+        <LeftArrowIcon
           width={18}
           height={18}
+          className="fill-Fill-10"
         />
       </div>
 

@@ -1,8 +1,9 @@
 'use client';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import StepIndicator from './StepIndicator';
-import Image from 'next/image';
 import LoginNextBtn from './LoginNextBtn';
+import CheckIcon from '@/public/icons/check.svg';
+import ArrowRightIcon from '@/public/icons/arrow-right.svg';
 
 type TermsKey = 'terms' | 'privacy' | 'age' | 'marketing';
 type TermsState = Record<TermsKey, boolean>;
@@ -63,23 +64,17 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
             >
               <div className="flex justify-start items-center gap-2">
                 <div className="w-6 h-6 relative overflow-hidden text-Label-Alternative">
-                  <svg
-                    width="24"
-                    height="24"
-                    fill="currentColor"
+                  <CheckIcon
+                    width={24}
+                    height={24}
                     className={`cursor-pointer ${
                       selected[item.key]
                         ? // ? 'text-[var(--color-Primary-Normal)]'
-                          'text-Primary-Normal'
-                        : 'text-Label-Alternative'
+                          'fill-Primary-Normal'
+                        : 'fill-Fill-80'
                     }`}
                     onClick={() => toggleItem(item.key)}
-                  >
-                    <path
-                      xmlns="http://www.w3.org/2000/svg"
-                      d="M4.52997 12.97C4.38779 12.8375 4.19975 12.7654 4.00545 12.7688C3.81114 12.7723 3.62576 12.851 3.48835 12.9884C3.35093 13.1258 3.27222 13.3112 3.26879 13.5055C3.26537 13.6998 3.33749 13.8878 3.46997 14.03L7.96997 18.53C8.11059 18.6705 8.30122 18.7493 8.49997 18.7493C8.69872 18.7493 8.88934 18.6705 9.02997 18.53L20.03 7.53C20.1625 7.38782 20.2346 7.19978 20.2311 7.00548C20.2277 6.81118 20.149 6.62579 20.0116 6.48838C19.8742 6.35096 19.6888 6.27225 19.4945 6.26882C19.3002 6.2654 19.1121 6.33752 18.97 6.47L8.49997 16.94L4.52997 12.97Z"
-                    />
-                  </svg>
+                  />
                 </div>
                 <div className="flex justify-start items-center gap-0.5">
                   <div className="justify-start text-Label-Alternative text-sm font-medium font-['Pretendard'] leading-tight">
@@ -88,11 +83,10 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
                 </div>
               </div>
               <div className="w-4 h-4 ml-auto">
-                <Image
-                  src={'/icons/arrow-right.svg'}
-                  alt="약관 상세 내용 확인 버튼"
+                <ArrowRightIcon
                   width={16}
                   height={16}
+                  className="fill-Fill-50"
                 />
               </div>
             </div>
@@ -105,11 +99,10 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
           className="flex gap-2 text-Label-Alternative text-sm font-medium font-['Pretendard'] leading-tight cursor-pointer"
           onClick={toggleAll}
         >
-          <Image
-            src={'/icons/check.svg'}
-            alt="전체 동의하기 체크 버튼"
+          <CheckIcon
             width={17}
             height={17}
+            className="fill-Fill-50"
           />
           전체 동의하기
         </button>
