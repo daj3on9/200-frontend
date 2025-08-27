@@ -84,14 +84,16 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="이메일을 입력해주세요"
-              className="w-56 justify-start text-Label-Normal text-base font-medium font-['Noto_Sans_KR'] leading-normal"
+              className="flex-grow px-4 h-full text-sm outline-none text-gray-500"
             />
-            <button
-              className="justify-start text-Label-Assisitive text-xs font-medium font-['Pretendard'] leading-none"
-              onClick={handleCheck}
-            >
-              확인
-            </button>
+            {status === 'default' && (
+              <button
+                className="justify-start body3-m cursor-pointer"
+                onClick={handleCheck}
+              >
+                확인
+              </button>
+            )}
           </div>
           <p
             className={`body3-m ${

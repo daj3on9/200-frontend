@@ -91,8 +91,8 @@ export default function StepNickname({
         <h2 className="h3-b mb-[48px]">
           사용할 닉네임을 <br /> 입력해주세요!
         </h2>
-        <div className="w-full max-w-md mx-auto mt-10 space-y-2">
-          <div className="flex items-center border border-gray-100 bg-gray-100 rounded-md overflow-hidden h-12">
+        <div className="h-20 flex flex-col w-full max-w-md mx-auto mt-10 space-y-2">
+          <div className="self-stretch h-12 p-4 bg-Fill-99 rounded-2xl inline-flex justify-between items-center overflow-hidden">
             <input
               type="text"
               value={nickname}
@@ -100,12 +100,14 @@ export default function StepNickname({
               placeholder="닉네임을 입력해주세요"
               className="flex-grow px-4 h-full text-sm outline-none text-gray-500"
             />
-            <button
-              className="flex items-center justify-center px-3 h-full body3-m "
-              onClick={handleCheck}
-            >
-              확인
-            </button>
+            {status === 'default' && (
+              <button
+                className="flex items-center justify-center px-3 h-full body3-m cursor-pointer"
+                onClick={handleCheck}
+              >
+                확인
+              </button>
+            )}
           </div>
           <p
             className={`body3-m ${
