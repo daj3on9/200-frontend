@@ -49,9 +49,9 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
   };
 
   return (
-    <div className="flex flex-col justify-start items-start gap-8">
+    <div className="flex flex-col justify-start items-start gap-12">
       <div className="w-90">
-        <h2 className="text-xl font-bold mb-[48px]">
+        <h2 className="h3-b mb-[48px] text-center">
           체리에 오신 것을 <br />
           환영합니다!
         </h2>
@@ -82,9 +82,7 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
                   </svg>
                 </div>
                 <div className="flex justify-start items-center gap-0.5">
-                  <div className="justify-start text-Label-Alternative text-sm font-medium font-['Pretendard'] leading-tight">
-                    {item.label}
-                  </div>
+                  <div className="justify-start body2-m">{item.label}</div>
                 </div>
               </div>
               <div className="w-4 h-4 ml-auto">
@@ -102,7 +100,7 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
 
       <div className="p-4 bg-Fill-99 rounded-[999px] inline-flex justify-center items-center gap-3 my-[84px] cursor-pointer ml-[50%] translate-x-[-50%]">
         <button
-          className="flex gap-2 text-Label-Alternative text-sm font-medium font-['Pretendard'] leading-tight cursor-pointer"
+          className="flex gap-2 title3-m cursor-pointer"
           onClick={toggleAll}
         >
           <Image

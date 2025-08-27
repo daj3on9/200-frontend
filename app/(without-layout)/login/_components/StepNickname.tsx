@@ -88,7 +88,7 @@ export default function StepNickname({
   return (
     <div className="">
       <div className="w-90">
-        <h2 className="text-xl font-bold mb-4">
+        <h2 className="h3-b mb-[48px]">
           사용할 닉네임을 <br /> 입력해주세요!
         </h2>
         <div className="w-full max-w-md mx-auto mt-10 space-y-2">
@@ -101,14 +101,14 @@ export default function StepNickname({
               className="flex-grow px-4 h-full text-sm outline-none text-gray-500"
             />
             <button
-              className="flex items-center justify-center text-black px-3 h-full text-sm font-medium "
+              className="flex items-center justify-center px-3 h-full body3-m "
               onClick={handleCheck}
             >
               확인
             </button>
           </div>
           <p
-            className={`text-sm ${
+            className={`body3-m ${
               status === 'duplicate' || status === 'invalid'
                 ? 'text-red-600'
                 : 'text-gray-500'

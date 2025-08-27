@@ -55,7 +55,7 @@ function StepComponent() {
         />
       </div>
 
-      <div className="">
+      <div className="h-[400px]">
         {step === 0 && (
           <StepTerms
             step={0}
