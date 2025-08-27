@@ -85,9 +85,8 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
               <div className="w-4 h-4 ml-auto">
                 <ArrowRightIcon
                   width={16}
-                  hegiht={16}
+                  height={16}
                   className="fill-Fill-50"
-                  alt="약관 상세 내용 확인 버튼"
                 />
               </div>
             </div>
@@ -102,9 +101,8 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
         >
           <CheckIcon
             width={17}
-            hegiht={17}
+            height={17}
             className="fill-Fill-50"
-            alt="전체 동의하기 체크 버튼"
           />
           전체 동의하기
         </button>

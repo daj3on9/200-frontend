@@ -51,7 +51,6 @@ function StepComponent() {
         <LeftArrowIcon
           width={18}
           height={18}
-          alt="뒤로가기 버튼"
           className="fill-Fill-10"
         />
       </div>

@@ -17,7 +17,6 @@ export default function Page() {
       <div className="w-full px-3.5 py-3 bg-Static-White inline-flex justify-start">
         <div className="w-6 h-6 overflow-hidden">
           <LeftArrowIcon
-            alt="뒤로가기 버튼"
             width={18}
             height={18}
             className="fill-Fill-10"
