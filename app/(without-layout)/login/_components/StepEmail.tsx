@@ -88,6 +88,7 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
             />
             {status === 'default' && (
               <button
+                type="button"
                 className="justify-start body3-m cursor-pointer"
                 onClick={handleCheck}
               >

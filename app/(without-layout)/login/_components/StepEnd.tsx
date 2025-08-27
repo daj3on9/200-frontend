@@ -18,8 +18,9 @@ export default function StepEnd({ nickname }: Props) {
 
       <div className="absolute bottom-0 left-0 w-full">
         <button
+          type="button"
           className={
-            'w-full py-4 text-Static-White text-base font-bold bg-Primary-Normal cursor-pointer'
+            'w-full py-4 text-Static-White title2-b bg-Primary-Normal cursor-pointer'
           }
           onClick={() => router.push('/')}
         >

@@ -1,5 +1,5 @@
 'use client';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import StepIndicator from './StepIndicator';
 import LoginNextBtn from './LoginNextBtn';
 import CheckIcon from '@/public/icons/check.svg';
@@ -46,8 +46,12 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
       privacy: newValue,
       marketing: newValue,
     });
-    setAgreedTerms((prev) => !prev);
+    setAgreedTerms(newValue);
   };
+
+  useEffect(() => {
+    setAgreedTerms(canProceed);
+  }, [canProceed, setAgreedTerms]);
 
   return (
     <div className="flex flex-col justify-start items-start gap-12">
@@ -69,8 +73,7 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
                     height={24}
                     className={`cursor-pointer ${
                       selected[item.key]
-                        ? // ? 'text-[var(--color-Primary-Normal)]'
-                          'fill-Primary-Normal'
+                        ? 'fill-Primary-Normal'
                         : 'fill-Fill-80'
                     }`}
                     onClick={() => toggleItem(item.key)}
@@ -95,6 +98,7 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
       {!isAllChecked && (
         <div className="p-4 bg-Fill-99 rounded-[999px] inline-flex justify-center items-center gap-3 my-[84px] cursor-pointer ml-[50%] translate-x-[-50%]">
           <button
+            type="button"
             className="flex gap-2 title3-m cursor-pointer"
             onClick={toggleAll}
           >

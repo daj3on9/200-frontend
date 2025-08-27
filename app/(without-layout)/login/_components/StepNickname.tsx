@@ -102,6 +102,7 @@ export default function StepNickname({
             />
             {status === 'default' && (
               <button
+                type="button"
                 className="flex items-center justify-center px-3 h-full body3-m cursor-pointer"
                 onClick={handleCheck}
               >
