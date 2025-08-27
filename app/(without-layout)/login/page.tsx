@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import LeftArrowIcon from '@/public/icons/leftarrow.svg';
 
 export default function Page() {
   const router = useRouter();
@@ -15,11 +16,11 @@ export default function Page() {
     <div className="w-full min-h-screen bg-Static-White inline-flex flex-col justify-between items-center overflow-hidden">
       <div className="w-full px-3.5 py-3 bg-Static-White inline-flex justify-start">
         <div className="w-6 h-6 overflow-hidden">
-          <Image
-            src={'/icons/leftarrow.svg'}
+          <LeftArrowIcon
             alt="뒤로가기 버튼"
             width={18}
             height={18}
+            className="fill-Fill-10"
           />
         </div>
       </div>
