@@ -1,6 +1,6 @@
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { postAPI } from '@/domains/common/api';
 
 interface ResStatus {
@@ -8,7 +8,7 @@ interface ResStatus {
   ProviderID: string;
 }
 
-export default function Page() {
+function Callback() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
@@ -24,7 +24,7 @@ export default function Page() {
       try {
         const res = await postAPI<ResStatus, { code: string }>(
           '/api/auth/kakao',
-          { code }
+          { code },
         );
         const ProviderID = res?.ProviderID as string;
 
@@ -49,5 +49,13 @@ export default function Page() {
     <div className="flex items-center justify-center h-screen">
       <p className="text-lg text-gray-600">로그인 처리 중입니다...</p>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <Callback />
+    </Suspense>
   );
 }
