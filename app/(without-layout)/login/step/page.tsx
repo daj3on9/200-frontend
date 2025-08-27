@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import StepTerms from '../_components/StepTerms';
 import StepNickname from '../_components/StepNickname';
 import StepEmail from '../_components/StepEmail';
@@ -9,7 +9,7 @@ import { postAPI } from '@/domains/common/api';
 import StepEnd from '../_components/StepEnd';
 import Image from 'next/image';
 
-export default function Page() {
+function StepComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const ProviderID = searchParams.get('ID');
@@ -83,5 +83,13 @@ export default function Page() {
         {step === 3 && <StepEnd nickname={nickname} />}
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <StepComponent />
+    </Suspense>
   );
 }
