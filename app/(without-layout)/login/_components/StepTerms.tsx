@@ -97,22 +97,22 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
           ))}
         </div>
       </div>
-
-      <div className="p-4 bg-Fill-99 rounded-[999px] inline-flex justify-center items-center gap-3 my-[84px] cursor-pointer ml-[50%] translate-x-[-50%]">
-        <button
-          className="flex gap-2 title3-m cursor-pointer"
-          onClick={toggleAll}
-        >
-          <Image
-            src={'/icons/check.svg'}
-            alt="전체 동의하기 체크 버튼"
-            width={17}
-            height={17}
-          />
-          전체 동의하기
-        </button>
-      </div>
-
+      {!isAllChecked && (
+        <div className="p-4 bg-Fill-99 rounded-[999px] inline-flex justify-center items-center gap-3 my-[84px] cursor-pointer ml-[50%] translate-x-[-50%]">
+          <button
+            className="flex gap-2 title3-m cursor-pointer"
+            onClick={toggleAll}
+          >
+            <Image
+              src={'/icons/check.svg'}
+              alt="전체 동의하기 체크 버튼"
+              width={17}
+              height={17}
+            />
+            전체 동의하기
+          </button>
+        </div>
+      )}
       <StepIndicator step={step} />
 
       <LoginNextBtn
