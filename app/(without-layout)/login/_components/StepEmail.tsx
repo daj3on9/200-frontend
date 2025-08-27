@@ -1,5 +1,5 @@
 'use client';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import StepIndicator from './StepIndicator';
 import { postAPI } from '@/domains/common/api';
 import LoginNextBtn from './LoginNextBtn';
@@ -64,6 +64,12 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
     // setCanProceed(false);
     // }
   };
+
+  useEffect(() => {
+    setStatus('default');
+    setMessage('중복 확인이 필요합니다.');
+    setCanProceed(false);
+  }, [email]);
 
   return (
     <div className="">

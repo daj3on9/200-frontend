@@ -1,5 +1,5 @@
 'use client';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import StepIndicator from './StepIndicator';
 import { postAPI } from '@/domains/common/api';
 import LoginNextBtn from './LoginNextBtn';
@@ -78,6 +78,12 @@ export default function StepNickname({
   const handleJoin = () => {
     onSubmit();
   };
+
+  useEffect(() => {
+    setStatus('default');
+    setMessage('중복 확인이 필요합니다.');
+    setCanProceed(false);
+  }, [nickname]);
 
   return (
     <div className="">
