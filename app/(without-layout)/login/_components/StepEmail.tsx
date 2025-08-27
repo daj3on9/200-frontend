@@ -1,7 +1,8 @@
 'use client';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import StepIndicator from './StepIndicator';
 import { postAPI } from '@/domains/common/api';
+import LoginNextBtn from './LoginNextBtn';
 
 interface Props {
   step: number;
@@ -19,11 +20,13 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
   const [status, setStatus] = useState<
     'default' | 'valid' | 'duplicate' | 'invalid'
   >('default');
+  const [canProceed, setCanProceed] = useState(false);
 
   const handleCheck = async () => {
     if (!email) {
       setMessage('이메일을 입력해주세요');
       setStatus('invalid');
+      setCanProceed(false);
       return;
     }
 
@@ -33,10 +36,12 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
     if (!emailRegex.test(email)) {
       setMessage('올바른 이메일 형식을 입력해주세요');
       setStatus('invalid');
+      setCanProceed(false);
       return;
     }
 
     setStatus('valid');
+    setCanProceed(true);
 
     // TODO : api 연결 후 주석 풀기
     // try {
@@ -47,32 +52,42 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
 
     //   if (res?.isDuplicate) {
     //     setMessage('동일한 이메일이 존재합니다');
-    //     setStatus('duplicate');
+    //     setStatus('invalid');
+    // setCanProceed(false);
     //   } else {
     //     setMessage('사용 가능한 이메일입니다');
-    //     setStatus('valid');
+    //     setCanProceed(true);
     //   }
     // } catch (error) {
     //   setMessage('오류가 발생했습니다');
     //   setStatus('default');
+    // setCanProceed(false);
     // }
   };
 
+  useEffect(() => {
+    setStatus('default');
+    setMessage('중복 확인이 필요합니다.');
+    setCanProceed(false);
+  }, [email]);
+
   return (
     <div className="">
-      <div className="w-72">
-        <h2 className="text-xl font-bold mb-4">이메일을 입력해주세요!</h2>
-        <div className="w-full max-w-md mx-auto mt-10 space-y-2">
-          <div className="flex items-center border border-gray-100 bg-gray-100 rounded-md overflow-hidden h-12">
+      <div className="w-90">
+        <h2 className="text-Label-Subnormal text-2xl font-bold">
+          이메일을 <br /> 입력해주세요!
+        </h2>
+        <div className="h-20 flex flex-col w-full max-w-md mx-auto mt-10 space-y-2">
+          <div className="self-stretch h-12 p-4 bg-Fill-99 rounded-2xl inline-flex justify-between items-center overflow-hidden">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="이메일을 입력해주세요"
-              className="flex-grow px-4 h-full text-sm outline-none text-gray-500"
+              className="w-56 justify-start text-Label-Normal text-base font-medium font-['Noto_Sans_KR'] leading-normal"
             />
             <button
-              className=" text-black px-6 h-full text-sm font-medium"
+              className="justify-start text-Label-Assisitive text-xs font-medium font-['Pretendard'] leading-none"
               onClick={handleCheck}
             >
               확인
@@ -80,9 +95,9 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
           </div>
           <p
             className={`text-sm ${
-              status === 'duplicate' || status === 'invalid'
-                ? 'text-red-600'
-                : 'text-gray-500'
+              status === 'invalid' || status === 'duplicate'
+                ? 'text-Primary-Normal'
+                : 'text-Label-Alternative'
             }`}
           >
             {message}
@@ -92,17 +107,10 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
 
       <StepIndicator step={step} />
 
-      <div className="absolute bottom-0 left-0 w-full">
-        <button
-          className={`w-full py-4 text-white text-lg font-semibold ${
-            status === 'valid' ? 'bg-black' : 'bg-gray-400'
-          }`}
-          disabled={status !== 'valid'}
-          onClick={() => setStep(step + 1)}
-        >
-          다음
-        </button>
-      </div>
+      <LoginNextBtn
+        setStep={setStep}
+        canProceed={canProceed}
+      />
     </div>
   );
 }
