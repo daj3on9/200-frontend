@@ -1,15 +1,15 @@
+import Header from '@/domains/common/components/header';
 import React from 'react';
 
-export default function Layout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <header>HEADER</header>
-      <div className="border-1 p-2">{children}</div>
-      <footer>FOOTER</footer>
-    </div>
+    <>
+      <Header
+        showLogo
+        showCart
+        showHamburger
+      />
+      <main>{children}</main>
+    </>
   );
 }
