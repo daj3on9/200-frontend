@@ -1,7 +1,7 @@
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
-import { postAPI } from '@/domains/common/api';
+import { getAPI } from '@/domains/common/api';
 import { useAuthStore } from '@/domains/common/store/authStore';
 
 interface ResStatus {
@@ -15,6 +15,7 @@ function Callback() {
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
   const { setTokens } = useAuthStore.getState();
+  // const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
     if (!code) {
@@ -24,9 +25,8 @@ function Callback() {
 
     const postApi = async () => {
       try {
-        const res = await postAPI<ResStatus, { code: string }>(
-          '/api/v1/auth/callback',
-          { code }
+        const res = await getAPI<ResStatus>(
+          `/api/v1/auth/callback?code=${code}`
         );
         if (res) {
           const TempToken = res.tempToken;
