@@ -18,7 +18,7 @@ interface ResStatus {
 
 interface Payload {
   tempToken: string;
-  email: string;
+  emailAddress: string;
   nickname: string;
   agreedTerms: boolean;
 }
@@ -40,13 +40,13 @@ function StepComponent() {
     }
     const payload = {
       tempToken,
-      email,
+      emailAddress: email,
       nickname,
       agreedTerms,
     };
 
     try {
-      const res = await postAPI<ResStatus, Payload>('/signup', payload);
+      const res = await postAPI<ResStatus, Payload>('/auth/signup', payload);
       if (res) {
         setTokens(res.accessToken as string, res.refreshToken as string);
       }
