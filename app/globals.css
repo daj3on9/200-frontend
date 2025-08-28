@@ -80,6 +80,30 @@
   --color-Status-Positive: #03aa5a;
   --color-Status-Cautionary: #ff9200;
   --color-Status-Negative: #e52222;
+
+  /* Border-Radius */
+  --radius-xs: 4px;
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --radius-xl: 24px;
+
+  /* Spacing */
+  /* margin */
+  --spacing-m-xxs: 2px;
+  --spacing-m-xs: 4px;
+  --spacing-m-s: 8px;
+  --spacing-m-m: 12px;
+  --spacing-m-l: 16px;
+  --spacing-m-xl: 20px;
+  --spacing-m-xxl: 24px;
+
+  /* Padding */
+  --spacing-p-xs: 2px;
+  --spacing-p-s: 4px;
+  --spacing-p-m: 8px;
+  --spacing-p-l: 12px;
+  --spacing-p-xl: 16px;
 }
 
 @layer utilities {
