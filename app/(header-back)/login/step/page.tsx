@@ -7,33 +7,53 @@ import StepEmail from '../_components/StepEmail';
 import { useSearchParams } from 'next/navigation';
 import { postAPI } from '@/domains/common/api';
 import StepEnd from '../_components/StepEnd';
-
 import LeftArrowIcon from '@/public/icons/leftarrow.svg';
+import { useAuthStore } from '@/domains/common/store/authStore';
+
+interface ResStatus {
+  accessToken?: string;
+  refreshToken?: string;
+  tempToken?: string;
+}
+
+interface Payload {
+  tempToken: string;
+  email: string;
+  nickname: string;
+  agreedTerms: boolean;
+}
 
 function StepComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const ProviderID = searchParams.get('ID');
+  const tempToken = searchParams.get('ID');
   const [step, setStep] = useState(0);
   const [agreedTerms, setAgreedTerms] = useState(false);
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
+  const { setTokens } = useAuthStore.getState();
 
   const handleSubmit = async () => {
+    if (!tempToken) {
+      console.error('tempToken이 없습니다.');
+      return;
+    }
     const payload = {
-      ProviderID,
+      tempToken,
       email,
       nickname,
       agreedTerms,
     };
-    setStep(step + 1);
-    // TODO : API 연결 후 주석 풀기
-    // try {
-    //   const res = await postAPI('/api/auth/kakao/register', payload);
-    //   setStep(step + 1);
-    // } catch (error) {
-    //   console.error('회원 가입 오류 :', error);
-    // }
+
+    try {
+      const res = await postAPI<ResStatus, Payload>('/signup', payload);
+      if (res) {
+        setTokens(res.accessToken as string, res.refreshToken as string);
+      }
+      setStep(step + 1);
+    } catch (error) {
+      console.error('회원 가입 오류 :', error);
+    }
   };
 
   return (
