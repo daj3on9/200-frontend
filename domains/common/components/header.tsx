@@ -1,6 +1,7 @@
 'use client';
 import LeftArrowIcon from '@/public/icons/leftarrow.svg';
 import HamburgerIcon from '@/public/icons/hamburger.svg';
+import BagIcon from '@/public/icons/bag.svg';
 import Image from 'next/image';
 
 type HeaderProps = {
@@ -46,7 +47,7 @@ export default function Header({
       </div>
 
       <div className="flex items-center gap-3">
-        {showCart && <HamburgerIcon className="w-5 h-5" />}
+        {showCart && <BagIcon className="w-5 h-5" />}
         {showHamburger && <HamburgerIcon className="w-5 h-5" />}
       </div>
     </header>
