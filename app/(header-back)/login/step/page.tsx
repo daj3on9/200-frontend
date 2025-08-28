@@ -20,7 +20,6 @@ interface Payload {
   tempToken: string;
   emailAddress: string;
   nickname: string;
-  agreedTerms: boolean;
 }
 
 function StepComponent() {
@@ -28,7 +27,6 @@ function StepComponent() {
   const searchParams = useSearchParams();
   const tempToken = searchParams.get('ID');
   const [step, setStep] = useState(0);
-  const [agreedTerms, setAgreedTerms] = useState(false);
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
   const { setTokens } = useAuthStore.getState();
@@ -42,7 +40,6 @@ function StepComponent() {
       tempToken,
       emailAddress: email,
       nickname,
-      agreedTerms,
     };
 
     try {
@@ -80,7 +77,6 @@ function StepComponent() {
           <StepTerms
             step={0}
             setStep={setStep}
-            setAgreedTerms={setAgreedTerms}
           />
         )}
         {step === 1 && (
