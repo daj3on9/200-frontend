@@ -25,9 +25,7 @@ function Callback() {
 
     const postApi = async () => {
       try {
-        const res = await getAPI<ResStatus>(
-          `/api/v1/auth/callback?code=${code}`
-        );
+        const res = await getAPI<ResStatus>(`/auth/callback?code=${code}`);
         if (res) {
           const TempToken = res.tempToken;
 
