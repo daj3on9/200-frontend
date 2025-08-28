@@ -2,16 +2,19 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
 import { postAPI } from '@/domains/common/api';
+import { useAuthStore } from '@/domains/common/store/authStore';
 
 interface ResStatus {
-  exist: boolean;
-  ProviderID: string;
+  accessToken?: string;
+  refreshToken?: string;
+  tempToken?: string;
 }
 
 function Callback() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
+  const { setTokens } = useAuthStore.getState();
 
   useEffect(() => {
     if (!code) {
@@ -19,30 +22,28 @@ function Callback() {
       return;
     }
 
-    router.push('/login/step');
     const postApi = async () => {
       try {
         const res = await postAPI<ResStatus, { code: string }>(
-          '/api/auth/kakao',
-          { code },
+          '/api/v1/auth/callback',
+          { code }
         );
-        const ProviderID = res?.ProviderID as string;
+        if (res) {
+          const TempToken = res.tempToken;
 
-        if (res?.exist) {
-          await postAPI<ResStatus, { ProviderID: string }>('/api/auth/kakao', {
-            ProviderID,
-          });
-          router.push('/');
-        } else {
-          router.push(`/login/step?ID=${ProviderID}`);
+          if (!TempToken) {
+            setTokens(res.accessToken as string, res.refreshToken as string);
+            router.push('/');
+          } else {
+            router.push(`/login/step?ID=${TempToken}`);
+          }
         }
       } catch (error) {
         console.error('카카오 인증 오류:', error);
       }
     };
 
-    // TODO : API 연결 후 주석 풀기
-    // postApi();
+    postApi();
   }, [code, router]);
 
   return (
