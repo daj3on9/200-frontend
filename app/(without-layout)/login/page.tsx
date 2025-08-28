@@ -32,7 +32,7 @@ export default function Page() {
             height={100}
           />
         </div>
-        <div className="text-center justify-start text-Label-Subnormal text-2xl font-bold font-['Pretendard'] leading-7">
+        <div className="text-center justify-start h3-b">
           로그인이 필요한
           <br />
           서비스 입니다.
@@ -40,7 +40,7 @@ export default function Page() {
       </div>
       <div className="self-stretch py-5 bg-yellow-300 flex flex-col justify-center items-center">
         <div
-          className="justify-start text-Label-Normal text-base font-bold leading-normal cursor-pointer"
+          className="justify-start title2-b cursor-pointer"
           onClick={kakaoLogin}
         >
           카카오로 시작하기

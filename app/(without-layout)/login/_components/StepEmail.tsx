@@ -74,7 +74,7 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
   return (
     <div className="">
       <div className="w-90">
-        <h2 className="text-Label-Subnormal text-2xl font-bold">
+        <h2 className="h3-b mb-[48px]">
           이메일을 <br /> 입력해주세요!
         </h2>
         <div className="h-20 flex flex-col w-full max-w-md mx-auto mt-10 space-y-2">
@@ -84,17 +84,20 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="이메일을 입력해주세요"
-              className="w-56 justify-start text-Label-Normal text-base font-medium font-['Noto_Sans_KR'] leading-normal"
+              className="flex-grow px-4 h-full text-sm outline-none text-gray-500"
             />
-            <button
-              className="justify-start text-Label-Assisitive text-xs font-medium font-['Pretendard'] leading-none"
-              onClick={handleCheck}
-            >
-              확인
-            </button>
+            {status === 'default' && (
+              <button
+                type="button"
+                className="justify-start body3-m cursor-pointer"
+                onClick={handleCheck}
+              >
+                확인
+              </button>
+            )}
           </div>
           <p
-            className={`text-sm ${
+            className={`body3-m ${
               status === 'invalid' || status === 'duplicate'
                 ? 'text-Primary-Normal'
                 : 'text-Label-Alternative'

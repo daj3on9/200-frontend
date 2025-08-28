@@ -10,7 +10,7 @@ export default function StepEnd({ nickname }: Props) {
   return (
     <div className="">
       <div className="w-90">
-        <h2 className="text-center text-Label-Subnormal text-2xl font-bold font-['Pretendard']">
+        <h2 className="text-center h3-b">
           {nickname}님<br></br>체리에 오신 걸 환영합니다!
         </h2>
         <div className="w-full max-w-md mx-auto mt-10 space-y-2"></div>
@@ -18,8 +18,9 @@ export default function StepEnd({ nickname }: Props) {
 
       <div className="absolute bottom-0 left-0 w-full">
         <button
+          type="button"
           className={
-            'w-full py-4 text-Static-White text-base font-bold bg-Primary-Normal cursor-pointer'
+            'w-full py-4 text-Static-White title2-b bg-Primary-Normal cursor-pointer'
           }
           onClick={() => router.push('/')}
         >
