@@ -37,7 +37,7 @@ export default function StepNickname({
       return;
     }
 
-    const nicknameRegex = /^[가-힣a-zA-Z0-9]{2,10}$/;
+    const nicknameRegex = /^[가-힣a-zA-Z0-9ㄱ-ㅎ]{2,10}$/;
     const trimmed = nickname.replace(/\s/g, '');
 
     if (!nicknameRegex.test(trimmed)) {
@@ -82,7 +82,9 @@ export default function StepNickname({
 
   useEffect(() => {
     setStatus('default');
-    setMessage('중복 확인이 필요합니다.');
+    setMessage(
+      '한글, 영문, 숫자를 사용해서 띄어쓰기 없이 2~10자까지 입력해주세요.'
+    );
     setCanProceed(false);
   }, [nickname]);
 
