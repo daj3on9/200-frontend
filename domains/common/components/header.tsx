@@ -12,6 +12,7 @@ type HeaderProps = {
   showCart?: boolean;
   showHamburger?: boolean;
   onBack?: () => void;
+  bgColor?: string;
 };
 
 export default function Header({
@@ -21,9 +22,12 @@ export default function Header({
   showCart,
   showHamburger,
   onBack,
+  bgColor = 'bg-white',
 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 flex h-14 items-center justify-between px-4 border-b transparent">
+    <header
+      className={`sticky top-0 z-50 flex h-14 items-center justify-between px-4 ${bgColor}`}
+    >
       <div className="flex items-center gap-2">
         {showBack && (
           <button
