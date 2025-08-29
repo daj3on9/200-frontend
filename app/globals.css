@@ -57,6 +57,7 @@
   --color-Label-Subtle: #edeff2;
   --color-Label-Subtler: #f4f4f4;
   --color-Label-Link: #0068c3;
+  --color-Label-Strong: #171717;
 
   /* Interaction */
   --color-Interaction-Inactive: #e1e5eb;
@@ -325,22 +326,22 @@
   }
 
   /* Radius */
-  .rounded-xs {
+  .ds-rounded-xs {
     border-radius: var(--radius-xs);
   }
-  .rounded-s {
+  .ds-rounded-s {
     border-radius: var(--radius-s);
   }
-  .rounded-m {
+  .ds-rounded-m {
     border-radius: var(--radius-m);
   }
-  .rounded-l {
+  .ds-rounded-l {
     border-radius: var(--radius-l);
   }
-  .rounded-xl {
+  .ds-rounded-xl {
     border-radius: var(--radius-xl);
   }
-  .rounded-full {
+  .ds-rounded-full {
     border-radius: var(--radius-full);
   }
 
@@ -395,15 +396,15 @@
 
   /* Border width */
   .border-s {
-    border-width: 0.5px;
+    border-width: var(--border-s);
   }
 
   .border-m {
-    border-width: 1px;
+    border-width: var(--border-m);
   }
 
   .border-l {
-    border-width: 2px;
+    border-width: var(--border-l);
   }
 
   /* Border Color */
