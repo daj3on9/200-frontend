@@ -17,6 +17,7 @@ interface ProductDetailType {
 export default function Page() {
   const { id } = useParams();
   const [detailData, setDetailData] = useState<ProductDetailType | null>(null);
+  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -29,7 +30,7 @@ export default function Page() {
   }, [id]);
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-screen overflow-hidden relative">
       <Header
         showBack
         title="상세 정보"
@@ -43,7 +44,13 @@ export default function Page() {
         <ProductDetailInfo />
         <ProductDetailGuide />
       </div>
-      <FooterBtn />
+      <FooterBtn
+        showOptions={showOptions}
+        setShowOptions={setShowOptions}
+      />
+      {showOptions && (
+        <div className="absolute inset-0 bg-black opacity-30 z-40" />
+      )}
     </div>
   );
 }
