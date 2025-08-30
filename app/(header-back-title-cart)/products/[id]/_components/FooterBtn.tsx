@@ -1,9 +1,30 @@
 'use client';
-import React, { useState } from 'react';
+import React, { Dispatch, useEffect, useRef, useState } from 'react';
 import OptionSelect from './OptionSelect';
 
-export default function FooterBtn() {
-  const [showOptions, setShowOptions] = useState(false);
+interface Props {
+  showOptions: boolean;
+  setShowOptions: Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function FooterBtn({ showOptions, setShowOptions }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setShowOptions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [setShowOptions]);
 
   const handleAddCart = () => {
     if (showOptions) {
@@ -13,11 +34,15 @@ export default function FooterBtn() {
     }
   };
   return (
-    <div className="relative w-full h-full px-3.5 bg-Static-White flex flex-col items-center gap-4 transition-all duration-300">
-      {/* 옵션 선택 영역 */}
+    <div
+      ref={containerRef}
+      className={`z-41 absolute bottom-0 w-full p-3.5 bg-Static-White flex flex-col items-center gap-4 shadow-[-0px_-6px_12px_rgba(0,0,0,0.15)] ${
+        showOptions ? 'rounded-tl-xl rounded-tr-xl' : ''
+      }`}
+    >
       {showOptions && <OptionSelect setShowOptions={setShowOptions} />}
 
-      <div className="w-full flex justify-start items-start gap-3 pt-3">
+      <div className="flex gap-3">
         <button
           type="button"
           className="w-[174px] p-4 rounded outline outline-Line-Subtle text-Label-Subnormal items-center cursor-pointer title2-sb"
