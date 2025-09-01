@@ -46,8 +46,13 @@ function StepComponent() {
         setTokens(res.accessToken as string, res.refreshToken as string);
       }
       setStep(step + 1);
+      sessionStorage.removeItem('tempToken');
     } catch (error) {
-      console.error('회원 가입 오류 :', error);
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      } else {
+        throw new Error('회원가입 오류');
+      }
     }
   };
 

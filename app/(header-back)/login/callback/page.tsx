@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
-import { getAPI } from '@/domains/common/api';
+import { postAPI } from '@/domains/common/api';
 import { useAuthStore } from '@/domains/common/store/authStore';
 
 interface ResStatus {
@@ -24,7 +25,10 @@ function Callback() {
 
     const postApi = async () => {
       try {
-        const res = await getAPI<ResStatus>(`/oauth/callback?code=${code}`);
+        const res = await postAPI<ResStatus, {}>(
+          `/oauth/callback?code=${code}`,
+          {}
+        );
         if (res) {
           const TempToken = res.tempToken;
 
@@ -37,7 +41,11 @@ function Callback() {
           }
         }
       } catch (error) {
-        console.error('카카오 인증 오류:', error);
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        } else {
+          throw new Error('카카오 로그인 오류');
+        }
       }
     };
 
