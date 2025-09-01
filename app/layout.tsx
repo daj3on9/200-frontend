@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import QueryProvider from '@/domains/common/providers/QueryProvider';
+import ModalProvider from '@/domains/common/components/ModalProvider';
 
 export const metadata: Metadata = {
   title: 'CHERRY',
@@ -25,7 +26,10 @@ export default function RootLayout({
       </head>
       <body className="antialiased bg-Fill-95">
         <div className="layout-container-no-padding bg-Static-White">
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            {children}
+            <ModalProvider />
+          </QueryProvider>
         </div>
       </body>
     </html>
