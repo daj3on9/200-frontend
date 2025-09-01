@@ -57,8 +57,7 @@ function StepComponent() {
   };
 
   useEffect(() => {
-    const token = sessionStorage.getItem('tempToken');
-    setTempToken(token);
+    setTempToken(sessionStorage.getItem('tempToken'));
   }, []);
 
   return (
