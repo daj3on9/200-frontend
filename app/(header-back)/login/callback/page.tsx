@@ -24,7 +24,7 @@ function Callback() {
 
     const postApi = async () => {
       try {
-        const res = await getAPI<ResStatus>(`/auth/callback?code=${code}`);
+        const res = await getAPI<ResStatus>(`/oauth/callback?code=${code}`);
         if (res) {
           const TempToken = res.tempToken;
 
@@ -32,7 +32,8 @@ function Callback() {
             setTokens(res.accessToken as string, res.refreshToken as string);
             router.push('/');
           } else {
-            router.push(`/login/step?ID=${TempToken}`);
+            sessionStorage.setItem('tempToken', TempToken);
+            router.push(`/login/step`);
           }
         }
       } catch (error) {

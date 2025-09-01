@@ -4,7 +4,6 @@ import { useState, Suspense } from 'react';
 import StepTerms from '../_components/StepTerms';
 import StepNickname from '../_components/StepNickname';
 import StepEmail from '../_components/StepEmail';
-import { useSearchParams } from 'next/navigation';
 import { postAPI } from '@/domains/common/api';
 import StepEnd from '../_components/StepEnd';
 import LeftArrowIcon from '@/public/icons/leftarrow.svg';
@@ -24,8 +23,7 @@ interface Payload {
 
 function StepComponent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const tempToken = searchParams.get('ID');
+  const tempToken = sessionStorage.getItem('tempToken');
   const [step, setStep] = useState(0);
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
