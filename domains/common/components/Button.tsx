@@ -13,7 +13,7 @@ const buttonVariants = cva(
         m: 'h-[56px] p-xl title2-sb ds-rounded-m [&_svg]:w-[24px] [&_svg]:h-[24px]',
       },
       variant: {
-        main: 'bg-Primary-Normal text-Static-White [&_svg]:fill-Static-White',
+        main: 'bg-Primary-Normal text-Static-White [&_svg]:fill-Static-White hover:bg-Primary-Strong active:bg-Primary-Heavy',
         subtle: 'bg-Fill-99 text-Label-Subnormal [&_svg]:fill-Fill-30',
         subtlest: 'bg-Static-White text-Label-Subnormal [&_svg]:fill-Fill-30',
         outlineMain:
@@ -57,6 +57,8 @@ export default function Button({
   children,
   ...props
 }: ButtonProps) {
+  const hasIcon = !!icon;
+
   return (
     <button
       {...props}
@@ -78,9 +80,11 @@ export default function Button({
         </>
       ) : (
         <>
-          {iconSide === 'left' && <span className="flex-shrink-0">{icon}</span>}
+          {hasIcon && iconSide === 'left' && (
+            <span className="flex-shrink-0">{icon}</span>
+          )}
           <span className="flex-1 text-center">{children}</span>
-          {iconSide === 'right' && (
+          {hasIcon && iconSide === 'right' && (
             <span className="flex-shrink-0">{icon}</span>
           )}
         </>
