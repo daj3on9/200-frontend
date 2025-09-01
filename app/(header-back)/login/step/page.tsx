@@ -65,11 +65,7 @@ function StepComponent() {
           }
         }}
       >
-        <LeftArrowIcon
-          width={18}
-          height={18}
-          className="fill-Fill-10"
-        />
+        <LeftArrowIcon className="w-[18px] h-[18px] fill-Fill-10" />
       </div>
 
       <div className="h-[400px]">
