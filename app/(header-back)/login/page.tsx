@@ -16,11 +16,7 @@ export default function Page() {
     <div className="w-full min-h-screen bg-Static-White inline-flex flex-col justify-between items-center overflow-hidden">
       <div className="w-full px-3.5 py-3 bg-Static-White inline-flex justify-start">
         <div className="w-6 h-6 overflow-hidden">
-          <LeftArrowIcon
-            width={18}
-            height={18}
-            className="fill-Fill-10"
-          />
+          <LeftArrowIcon className="w-[18px] h-[18px] fill-Fill-10" />
         </div>
       </div>
       <div className="flex flex-col justify-center items-center gap-4">
