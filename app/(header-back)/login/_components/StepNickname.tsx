@@ -130,6 +130,7 @@ export default function StepNickname({
       <LoginNextBtn
         setStep={setStep}
         canProceed={canProceed}
+        handleJoin={handleJoin}
       />
     </div>
   );

@@ -1,5 +1,5 @@
 'use client';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import StepIndicator from './StepIndicator';
 import LoginNextBtn from './LoginNextBtn';
 import CheckIcon from '@/public/icons/check.svg';
@@ -11,10 +11,9 @@ type TermsState = Record<TermsKey, boolean>;
 interface Props {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
-  setAgreedTerms: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
+export default function StepTerms({ step, setStep }: Props) {
   const [selected, setSelected] = useState<TermsState>({
     terms: false,
     privacy: false,
@@ -46,12 +45,7 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
       privacy: newValue,
       marketing: newValue,
     });
-    setAgreedTerms(newValue);
   };
-
-  useEffect(() => {
-    setAgreedTerms(canProceed);
-  }, [canProceed, setAgreedTerms]);
 
   return (
     <div className="flex flex-col justify-start items-start gap-12">
@@ -69,9 +63,7 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
               <div className="flex justify-start items-center gap-2">
                 <div className="w-6 h-6 relative overflow-hidden text-Label-Alternative">
                   <CheckIcon
-                    width={24}
-                    height={24}
-                    className={`cursor-pointer ${
+                    className={`cursor-pointer w-[24px] h-[24px] ${
                       selected[item.key]
                         ? 'fill-Primary-Normal'
                         : 'fill-Fill-80'
@@ -84,11 +76,7 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
                 </div>
               </div>
               <div className="w-4 h-4 ml-auto">
-                <ArrowRightIcon
-                  width={16}
-                  height={16}
-                  className="fill-Fill-50"
-                />
+                <ArrowRightIcon className="w-[16px] h-[16px] fill-Fill-50" />
               </div>
             </div>
           ))}
@@ -99,14 +87,10 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
         <div className="p-4 bg-Fill-99 rounded-[999px] inline-flex justify-center items-center gap-3 my-[84px] cursor-pointer ml-[50%] translate-x-[-50%]">
           <button
             type="button"
-            className="flex gap-2 title3-m cursor-pointer"
+            className="flex items-center gap-2 title3-m cursor-pointer"
             onClick={toggleAll}
           >
-            <CheckIcon
-              width={17}
-              height={17}
-              className="fill-Fill-50"
-            />
+            <CheckIcon className="w-[24px] h-[24px] fill-Fill-50" />
             전체 동의하기
           </button>
         </div>

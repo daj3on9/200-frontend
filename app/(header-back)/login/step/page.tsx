@@ -1,10 +1,9 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useState, Suspense } from 'react';
+import { useState, Suspense, useEffect } from 'react';
 import StepTerms from '../_components/StepTerms';
 import StepNickname from '../_components/StepNickname';
 import StepEmail from '../_components/StepEmail';
-import { useSearchParams } from 'next/navigation';
 import { postAPI } from '@/domains/common/api';
 import StepEnd from '../_components/StepEnd';
 import LeftArrowIcon from '@/public/icons/leftarrow.svg';
@@ -20,15 +19,12 @@ interface Payload {
   tempToken: string;
   emailAddress: string;
   nickname: string;
-  agreedTerms: boolean;
 }
 
 function StepComponent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const tempToken = searchParams.get('ID');
+  const [tempToken, setTempToken] = useState<string | null>(null);
   const [step, setStep] = useState(0);
-  const [agreedTerms, setAgreedTerms] = useState(false);
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
   const { setTokens } = useAuthStore.getState();
@@ -42,7 +38,6 @@ function StepComponent() {
       tempToken,
       emailAddress: email,
       nickname,
-      agreedTerms,
     };
 
     try {
@@ -51,10 +46,19 @@ function StepComponent() {
         setTokens(res.accessToken as string, res.refreshToken as string);
       }
       setStep(step + 1);
+      sessionStorage.removeItem('tempToken');
     } catch (error) {
-      console.error('회원 가입 오류 :', error);
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      } else {
+        throw new Error('회원가입 오류');
+      }
     }
   };
+
+  useEffect(() => {
+    setTempToken(sessionStorage.getItem('tempToken'));
+  }, []);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-white">
@@ -68,11 +72,7 @@ function StepComponent() {
           }
         }}
       >
-        <LeftArrowIcon
-          width={18}
-          height={18}
-          className="fill-Fill-10"
-        />
+        <LeftArrowIcon className="w-[18px] h-[18px] fill-Fill-10" />
       </div>
 
       <div className="h-[400px]">
@@ -80,7 +80,6 @@ function StepComponent() {
           <StepTerms
             step={0}
             setStep={setStep}
-            setAgreedTerms={setAgreedTerms}
           />
         )}
         {step === 1 && (

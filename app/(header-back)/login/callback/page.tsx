@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
@@ -24,9 +25,9 @@ function Callback() {
 
     const postApi = async () => {
       try {
-        const res = await postAPI<ResStatus, { code: string }>(
-          '/api/v1/auth/callback',
-          { code }
+        const res = await postAPI<ResStatus, {}>(
+          `/oauth/callback?code=${code}`,
+          {}
         );
         if (res) {
           const TempToken = res.tempToken;
@@ -35,11 +36,16 @@ function Callback() {
             setTokens(res.accessToken as string, res.refreshToken as string);
             router.push('/');
           } else {
-            router.push(`/login/step?ID=${TempToken}`);
+            sessionStorage.setItem('tempToken', TempToken);
+            router.push(`/login/step`);
           }
         }
       } catch (error) {
-        console.error('카카오 인증 오류:', error);
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        } else {
+          throw new Error('카카오 로그인 오류');
+        }
       }
     };
 
