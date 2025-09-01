@@ -12,7 +12,7 @@ export default function ProductDetailGuide() {
         <div className="justify-start text-Label-Normal title2-sb">
           체험 가이드
         </div>
-        <div className="justify-start text-Label-Assisitive body3-m">
+        <div className="justify-start text-Label-Assistive body3-m">
           &#183; 고장 및 파손에 주의해 주세요.
           <br />
           &#183; 분실∙도난 방지를 위한 보안 스티커를 제거하지말아주세요.

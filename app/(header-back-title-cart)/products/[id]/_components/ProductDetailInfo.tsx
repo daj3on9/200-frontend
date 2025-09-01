@@ -9,7 +9,6 @@ export default function ProductDetailInfo() {
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // const handleWideBtn = () => {};
   useEffect(() => {
     if (contentRef.current) {
       setContentHeight(contentRef.current.scrollHeight);
@@ -44,7 +43,7 @@ export default function ProductDetailInfo() {
       <div className="w-full px-3.5 py-3 left-0 top-[216px] bg-Static-White ">
         <button
           type="button"
-          className="flex gap-3 text-center title3-sb text-Label-Subnormal rounded-xl outline outline-Line-Subtle w-full p-2 items-center justify-center"
+          className="flex gap-3 text-center title3-sb text-Label-Subnormal rounded-xl outline outline-Line-Subtle w-full p-2 items-center justify-center cursor-pointer"
           onClick={() => setIsWide(!isWide)}
         >
           상품정보 열기

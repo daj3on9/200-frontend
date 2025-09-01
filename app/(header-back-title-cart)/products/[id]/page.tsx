@@ -7,6 +7,7 @@ import ProductDetailGuide from './_components/ProductDetailGuide';
 import FooterBtn from './_components/FooterBtn';
 import ProductDetailInfo from './_components/ProductDetailInfo';
 import { getAPI } from '@/domains/common/api';
+// import ToastComponent from '@/domains/common/components/ToastComponent';
 
 interface ProductDetailType {
   name: string;
@@ -18,6 +19,7 @@ export default function Page() {
   const { id } = useParams();
   const [detailData, setDetailData] = useState<ProductDetailType | null>(null);
   const [showOptions, setShowOptions] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -28,6 +30,13 @@ export default function Page() {
     // TODO : api 연결 후 주석 해제
     // getData();
   }, [id]);
+
+  const handleToast = () => {
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000); // 3초 후 자동 제거
+  };
 
   return (
     <div className="h-screen overflow-hidden relative">
@@ -45,12 +54,15 @@ export default function Page() {
         <ProductDetailGuide />
       </div>
       <FooterBtn
+        id={id as string}
         showOptions={showOptions}
         setShowOptions={setShowOptions}
+        handleToast={handleToast}
       />
       {showOptions && (
         <div className="absolute inset-0 bg-black opacity-30 z-40" />
       )}
+      {/* {showToast && <ToastComponent />} */}
     </div>
   );
 }

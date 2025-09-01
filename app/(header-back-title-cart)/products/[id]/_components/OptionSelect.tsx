@@ -9,14 +9,20 @@ import React, {
 import ArrowDownIcon from '@/public/icons/arrow-down.svg';
 import ArrowUpIcon from '@/public/icons/arrow-up.svg';
 import SelectColor from './SelectColor';
+import ProductPrice from './ProductPrice';
 
 interface Props {
   setShowOptions: Dispatch<SetStateAction<boolean>>;
+  selectedColor: string;
+  setSelectedColor: Dispatch<SetStateAction<string>>;
 }
 
-export default function OptionSelect({ setShowOptions }: Props) {
+export default function OptionSelect({
+  setShowOptions,
+  selectedColor,
+  setSelectedColor,
+}: Props) {
   const [showColorPicker, setShowColorPicker] = useState(false);
-  const [selectedColor, setSelectedColor] = useState('');
 
   return (
     <div>
@@ -40,6 +46,7 @@ export default function OptionSelect({ setShowOptions }: Props) {
           )}
         </div>
       </div>
+      {selectedColor && <ProductPrice />}
       {showColorPicker && (
         <SelectColor
           onSelect={(color, event) => {

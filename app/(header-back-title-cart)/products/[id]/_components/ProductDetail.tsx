@@ -33,7 +33,7 @@ export default function ProductDetail() {
           <div className="justify-start text-Label-Normal h3-b">Title</div>
         </div>
         <div className="flex flex-col justify-start items-start gap-2">
-          <div className="text-center justify-start text-Label-Assisitive body2-m ">
+          <div className="text-center justify-start text-Label-Assistive body2-m ">
             Option
           </div>
           <div className="bg-Static-White inline-flex justify-start items-start gap-2.5">
@@ -48,7 +48,7 @@ export default function ProductDetail() {
         </div>
         <div className="flex flex-col justify-start items-start gap-2">
           <div className="flex items-center justify-center gap-1">
-            <div className="justify-start text-Label-Assisitive body2-r">
+            <div className="justify-start text-Label-Assistive body2-r">
               대여 요금
             </div>
             <div className="w-3.5 h-3.5 cursor-pointer">
