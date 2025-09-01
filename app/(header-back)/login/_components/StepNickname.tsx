@@ -37,7 +37,7 @@ export default function StepNickname({
       return;
     }
 
-    const nicknameRegex = /^[가-힣a-zA-Z0-9]{2,10}$/;
+    const nicknameRegex = /^[가-힣a-zA-Z0-9ㄱ-ㅎ]{2,10}$/;
     const trimmed = nickname.replace(/\s/g, '');
 
     if (!nicknameRegex.test(trimmed)) {
@@ -50,6 +50,7 @@ export default function StepNickname({
     }
 
     setStatus('valid');
+    setMessage('');
     setCanProceed(true);
 
     // TODO : api 연결 후 주석 풀기
@@ -81,7 +82,9 @@ export default function StepNickname({
 
   useEffect(() => {
     setStatus('default');
-    setMessage('중복 확인이 필요합니다.');
+    setMessage(
+      '한글, 영문, 숫자를 사용해서 띄어쓰기 없이 2~10자까지 입력해주세요.'
+    );
     setCanProceed(false);
   }, [nickname]);
 
@@ -91,19 +94,19 @@ export default function StepNickname({
         <h2 className="h3-b mb-[48px]">
           사용할 닉네임을 <br /> 입력해주세요!
         </h2>
-        <div className="h-20 flex flex-col w-full max-w-md mx-auto mt-10 space-y-2">
+        <div className="h-28 flex flex-col w-full max-w-md mx-auto mt-10 space-y-2 gap-2">
           <div className="self-stretch h-12 p-4 bg-Fill-99 rounded-2xl inline-flex justify-between items-center overflow-hidden">
             <input
               type="text"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
               placeholder="닉네임을 입력해주세요"
-              className="flex-grow px-4 h-full text-sm outline-none text-gray-500"
+              className="flex-grow pr-4 h-full text-sm outline-none text-Label-Normal placeholder:text-gray-500"
             />
             {status === 'default' && (
               <button
                 type="button"
-                className="flex items-center justify-center px-3 h-full body3-m cursor-pointer"
+                className="flex items-center justify-center px-3 h-full body3-m cursor-pointer text-Label-Assistive"
                 onClick={handleCheck}
               >
                 확인
@@ -127,6 +130,7 @@ export default function StepNickname({
       <LoginNextBtn
         setStep={setStep}
         canProceed={canProceed}
+        handleJoin={handleJoin}
       />
     </div>
   );

@@ -1,17 +1,21 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
 import { postAPI } from '@/domains/common/api';
+import { useAuthStore } from '@/domains/common/store/authStore';
 
 interface ResStatus {
-  exist: boolean;
-  ProviderID: string;
+  accessToken?: string;
+  refreshToken?: string;
+  tempToken?: string;
 }
 
 function Callback() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
+  const { setTokens } = useAuthStore.getState();
 
   useEffect(() => {
     if (!code) {
@@ -19,30 +23,33 @@ function Callback() {
       return;
     }
 
-    router.push('/login/step');
     const postApi = async () => {
       try {
-        const res = await postAPI<ResStatus, { code: string }>(
-          '/api/auth/kakao',
-          { code },
+        const res = await postAPI<ResStatus, {}>(
+          `/oauth/callback?code=${code}`,
+          {}
         );
-        const ProviderID = res?.ProviderID as string;
+        if (res) {
+          const TempToken = res.tempToken;
 
-        if (res?.exist) {
-          await postAPI<ResStatus, { ProviderID: string }>('/api/auth/kakao', {
-            ProviderID,
-          });
-          router.push('/');
-        } else {
-          router.push(`/login/step?ID=${ProviderID}`);
+          if (!TempToken) {
+            setTokens(res.accessToken as string, res.refreshToken as string);
+            router.push('/');
+          } else {
+            sessionStorage.setItem('tempToken', TempToken);
+            router.push(`/login/step`);
+          }
         }
       } catch (error) {
-        console.error('카카오 인증 오류:', error);
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        } else {
+          throw new Error('카카오 로그인 오류');
+        }
       }
     };
 
-    // TODO : API 연결 후 주석 풀기
-    // postApi();
+    postApi();
   }, [code, router]);
 
   return (

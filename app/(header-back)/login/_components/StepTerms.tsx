@@ -1,5 +1,5 @@
 'use client';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import StepIndicator from './StepIndicator';
 import LoginNextBtn from './LoginNextBtn';
 import CheckIcon from '@/public/icons/check.svg';
@@ -11,10 +11,9 @@ type TermsState = Record<TermsKey, boolean>;
 interface Props {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
-  setAgreedTerms: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
+export default function StepTerms({ step, setStep }: Props) {
   const [selected, setSelected] = useState<TermsState>({
     terms: false,
     privacy: false,
@@ -46,12 +45,7 @@ export default function StepTerms({ step, setStep, setAgreedTerms }: Props) {
       privacy: newValue,
       marketing: newValue,
     });
-    setAgreedTerms(newValue);
   };
-
-  useEffect(() => {
-    setAgreedTerms(canProceed);
-  }, [canProceed, setAgreedTerms]);
 
   return (
     <div className="flex flex-col justify-start items-start gap-12">
