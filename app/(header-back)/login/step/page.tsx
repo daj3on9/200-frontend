@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useState, Suspense } from 'react';
+import { useState, Suspense, useEffect } from 'react';
 import StepTerms from '../_components/StepTerms';
 import StepNickname from '../_components/StepNickname';
 import StepEmail from '../_components/StepEmail';
@@ -23,7 +23,7 @@ interface Payload {
 
 function StepComponent() {
   const router = useRouter();
-  const tempToken = sessionStorage.getItem('tempToken');
+  const [tempToken, setTempToken] = useState<string | null>(null);
   const [step, setStep] = useState(0);
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
@@ -55,6 +55,10 @@ function StepComponent() {
       }
     }
   };
+
+  useEffect(() => {
+    setTempToken(sessionStorage.getItem('tempToken'));
+  }, []);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-white">
