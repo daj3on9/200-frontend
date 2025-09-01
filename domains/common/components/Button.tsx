@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 const buttonVariants = cva(
-  'relative select-none transition-colors cursor-pointer focus-visible:outline-none disabled:cursor-not-allowed',
+  'relative select-none transition-colors cursor-pointer disabled:cursor-not-allowed',
   {
     variants: {
       size: {
@@ -24,8 +24,8 @@ const buttonVariants = cva(
           'border-Line-Subtler border-m text-Label-Subtler [&_svg]:fill-Fill-98',
       },
       iconLayout: {
-        inline: 'flex justify-center items-center gap-m flex-1',
-        edge: 'flex justify-between items-center flex-1',
+        inline: 'flex justify-center items-center gap-m',
+        edge: 'flex justify-between items-center',
       },
       fullWidth: {
         true: 'w-full',
@@ -62,6 +62,7 @@ export default function Button({
   return (
     <button
       {...props}
+      type={props.type ?? 'button'}
       className={clsx(
         buttonVariants({
           size,

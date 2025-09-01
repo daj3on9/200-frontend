@@ -2,16 +2,15 @@
 
 import clsx from 'clsx';
 import Button from './Button';
+import { ReactNode } from 'react';
 
 type Align = 'left' | 'center';
 
 export interface ModalProps {
-  title?: string;
-  content?: string;
+  title?: ReactNode;
+  content?: ReactNode;
   align?: Align;
-  confirmText?: string;
   onConfirm: () => void;
-  cancelText?: string;
   onCancel?: () => void;
   className?: string;
 }
@@ -34,6 +33,10 @@ export default function ModalComponent({
           'w-80 p-6 bg-Static-White ds-rounded-m inline-flex flex-col justify-start items-center gap-xxl',
           className
         )}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={title ? 'modal-title' : undefined}
+        aria-describedby={content ? 'modal-description' : undefined}
       >
         <div
           className={clsx(
@@ -41,11 +44,17 @@ export default function ModalComponent({
             alignBlock
           )}
         >
-          <div className="text-center justify-start title1-b text-Label-Subnormal ">
+          <div
+            id="modal-title"
+            className="justify-start title1-b text-Label-Subnormal"
+          >
             {title}
           </div>
           {content && (
-            <div className="text-center justify-start body1-sb text-Label-Assistive">
+            <div
+              id="modal-description"
+              className="justify-start body1-sb text-Label-Assistive"
+            >
               {content}
             </div>
           )}
