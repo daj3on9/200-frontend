@@ -1,9 +1,16 @@
 import Header from '@/domains/common/components/header';
 import React from 'react';
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default function layout({
+  children,
+  modal,
+}: {
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}) {
   return (
-    <div className="flex flex-col h-dvh bg-Fill-99">
+    <div className="relative flex flex-col h-dvh bg-Fill-99">
+      {modal}
       <Header
         showLogo
         showCart
