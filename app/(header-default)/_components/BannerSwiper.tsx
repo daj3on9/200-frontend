@@ -3,8 +3,9 @@
 import React from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import { cn } from '@/lib/utils';
+import clsx from 'clsx';
 
 type BannerImage = { src: string; alt?: string };
 
@@ -26,14 +27,25 @@ export default function BannerSwiper({
   className = '',
 }: BannerSwiperProps) {
   const [active, setActive] = React.useState(0);
+
   const swiperRef = React.useRef<import('swiper').Swiper | null>(null);
   const isLoop = images.length > 1;
 
   return (
-    <section className={cn('w-full flex flex-col gap-m', className)}>
+    <section className={clsx('w-full flex flex-col gap-m', className)}>
       <Swiper
+        modules={[Autoplay]}
         loop={isLoop}
         onSwiper={(s) => (swiperRef.current = s)}
+        autoplay={
+          isLoop
+            ? {
+                delay: 3000, // 3초마다
+                disableOnInteraction: false,
+              }
+            : false
+        }
+        allowTouchMove={false}
         onSlideChange={(s) => setActive(s.realIndex)}
         className="w-full"
       >
@@ -59,8 +71,8 @@ export default function BannerSwiper({
           return (
             <div
               key={i}
-              className={cn(
-                'h-2 ds-rounded-full',
+              className={clsx(
+                'h-2 ds-rounded-full transition-all duration-200',
                 isActive ? 'w-6 bg-Fill-50' : 'w-2 bg-Fill-95'
               )}
             />
