@@ -3,6 +3,7 @@ import React, { Dispatch, useEffect, useRef, useState } from 'react';
 import OptionSelect from './OptionSelect';
 import { postAPI } from '@/domains/common/api';
 import { useToastStore } from '@/domains/common/store/toastStore';
+import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 
 interface Props {
   id: string;
@@ -22,6 +23,8 @@ export default function FooterBtn({
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedColor, setSelectedColor] = useState('');
   const { showToast } = useToastStore.getState();
+  const { cartQuery, addMutation } = useCartQuery();
+  const cartItems = cartQuery.data ?? [];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -49,22 +52,16 @@ export default function FooterBtn({
 
     if (selectedColor === '') {
       setShowModal(true);
+      return;
     }
 
-    // TODO : 장바구니 3개이상 있으면 추가 불가
-    if (selectedColor === '') {
+    if (cartItems.length >= 3) {
       showToast('장바구니에는 최대 3개만 담을 수 있어요', 'close', true);
+      return;
     }
 
-    console.log('장바구니!');
-    // TODO : api 연결 후 주석 해제
-    // try {
-    //   await postAPI<null, { id: string }>('/addCart', { id });
-    //   showToast('제품을 장바구니에 담았습니다.', 'cart', true);
-    // } catch (error) {
-    //   showToast('장바구니 담기에 실패했어요.', 'close');
-    //   console.error('🛑 addCart 실패:', error);
-    // }
+    // TODO : 장바구니 API 연결후, 파라미터 추가
+    // addMutation.mutate()
   };
 
   const handlePayment = () => {

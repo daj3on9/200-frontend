@@ -7,7 +7,7 @@ export default function ProductPrice() {
       <div className="self-stretch flex flex-col justify-start items-start gap-2">
         <div className="self-stretch inline-flex justify-between items-center">
           <div className="text-center justify-start text-Label-Normal body1-sb">
-            일 체험 금액
+            하루 체험 금액
           </div>
           <div className="flex justify-start items-center gap-0.5 text-center text-Label-Normal body1-sb">
             Price 원
@@ -15,7 +15,7 @@ export default function ProductPrice() {
         </div>
         <div className="self-stretch inline-flex justify-between items-center">
           <div className="text-center justify-start text-Label-Normal body1-sb">
-            부가 금액
+            배송 금액
           </div>
           <div className="self-stretch flex justify-start items-center gap-2">
             <div
