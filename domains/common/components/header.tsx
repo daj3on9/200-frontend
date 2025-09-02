@@ -34,7 +34,7 @@ export default function Header({
             aria-label="뒤로가기"
             onClick={onBack ?? (() => history.back())}
           >
-            <LeftArrowIcon />
+            <LeftArrowIcon className="w-6 h-6" />
           </button>
         )}
         {showLogo && (
@@ -43,7 +43,11 @@ export default function Header({
             <LogoTextIcon />
           </div>
         )}
-        {title && <h1 className="text-base font-semibold">{title}</h1>}
+        {title && (
+          <h1 className="absolute left-1/2 transform -translate-x-1/2 title1-sb">
+            {title}
+          </h1>
+        )}
       </div>
 
       <div className="flex items-center gap-3">
