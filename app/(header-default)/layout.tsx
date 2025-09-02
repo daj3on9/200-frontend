@@ -10,7 +10,9 @@ export default function layout({ children }: { children: React.ReactNode }) {
         showHamburger
         bgColor="bg-Fill-99"
       />
-      <main className="flex-1 overflow-y-auto no-scrollbar">{children}</main>
+      <main className="layout-container flex-1 overflow-y-auto no-scrollbar">
+        {children}
+      </main>
     </div>
   );
 }
