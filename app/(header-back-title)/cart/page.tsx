@@ -1,34 +1,33 @@
 'use client';
 import Header from '@/domains/common/components/header';
 import React, { useState } from 'react';
-import CartDetail from './_components/CartDetail';
+import { CartItemState } from '@/domains/common/types/cartItemType';
+import CartItemDetail from './_components/CartItemDetail';
+import CartPriceDetail from './_components/CartPriceDetail';
 
 const TEMPDATA = [
   {
     title: '이어폰 1',
     option: '검정색',
-    startDate: '2025.09.03',
-    endDate: '2025.09.06',
     price: '45,000',
+    image: '',
   },
   {
     title: '이어폰 2',
     option: '하늘색',
-    startDate: '2025.09.10',
-    endDate: '2025.09.11',
     price: '45,000',
+    image: '',
   },
   {
     title: '이어폰 3',
     option: '흰색',
-    startDate: '2025.09.01',
-    endDate: '2025.09.08',
     price: '45,000',
+    image: '',
   },
 ];
 
 export default function Page() {
-  const [cartData, setCartData] = useState(TEMPDATA);
+  const [cartData, setCartData] = useState<CartItemState[]>(TEMPDATA);
 
   return (
     <div className="h-screen overflow-hidden">
@@ -45,7 +44,10 @@ export default function Page() {
             장바구니가 비었어요.
           </div>
         ) : (
-          <CartDetail />
+          <div className="h-full flex flex-col gap-3">
+            <CartItemDetail cartData={cartData} />
+            <CartPriceDetail />
+          </div>
         )}
       </main>
       <div className="relative w-full h-full p-3.5 bg-Static-White">
@@ -53,7 +55,7 @@ export default function Page() {
           type="button"
           className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
         >
-          99,999원 결제하기
+          {!cartData.length ? '상품추가 하기' : `99,999원 결제하기`}
         </button>
       </div>
     </div>
