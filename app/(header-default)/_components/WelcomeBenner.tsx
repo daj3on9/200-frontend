@@ -1,14 +1,12 @@
+'use client';
+
+import { useAuthStore } from '@/domains/common/store/authStore';
 import Link from 'next/link';
 
-interface WelcomeBennerProps {
-  isLoggedIn?: boolean;
-  nickname?: string;
-}
+export default function WelcomeBenner() {
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  const nickname = useAuthStore((s) => s.nickname);
 
-export default function WelcomeBenner({
-  isLoggedIn,
-  nickname,
-}: WelcomeBennerProps) {
   return (
     <section className="flex flex-1 flex-col gap-1">
       {isLoggedIn ? (
