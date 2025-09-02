@@ -54,7 +54,7 @@ export default function Page() {
           </div>
         )}
       </main>
-      <div className="relative w-full h-full p-3.5 bg-Static-White">
+      <div className="w-full p-3.5 bg-Static-White">
         {!cartData.length ? (
           <Link
             href="/products"
