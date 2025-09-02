@@ -1,19 +1,44 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
   isLoggedIn: boolean;
+  nickname: string | null;
+  email: string | null;
   setTokens: (access: string, refresh: string) => void;
+  setUsers: (nickname: string, email: string) => void;
   logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  accessToken: null,
-  refreshToken: null,
-  isLoggedIn: false,
-  setTokens: (access, refresh) =>
-    set({ accessToken: access, refreshToken: refresh, isLoggedIn: true }),
-  logout: () =>
-    set({ accessToken: null, refreshToken: null, isLoggedIn: false }),
-}));
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      accessToken: null,
+      refreshToken: null,
+      isLoggedIn: false,
+      nickname: null,
+      email: null,
+      setTokens: (access, refresh) =>
+        set({ accessToken: access, refreshToken: refresh, isLoggedIn: true }),
+      setUsers: (nickname, email) => set({ nickname, email }),
+      logout: () =>
+        set({
+          accessToken: null,
+          refreshToken: null,
+          isLoggedIn: false,
+          nickname: null,
+          email: null,
+        }),
+    }),
+    {
+      name: 'auth-storage',
+      // nickname, email만 저장
+      partialize: (state) => ({
+        nickname: state.nickname,
+        email: state.email,
+      }),
+    }
+  )
+);
