@@ -1,9 +1,9 @@
 'use client';
 import LeftArrowIcon from '@/public/icons/leftarrow.svg';
-import HamburgerIcon from '@/public/icons/hamburger.svg';
 import LogoIcon from '@/public/icons/Logo.svg';
 import LogoTextIcon from '@/public/icons/Logo-text.svg';
 import BasketIcon from '@/public/icons/Score=0.svg';
+import HamburgerButton from './HamburgerButton';
 
 type HeaderProps = {
   title?: string;
@@ -39,10 +39,7 @@ export default function Header({
         )}
         {showLogo && (
           <div className="font-extrabold flex h-10 items-center gap-0.5">
-            <LogoIcon
-              width={24}
-              hegiht={24}
-            />
+            <LogoIcon className="w-6 h-6" />
             <LogoTextIcon />
           </div>
         )}
@@ -50,18 +47,8 @@ export default function Header({
       </div>
 
       <div className="flex items-center gap-3">
-        {showCart && (
-          <BasketIcon
-            width={24}
-            height={24}
-          />
-        )}
-        {showHamburger && (
-          <HamburgerIcon
-            width={24}
-            height={24}
-          />
-        )}
+        {showCart && <BasketIcon className="w-6 h-6 fill-Fill-20" />}
+        {showHamburger && <HamburgerButton />}
       </div>
     </header>
   );
