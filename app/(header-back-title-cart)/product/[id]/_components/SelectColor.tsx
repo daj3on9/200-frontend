@@ -1,3 +1,5 @@
+'use client';
+
 interface Props {
   onSelect: (color: string, event: React.MouseEvent<HTMLDivElement>) => void;
 }

@@ -19,7 +19,7 @@ export const useToastStore = create<ToastState>((set) => ({
   text: '',
   icon: 'cart',
   position: 100,
-  showToast: (text, icon, devide, position) => {
+  showToast: (text, icon, devide, position = 100) => {
     set({ show: true, text, icon, devide, position });
     setTimeout(() => set({ show: false }), 3000);
   },
