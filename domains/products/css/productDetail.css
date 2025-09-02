@@ -1,0 +1,17 @@
+.swiper-pagination-fraction {
+  bottom: 2px !important;
+  left: 293px !important;
+  width: 55px !important;
+  background-color: #222225;
+  opacity: 25%;
+  padding: 4px 6px;
+  border-radius: var(--radius-xs);
+  font-size: var(--text-xs);
+  font-weight: var(--font-normal);
+  z-index: 10;
+  color: white !important;
+}
+
+.swiper-pagination-fraction span {
+  color: white;
+}

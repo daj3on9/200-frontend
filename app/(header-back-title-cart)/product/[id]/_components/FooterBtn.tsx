@@ -1,0 +1,106 @@
+'use client';
+import React, { Dispatch, useEffect, useRef, useState } from 'react';
+import OptionSelect from './OptionSelect';
+import { postAPI } from '@/domains/common/api';
+import { useToastStore } from '@/domains/common/store/toastStore';
+import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
+
+interface Props {
+  id: string;
+  showOptions: boolean;
+  setShowOptions: Dispatch<React.SetStateAction<boolean>>;
+  showModal: boolean;
+  setShowModal: Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function FooterBtn({
+  id,
+  showOptions,
+  setShowOptions,
+  showModal,
+  setShowModal,
+}: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedColor, setSelectedColor] = useState('');
+  const { showToast } = useToastStore.getState();
+  const { cartQuery, addMutation } = useCartQuery();
+  const cartItems = cartQuery.data ?? [];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showModal) return false;
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setShowOptions(false);
+        setSelectedColor('');
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [setShowOptions, showModal]);
+
+  const handleAddCart = async () => {
+    if (!showOptions) {
+      setShowOptions(true);
+      return;
+    }
+
+    if (selectedColor === '') {
+      setShowModal(true);
+      return;
+    }
+
+    if (cartItems.length >= 3) {
+      showToast('장바구니에는 최대 3개만 담을 수 있어요', 'close', true, 100);
+      return;
+    }
+
+    // TODO : 장바구니 API 연결후, 파라미터 추가
+    // addMutation.mutate()
+  };
+
+  const handlePayment = () => {
+    if (selectedColor === '') {
+      setShowModal(true);
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={`z-41 absolute bottom-0 w-full p-3.5 bg-Static-White flex flex-col items-center gap-4 shadow-[-0px_-6px_12px_rgba(0,0,0,0.15)] ${
+        showOptions ? 'rounded-tl-xl rounded-tr-xl' : ''
+      }`}
+    >
+      {showOptions && (
+        <OptionSelect
+          setShowOptions={setShowOptions}
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+        />
+      )}
+
+      <div className="flex gap-3">
+        <button
+          type="button"
+          className="w-[174px] p-4 rounded outline outline-Line-Subtle text-Label-Subnormal items-center cursor-pointer title2-sb"
+          onClick={handleAddCart}
+        >
+          장바구니 담기
+        </button>
+        <button
+          type="button"
+          className="w-[174px] p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
+          onClick={handlePayment}
+        >
+          결제하기
+        </button>
+      </div>
+    </div>
+  );
+}
