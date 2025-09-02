@@ -63,6 +63,7 @@ export default function ModalComponent({
           <Button
             size="s"
             variant="main"
+            fullWidth
             onClick={onConfirm}
           >
             확인하기
@@ -71,6 +72,7 @@ export default function ModalComponent({
             <Button
               size="s"
               variant="subtle"
+              fullWidth
               onClick={onCancel}
             >
               취소하기
