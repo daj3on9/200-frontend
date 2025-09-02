@@ -2,30 +2,36 @@
 import React, { Dispatch, useEffect, useRef, useState } from 'react';
 import OptionSelect from './OptionSelect';
 import { postAPI } from '@/domains/common/api';
+import { useToastStore } from '@/domains/common/store/toastStore';
 
 interface Props {
   id: string;
   showOptions: boolean;
   setShowOptions: Dispatch<React.SetStateAction<boolean>>;
-  handleToast: () => void;
+  showModal: boolean;
+  setShowModal: Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function FooterBtn({
   id,
   showOptions,
   setShowOptions,
-  handleToast,
+  showModal,
+  setShowModal,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedColor, setSelectedColor] = useState('');
+  const { showToast } = useToastStore.getState();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      if (showModal) return false;
       if (
         containerRef.current &&
         !containerRef.current.contains(event.target as Node)
       ) {
         setShowOptions(false);
+        setSelectedColor('');
       }
     };
 
@@ -33,7 +39,7 @@ export default function FooterBtn({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [setShowOptions]);
+  }, [setShowOptions, showModal]);
 
   const handleAddCart = async () => {
     if (!showOptions) {
@@ -42,18 +48,19 @@ export default function FooterBtn({
     }
 
     if (selectedColor === '') {
-      // TODO : 색상 선택 모달 출력
+      setShowModal(true);
     }
 
-    // TODO : 장바구니 3개이상 있으면 추가 불가 모달 출력
+    // TODO : 장바구니 3개이상 있으면 추가 불가
     if (selectedColor === '') {
+      showToast('장바구니에는 최대 3개만 담을 수 있어요', 'close', true);
     }
 
     console.log('장바구니!');
     // TODO : api 연결 후 주석 해제
     // try {
     //   await postAPI<null, { id: string }>('/addCart', { id });
-    //   showToast('장바구니에 담겼습니다.', 'cart', true);
+    //   showToast('제품을 장바구니에 담았습니다.', 'cart', true);
     // } catch (error) {
     //   showToast('장바구니 담기에 실패했어요.', 'close');
     //   console.error('🛑 addCart 실패:', error);
@@ -62,7 +69,7 @@ export default function FooterBtn({
 
   const handlePayment = () => {
     if (selectedColor === '') {
-      // TODO : 색상 선택 모달 출력
+      setShowModal(true);
     }
   };
 

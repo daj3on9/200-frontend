@@ -7,6 +7,9 @@ import ProductDetailGuide from './_components/ProductDetailGuide';
 import FooterBtn from './_components/FooterBtn';
 import ProductDetailInfo from './_components/ProductDetailInfo';
 import { getAPI } from '@/domains/common/api';
+import ToastComponent from '@/domains/common/components/ToastComponent';
+import { useToastStore } from '@/domains/common/store/toastStore';
+import ModalComponent from '@/domains/common/components/ModalComponent';
 // import ToastComponent from '@/domains/common/components/ToastComponent';
 
 interface ProductDetailType {
@@ -19,7 +22,8 @@ export default function Page() {
   const { id } = useParams();
   const [detailData, setDetailData] = useState<ProductDetailType | null>(null);
   const [showOptions, setShowOptions] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const { show } = useToastStore.getState();
 
   useEffect(() => {
     const getData = async () => {
@@ -30,13 +34,6 @@ export default function Page() {
     // TODO : api 연결 후 주석 해제
     // getData();
   }, [id]);
-
-  const handleToast = () => {
-    setShowToast(true);
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000); // 3초 후 자동 제거
-  };
 
   return (
     <div className="h-screen overflow-hidden relative">
@@ -57,12 +54,21 @@ export default function Page() {
         id={id as string}
         showOptions={showOptions}
         setShowOptions={setShowOptions}
-        handleToast={handleToast}
+        showModal={showModal}
+        setShowModal={setShowModal}
       />
       {showOptions && (
         <div className="absolute inset-0 bg-black opacity-30 z-40" />
       )}
-      {/* {showToast && <ToastComponent />} */}
+
+      {show && <ToastComponent />}
+      {showModal && (
+        <ModalComponent
+          title="옵션을 선택해 주세요!"
+          content="1개 이상의 옵션을 선택해야 합니다."
+          onConfirm={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 }
