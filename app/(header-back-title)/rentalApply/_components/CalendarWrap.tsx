@@ -52,7 +52,7 @@ export default function CalendarWrap() {
           <p className="body3-m text-Label-Assistive">체험 시작일</p>
           <p className="title3-sb">
             {range.startDate
-              ? format(range.startDate, 'MM월 dd일 EEEE', { locale: ko })
+              ? format(range.startDate, 'MM.dd EEEE', { locale: ko })
               : '날짜를 선택해주세요'}
           </p>
         </div>
@@ -60,7 +60,7 @@ export default function CalendarWrap() {
           <p className="body3-m text-Label-Assistive">체험 종료일</p>
           <p className="title3-sb">
             {range.endDate
-              ? format(range.endDate, 'MM월 dd일 EEEE', { locale: ko })
+              ? format(range.endDate, 'MM.dd EEEE', { locale: ko })
               : '날짜를 선택해주세요'}
           </p>
         </div>

@@ -5,6 +5,7 @@ import { CartItemState } from '@/domains/cart/types/cartItemType';
 import ItemDetail from '@/domains/common/components/ItemDetail';
 import CalendarWrap from './_components/CalendarWrap';
 import DeliveryDetails from './_components/DeliveryDetails';
+import PaymentWrap from './_components/PaymentWrap';
 
 const TEMPDATA = [
   {
@@ -53,6 +54,7 @@ export default function Page() {
         </div>
         <CalendarWrap />
         <DeliveryDetails />
+        <PaymentWrap />
       </main>
       <div className="w-full p-3.5 bg-Static-White">
         <button
