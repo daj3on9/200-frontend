@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 export default function BrandTabs() {
-  const [selected, setSelected] = useState<string>(mockBrands[0].id);
+  const [selected, setSelected] = useState<string>(mockBrands[0]?.id ?? '');
   return (
     <div className="w-96 py-3 border-b-[0.50px] border-Line-Subtler flex justify-start items-center">
       <div className="w-20 shrink-0 border-r border-Line-Subtler flex justify-center items-center ">

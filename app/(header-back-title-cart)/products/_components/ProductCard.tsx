@@ -22,7 +22,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="self-stretch p-3 bg-Static-White flex flex-col justify-start items-start gap-2">
           <div className="flex flex-col justify-start items-start">
             <div className="justify-start text-Label-Alternative body3-m">
-              {product.brand}
+              {product.brandName}
             </div>
             <div className="w-40 justify-start text-Label-Normal title1-b truncate">
               {product.title}
