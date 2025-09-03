@@ -36,14 +36,14 @@ export default function Page() {
   }, [id]);
 
   return (
-    <div className="h-screen overflow-hidden relative">
+    <div className="h-screen overflow-hidden relative bg-Fill-99">
       <Header
         showBack
         title="상세 정보"
         showCart
       />
       <div
-        className="pb-3 flex flex-col gap-3 bg-Fill-95 overflow-y-scroll h-[calc(100vh-135px)]"
+        className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)]"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         <ProductDetail />
