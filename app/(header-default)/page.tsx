@@ -44,9 +44,8 @@ export default function page() {
             height={300}
             unoptimized
           />
-          {/* TODO : 체험하기 링크 추가 */}
           <Link
-            href="/"
+            href="/products"
             className="self-stretch py-3 bg-Primary-Normal flex justify-center items-center"
           >
             <div className="justify-start text-Static-White h3-b">체험하기</div>
