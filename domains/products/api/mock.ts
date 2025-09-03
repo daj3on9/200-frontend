@@ -94,15 +94,3 @@ export const mockProducts: Product[] = [
     reservable: false,
   },
 ];
-
-const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-// 가짜 fetchers
-export async function fetchBrands(): Promise<Brand[]> {
-  await wait(300);
-  return mockBrands;
-}
-export async function fetchProducts(): Promise<Product[]> {
-  await wait(350);
-  return mockProducts;
-}
