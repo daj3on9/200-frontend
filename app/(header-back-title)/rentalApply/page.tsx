@@ -7,6 +7,7 @@ import DeliveryDetails from './_components/DeliveryDetails';
 import PaymentWrap from './_components/PaymentWrap';
 import PriceDetail from './_components/PriceDetail';
 import RentalItem from './_components/RentalItem';
+import RentalNotice from './_components/RentalNotice';
 
 const TEMPDATA = [
   {
@@ -47,6 +48,7 @@ export default function Page() {
         <DeliveryDetails />
         <PaymentWrap />
         <PriceDetail />
+        <RentalNotice />
       </main>
       <div className="w-full p-3.5 bg-Static-White">
         <button
