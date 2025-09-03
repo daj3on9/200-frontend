@@ -2,10 +2,11 @@
 import Header from '@/domains/common/components/header';
 import React, { useState } from 'react';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
-import ItemDetail from '@/domains/common/components/ItemDetail';
 import CalendarWrap from './_components/CalendarWrap';
 import DeliveryDetails from './_components/DeliveryDetails';
 import PaymentWrap from './_components/PaymentWrap';
+import PriceDetail from './_components/PriceDetail';
+import RentalItem from './_components/RentalItem';
 
 const TEMPDATA = [
   {
@@ -40,21 +41,12 @@ export default function Page() {
         showBack
         title="체험 신청하기"
       />
-      <main
-        className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)]"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        <div className="px-3.5 flex flex-col justify-center bg-Static-White">
-          {cartData.map((item) => (
-            <ItemDetail
-              key={item.id}
-              item={item}
-            />
-          ))}
-        </div>
+      <main className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
+        <RentalItem cartData={cartData} />
         <CalendarWrap />
         <DeliveryDetails />
         <PaymentWrap />
+        <PriceDetail />
       </main>
       <div className="w-full p-3.5 bg-Static-White">
         <button
