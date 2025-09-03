@@ -1,0 +1,35 @@
+import React, { Dispatch, SetStateAction } from 'react';
+interface Props {
+  setStep: Dispatch<SetStateAction<number>>;
+  canProceed: boolean;
+  handleJoin?: () => void;
+}
+
+export default function LoginNextBtn({
+  setStep,
+  canProceed,
+  handleJoin,
+}: Props) {
+  const handleClick = () => {
+    if (handleJoin) {
+      handleJoin();
+    } else {
+      setStep((prev) => prev + 1);
+    }
+  };
+
+  return (
+    <div className="absolute bottom-0 left-0 w-full cursor-pointer">
+      <button
+        type="button"
+        className={`w-full py-4 text-Static-White title2-b bg-Primary-Normal cursor-pointer ${
+          canProceed ? '' : 'opacity-30'
+        }`}
+        disabled={!canProceed}
+        onClick={handleClick}
+      >
+        다음으로
+      </button>
+    </div>
+  );
+}
