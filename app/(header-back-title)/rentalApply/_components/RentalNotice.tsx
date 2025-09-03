@@ -32,7 +32,7 @@ export default function RentalNotice() {
           <p className="justify-start text-Label-Subnormal title1-sb">
             체험동의서
           </p>
-          <p className="w-96 justify-start text-Label-Assistive body2-m">
+          <p className="justify-start text-Label-Assistive body2-m">
             체험동의서를 확인하시고 서비스를 이용해 주세요.
             <br />
             체험 목적물은 체험종료 후 반납 기한까지 반드시 반납해야하며 체험
