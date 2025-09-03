@@ -1,0 +1,108 @@
+import type { Brand, Product } from '../types/ProductsType';
+
+export const mockBrands: Brand[] = [
+  { id: 'b1', name: 'Brand A' },
+  { id: 'b2', name: 'Brand B' },
+  { id: 'b3', name: 'Brand C' },
+  { id: 'b4', name: 'Brand D' },
+  { id: 'b5', name: 'Brand E' },
+  { id: 'b6', name: 'Brand F' },
+  { id: 'b7', name: 'Brand G' },
+  { id: 'b8', name: 'Brand H' },
+  { id: 'b9', name: 'Brand I' },
+];
+
+export const mockProducts: Product[] = [
+  {
+    id: 'p1',
+    brand: 'b1',
+    title: 'Noise-Canceling Headset',
+    pricePerDay: 9000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: true,
+  },
+  {
+    id: 'p2',
+    brand: 'b1',
+    title: 'Streaming Webcam',
+    pricePerDay: 12000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: true,
+  },
+  {
+    id: 'p3',
+    brand: 'b2',
+    title: '4K Action Camera',
+    pricePerDay: 18000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: false,
+  },
+  {
+    id: 'p4',
+    brand: 'b3',
+    title: 'Studio Mic',
+    pricePerDay: 7000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: true,
+  },
+  {
+    id: 'p5',
+    brand: 'b1',
+    title: 'Portable Light',
+    pricePerDay: 5000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: false,
+  },
+  {
+    id: 'p6',
+    brand: 'b1',
+    title: 'Portable Light',
+    pricePerDay: 5000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: false,
+  },
+  {
+    id: 'p7',
+    brand: 'b1',
+    title: 'Portable Light',
+    pricePerDay: 5000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: false,
+  },
+  {
+    id: 'p8',
+    brand: 'b1',
+    title: 'Portable Light',
+    pricePerDay: 5000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: false,
+  },
+  {
+    id: 'p9',
+    brand: 'b1',
+    title: 'Portable Light',
+    pricePerDay: 5000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: false,
+  },
+  {
+    id: 'p10',
+    brand: 'b1',
+    title: 'Portable Light',
+    pricePerDay: 5000,
+    imageUrl: 'https://placehold.co/360x240',
+    reservable: false,
+  },
+];
+
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// 가짜 fetchers
+export async function fetchBrands(): Promise<Brand[]> {
+  await wait(300);
+  return mockBrands;
+}
+export async function fetchProducts(): Promise<Product[]> {
+  await wait(350);
+  return mockProducts;
+}
