@@ -26,7 +26,7 @@ export default function OrderCard({ order }: OrderProps) {
 
         {/* TODO : 주문 상세 링크 추가 필요 */}
         <Link
-          href="/orders/id"
+          href={`/orders/${order.orderNumber}`}
           className="body3-r text-Label-Assistive underline"
         >
           주문 상세
