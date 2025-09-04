@@ -14,7 +14,7 @@ type Menu = {
 // TODO : 링크 추가
 const MENUS: Menu[] = [
   { label: '내 정보', href: '/dummy', needAuth: true },
-  { label: '이용내역', href: '/dummy', needAuth: true },
+  { label: '이용내역', href: '/orders', needAuth: true },
   { label: '리포트', href: '/dummy', needAuth: true },
   {
     label: '공지사항',
