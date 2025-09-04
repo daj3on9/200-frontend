@@ -5,8 +5,10 @@ import ArrowRightIcon from '@/public/icons/arrow-right.svg';
 import { createModal } from '@/domains/common/store/modalStore';
 import Link from 'next/link';
 import { useAuthStore } from '@/domains/common/store/authStore';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+  const router = useRouter();
   const { logout } = useAuthStore.getState();
   const handleCS = () => {
     createModal({
@@ -118,7 +120,10 @@ export default function Page() {
         <button
           type="button"
           className="w-full p-4 rounded-2xl text-Label-Assistive bg-Static-White items-center cursor-pointer body1-m outline outline-offset-[-1px] outline-Line-Subtler"
-          onClick={logout}
+          onClick={() => {
+            logout();
+            router.replace('/login');
+          }}
         >
           로그아웃
         </button>
