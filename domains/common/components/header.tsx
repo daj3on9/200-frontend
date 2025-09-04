@@ -4,6 +4,7 @@ import LogoIcon from '@/public/icons/Logo.svg';
 import LogoTextIcon from '@/public/icons/Logo-text.svg';
 import BasketIcon from '@/public/icons/Score=0.svg';
 import HamburgerButton from './HamburgerButton';
+import HomeButton from './HomeButton';
 
 type HeaderProps = {
   title?: string;
@@ -11,6 +12,7 @@ type HeaderProps = {
   showBack?: boolean;
   showCart?: boolean;
   showHamburger?: boolean;
+  showHome?: boolean;
   onBack?: () => void;
   bgColor?: string;
 };
@@ -21,6 +23,7 @@ export default function Header({
   showBack,
   showCart,
   showHamburger,
+  showHome,
   onBack,
   bgColor = 'bg-white',
 }: HeaderProps) {
@@ -53,6 +56,7 @@ export default function Header({
       <div className="flex items-center gap-3">
         {showCart && <BasketIcon className="w-6 h-6 fill-Fill-20" />}
         {showHamburger && <HamburgerButton />}
+        {showHome && <HomeButton />}
       </div>
     </header>
   );
