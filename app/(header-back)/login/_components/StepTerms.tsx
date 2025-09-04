@@ -4,6 +4,7 @@ import StepIndicator from './StepIndicator';
 import LoginNextBtn from './LoginNextBtn';
 import CheckIcon from '@/public/icons/check.svg';
 import ArrowRightIcon from '@/public/icons/arrow-right.svg';
+import Link from 'next/link';
 
 type TermsKey = 'terms' | 'privacy' | 'age' | 'marketing';
 type TermsState = Record<TermsKey, boolean>;
@@ -21,11 +22,11 @@ export default function StepTerms({ step, setStep }: Props) {
     marketing: false,
   });
 
-  const termsList: { key: TermsKey; label: string }[] = [
-    { key: 'terms', label: '이용약관 동의 (필수)' },
-    { key: 'privacy', label: '개인정보 수집 및 이용 동의 (필수)' },
-    { key: 'age', label: '14세 이상입니다 (필수)' },
-    { key: 'marketing', label: '마케팅 정보 수신 동의 (선택)' },
+  const termsList: { key: TermsKey; label: string; link: string }[] = [
+    { key: 'terms', label: '이용약관 동의 (필수)', link: '' },
+    { key: 'privacy', label: '개인정보 수집 및 이용 동의 (필수)', link: '' },
+    { key: 'age', label: '14세 이상입니다 (필수)', link: '' },
+    { key: 'marketing', label: '마케팅 정보 수신 동의 (선택)', link: '' },
   ];
 
   const canProceed = selected.terms && selected.age && selected.privacy;
@@ -76,7 +77,12 @@ export default function StepTerms({ step, setStep }: Props) {
                 </div>
               </div>
               <div className="w-4 h-4 ml-auto">
-                <ArrowRightIcon className="w-[16px] h-[16px] fill-Fill-50" />
+                <Link
+                  href={item.link}
+                  aria-label={item.label}
+                >
+                  <ArrowRightIcon className="w-[16px] h-[16px] fill-Fill-50" />
+                </Link>
               </div>
             </div>
           ))}
