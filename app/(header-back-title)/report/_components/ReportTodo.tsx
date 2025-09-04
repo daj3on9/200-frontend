@@ -1,6 +1,7 @@
 import { CartItemState } from '@/domains/cart/types/cartItemType';
 import React from 'react';
 import ItemDetail from '@/domains/common/components/ItemDetail';
+import Link from 'next/link';
 
 interface Props {
   todoData: CartItemState[];
@@ -32,12 +33,12 @@ export default function ReportTodo({ todoData }: Props) {
                 </p>
               </div>
               <ItemDetail item={item} />
-              <button
-                type="button"
-                className="w-full p-2 outline rounded-md outline-offset-[-1px] outline-Line-Subtle text-Label-Subnormal title3-sb cursor-pointer"
+              <Link
+                href={'/report/write'}
+                className="w-full p-2 text-center outline rounded-md outline-offset-[-1px] outline-Line-Subtle text-Label-Subnormal title3-sb cursor-pointer"
               >
                 리포트 작성하기
-              </button>
+              </Link>
             </div>
           ))}
         </div>

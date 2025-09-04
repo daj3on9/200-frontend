@@ -62,6 +62,7 @@ export default function Page() {
                 href={
                   'https://www.notion.so/25dced6af65280759a55c81629afd17d?source=copy_link'
                 }
+                target="_blank"
                 className="justify-start text-Label-Assistive underline body2-r"
               >
                 환급 안내
@@ -74,6 +75,7 @@ export default function Page() {
             href={
               'https://www.notion.so/25dced6af6528053a4eef3054a1f8fdb?source=copy_link'
             }
+            target="_blank"
             className="flex rounded justify-between items-center bg-Fill-99 p-2.5 cursor-pointer"
           >
             <p className="justify-start text-Label-Normal body2-m">
