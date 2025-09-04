@@ -39,7 +39,7 @@ export default function PriceDetail() {
           </div>
         </div>
       </div>
-      <div className="w-96 h-px relative bg-Fill-98" />
+      <div className="w-full h-px relative bg-Fill-98" />
       <div className="self-stretch inline-flex justify-between items-center">
         <div className="justify-start text-Label-Subnormal title1-sb">
           총 결제 금액

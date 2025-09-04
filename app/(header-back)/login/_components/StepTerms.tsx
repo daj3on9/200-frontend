@@ -23,10 +23,22 @@ export default function StepTerms({ step, setStep }: Props) {
   });
 
   const termsList: { key: TermsKey; label: string; link: string }[] = [
-    { key: 'terms', label: '이용약관 동의 (필수)', link: '' },
-    { key: 'privacy', label: '개인정보 수집 및 이용 동의 (필수)', link: '' },
+    {
+      key: 'terms',
+      label: '이용약관 동의 (필수)',
+      link: 'https://www.notion.so/25dced6af6528032bdb2fcfe1c775a61?source=copy_link',
+    },
+    {
+      key: 'privacy',
+      label: '개인정보 수집 및 이용 동의 (필수)',
+      link: 'https://www.notion.so/25dced6af65280f3b7d0ca995f437306?source=copy_link',
+    },
     { key: 'age', label: '14세 이상입니다 (필수)', link: '' },
-    { key: 'marketing', label: '마케팅 정보 수신 동의 (선택)', link: '' },
+    {
+      key: 'marketing',
+      label: '마케팅 정보 수신 동의 (선택)',
+      link: 'https://www.notion.so/25dced6af652806db22dd60e21bc1e59?source=copy_link',
+    },
   ];
 
   const canProceed = selected.terms && selected.age && selected.privacy;

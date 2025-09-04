@@ -1,15 +1,15 @@
 'use client';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { DateRange, Range, RangeKeyDict } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { addDays, format, isSameDay, startOfDay } from 'date-fns';
+import { addDays, format, startOfDay } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import '@/domains/rentalApply/css/calendar.css';
 
 interface Props {
   range: Range;
-  setRange: React.Dispatch<React.SetStateAction<Range>>;
+  setRange: Dispatch<SetStateAction<Range>>;
   validationErrs?: boolean;
 }
 

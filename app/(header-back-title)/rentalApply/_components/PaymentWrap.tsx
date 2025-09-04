@@ -1,8 +1,9 @@
 import Image from 'next/image';
+import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
   selectPayment: string;
-  setSelectPayment: React.Dispatch<React.SetStateAction<string>>;
+  setSelectPayment: Dispatch<SetStateAction<string>>;
   validationErrs: boolean;
 }
 
@@ -24,7 +25,8 @@ export default function PaymentWrap({
       </div>
       <div className="flex flex-wrap justify-center items-center gap-4">
         {PaymentList.map((v) => (
-          <div
+          <button
+            type="button"
             key={v.id}
             className={`w-[47%] px-2 py-3 rounded-md outline outline-offset-[-1px] flex justify-start items-center gap-2 cursor-pointer ${
               selectPayment === v.id
@@ -43,7 +45,7 @@ export default function PaymentWrap({
             <div className="justify-start text-Label-Subnormal body2-m">
               {v.name}
             </div>
-          </div>
+          </button>
         ))}
       </div>
 

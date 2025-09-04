@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import CheckIcon from '@/public/icons/check.svg';
 import Link from 'next/link';
 
@@ -9,7 +9,7 @@ interface AgreeNotice {
 
 interface Props {
   agreeNotice: AgreeNotice;
-  setAgreeNotice: React.Dispatch<React.SetStateAction<AgreeNotice>>;
+  setAgreeNotice: Dispatch<SetStateAction<AgreeNotice>>;
   validCaution: boolean;
   validConsent: boolean;
 }
@@ -36,7 +36,8 @@ export default function RentalNotice({
           </p>
         </div>
         <div className="w-full p-3 rounded-md outline outline-offset-[-1px] outline-Line-Subtler flex justify-between items-center">
-          <div
+          <button
+            type="button"
             className={`flex gap-2 body1-sb cursor-pointer ${
               agreeNotice.caution
                 ? 'text-Secondary-Normal'
@@ -52,7 +53,7 @@ export default function RentalNotice({
               }`}
             />
             <p>체험 안내 확인 및 모든 약관 동의</p>
-          </div>
+          </button>
           <div className="justify-start text-Label-Assistive text-xs font-normal font-['Pretendard'] underline leading-none">
             <Link
               href="https://www.notion.so/25dced6af6528053bdbaf593ea09db1b?source=copy_link"
@@ -82,7 +83,8 @@ export default function RentalNotice({
           </p>
         </div>
         <div className="w-full p-3 rounded-md outline outline-offset-[-1px] outline-Line-Subtler flex justify-between items-center">
-          <div
+          <button
+            type="button"
             className={`flex gap-2 body1-sb cursor-pointer ${
               agreeNotice.consent
                 ? 'text-Secondary-Normal'
@@ -94,13 +96,11 @@ export default function RentalNotice({
           >
             <CheckIcon
               className={`w-5 h-5  ${
-                agreeNotice.caution
-                  ? 'fill-Fill-[var(--color-Secondary-Normal)]'
-                  : 'fill-Fill-70'
+                agreeNotice.consent ? 'fill-Secondary-Normal' : 'fill-Fill-70'
               }`}
             />
             <p>체험동의서 확인 및 모든 약관 동의</p>
-          </div>
+          </button>
           <div className="justify-start text-Label-Assistive text-xs font-normal font-['Pretendard'] underline leading-none">
             <Link
               href="https://www.notion.so/25dced6af652804bbdebccd365c34a32?source=copy_link"

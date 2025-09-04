@@ -17,7 +17,7 @@ export default function page() {
             <CheckIcon className="w-20 h-20 left-[4.33px] top-[4.33px] absolute fill-Primary-Normal" />
           </div>
           <div className="flex flex-col gap-3 justify-start">
-            <div className="flex gap-3 items-center justify-cente">
+            <div className="flex gap-3 items-center">
               <div className="w-10 h-10 bg-Fill-99 rounded-full flex items-center justify-center">
                 <ReceiptIcon className="w-5 h-5 fill-Fill-20" />
               </div>
@@ -45,12 +45,13 @@ export default function page() {
         </div>
       </main>
       <div className="w-full p-3.5 bg-Static-White">
-        <button
-          type="button"
-          className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
+        <Link
+          href="/"
+          className="block w-full p-4 rounded bg-Primary-Normal text-Static-White text-center cursor-pointer title2-sb"
+          aria-label="완료하기"
         >
-          <Link href="/">완료하기</Link>
-        </button>
+          완료하기
+        </Link>
       </div>
     </div>
   );

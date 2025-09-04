@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 
 interface DaumPostcodeData {
   zonecode: string;
@@ -15,7 +15,7 @@ interface DeliveryInfo {
 }
 interface Props {
   deliveryInfo: DeliveryInfo;
-  setDeliveryInfo: React.Dispatch<React.SetStateAction<DeliveryInfo>>;
+  setDeliveryInfo: Dispatch<SetStateAction<DeliveryInfo>>;
   validName: boolean;
   validNumber: boolean;
   validDelivery: boolean;
@@ -28,6 +28,23 @@ export default function DeliveryDetails({
   validNumber,
   validDelivery,
 }: Props) {
+  const formatPhoneNumber = (value: string) => {
+    const onlyNums = value.replace(/\D/g, '');
+
+    if (onlyNums.length < 4) return onlyNums;
+    if (onlyNums.length < 7)
+      return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3)}`;
+    if (onlyNums.length <= 11)
+      return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 7)}-${onlyNums.slice(
+        7
+      )}`;
+
+    return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 7)}-${onlyNums.slice(
+      7,
+      11
+    )}`;
+  };
+
   const openPostcode = () => {
     new (window as any).daum.Postcode({
       oncomplete: function (data: DaumPostcodeData) {
@@ -95,7 +112,7 @@ export default function DeliveryDetails({
               onChange={(e) =>
                 setDeliveryInfo((prev) => ({
                   ...prev,
-                  number: e.target.value,
+                  number: formatPhoneNumber(e.target.value),
                 }))
               }
             />
