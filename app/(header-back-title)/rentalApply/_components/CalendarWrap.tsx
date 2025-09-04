@@ -7,14 +7,18 @@ import { addDays, format, isSameDay, startOfDay } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import '@/domains/rentalApply/css/calendar.css';
 
-export default function CalendarWrap() {
-  const today = startOfDay(new Date());
+interface Props {
+  range: Range;
+  setRange: React.Dispatch<React.SetStateAction<Range>>;
+  validationErrs?: boolean;
+}
 
-  const [range, setRange] = useState<Range>({
-    startDate: undefined,
-    endDate: undefined,
-    key: 'selection',
-  });
+export default function CalendarWrap({
+  range,
+  setRange,
+  validationErrs,
+}: Props) {
+  const today = startOfDay(new Date());
 
   const handleChange = (ranges: RangeKeyDict) => {
     const selectedStart = ranges.selection.startDate;
@@ -29,6 +33,7 @@ export default function CalendarWrap() {
       key: 'selection',
     });
   };
+
   return (
     <div className="w-full bg-Static-White pb-3">
       <DateRange
@@ -65,6 +70,11 @@ export default function CalendarWrap() {
           </p>
         </div>
       </div>
+      {validationErrs && (
+        <p className="body3-m text-Status-Negative text-center py-3">
+          체험 시작일을 선택해 주세요.
+        </p>
+      )}
     </div>
   );
 }

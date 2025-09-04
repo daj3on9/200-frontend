@@ -1,22 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 interface DaumPostcodeData {
   zonecode: string;
   roadAddress: string;
 }
+interface DeliveryInfo {
+  name: string;
+  number: string;
+  zoneCode: string;
+  address: string;
+  detailAddress: string;
+}
+interface Props {
+  deliveryInfo: DeliveryInfo;
+  setDeliveryInfo: React.Dispatch<React.SetStateAction<DeliveryInfo>>;
+  validName: boolean;
+  validNumber: boolean;
+  validDelivery: boolean;
+}
 
-export default function DeliveryDetails() {
-  const [zoneCode, setZoneCode] = useState('');
-  const [address, setAddress] = useState('');
-  const [detailAddress, setDetailAddress] = useState('');
-
+export default function DeliveryDetails({
+  deliveryInfo,
+  setDeliveryInfo,
+  validName,
+  validNumber,
+  validDelivery,
+}: Props) {
   const openPostcode = () => {
     new (window as any).daum.Postcode({
       oncomplete: function (data: DaumPostcodeData) {
-        setZoneCode(data.zonecode);
-        setAddress(data.roadAddress);
+        setDeliveryInfo((prev) => ({
+          ...prev,
+          zoneCode: data.zonecode,
+          address: data.roadAddress,
+        }));
       },
     }).open();
   };
@@ -35,62 +54,117 @@ export default function DeliveryDetails() {
         배송 정보
       </div>
       <div className="self-stretch flex flex-col justify-start items-center gap-3">
-        <div className="self-stretch flex justify-start items-center gap-3">
-          <div className="flex justify-start items-center gap-0.5 body2-m">
+        <div className="self-stretch flex justify-start items-start gap-3">
+          <div className="flex justify-start pt-2 gap-0.5 body2-m">
             <div className="text-Label-Subnormal">수령인</div>
             <div className="text-Status-Negative">*</div>
           </div>
-          <input
-            type="text"
-            placeholder="홍길동"
-            className="flex-1 p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
-          />
+          <div className="flex-1 flex flex-col">
+            <input
+              type="text"
+              placeholder="홍길동"
+              minLength={2}
+              maxLength={10}
+              className="p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
+              value={deliveryInfo.name}
+              onChange={(e) =>
+                setDeliveryInfo((prev) => ({
+                  ...prev,
+                  name: e.target.value,
+                }))
+              }
+            />
+            {validName && (
+              <p className="body3-m text-Status-Negative pt-2">
+                수령인을 입력해 주세요.
+              </p>
+            )}
+          </div>
         </div>
-        <div className="self-stretch flex justify-start items-center gap-3">
-          <div className="flex justify-start items-center gap-0.5 body2-m">
+        <div className="self-stretch flex justify-start items-start gap-3">
+          <div className="flex justify-start pt-2 gap-0.5 body2-m">
             <div className="text-Label-Subnormal">연락처</div>
             <div className="text-Status-Negative">*</div>
           </div>
-          <input
-            type="tel"
-            placeholder="010-0000-0000"
-            className="flex-1 p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
-          />
+          <div className="flex-1 flex flex-col">
+            <input
+              type="tel"
+              placeholder="010-0000-0000"
+              className="flex-1 p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
+              value={deliveryInfo.number}
+              onChange={(e) =>
+                setDeliveryInfo((prev) => ({
+                  ...prev,
+                  number: e.target.value,
+                }))
+              }
+            />
+            {validNumber && (
+              <p className="body3-m text-Status-Negative pt-2">
+                연락처를 입력해 주세요.
+              </p>
+            )}
+          </div>
         </div>
         <div className="self-stretch flex justify-start items-start gap-3">
-          <div className="flex justify-start gap-0.5 body2-m pt-3">
+          <div className="flex justify-start gap-0.5 body2-m pt-2">
             <div className="text-Label-Subnormal">배송지</div>
             <div className="text-Status-Negative">*</div>
           </div>
-          <div className="flex flex-col gap-3">
-            <div className="flex gap-4 justify-start items-center">
+          <div>
+            <div className="flex flex-col gap-3">
+              <div className="flex gap-4 justify-start items-center">
+                <input
+                  type="text"
+                  readOnly
+                  className="w-[187px] flex-1 p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
+                  value={deliveryInfo.zoneCode}
+                  onChange={(e) =>
+                    setDeliveryInfo((prev) => ({
+                      ...prev,
+                      zoneCode: e.target.value,
+                    }))
+                  }
+                  onClick={openPostcode}
+                />
+                <button
+                  type="button"
+                  className="text-Label-Assistive body2-m px-3 py-2 bg-Fill-99 rounded-md cursor-pointer"
+                  onClick={openPostcode}
+                >
+                  우편번호 검색
+                </button>
+              </div>
               <input
                 type="text"
                 readOnly
-                className="w-[187px] flex-1 p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
-                value={zoneCode}
-                onClick={openPostcode}
+                className="self-stretch p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
+                value={deliveryInfo.address}
+                onChange={(e) =>
+                  setDeliveryInfo((prev) => ({
+                    ...prev,
+                    address: e.target.value,
+                  }))
+                }
               />
-              <button
-                type="button"
-                className="text-Label-Assistive body2-m px-3 py-2 bg-Fill-99 rounded-md cursor-pointer"
-                onClick={openPostcode}
-              >
-                우편번호 검색
-              </button>
+              <input
+                type="text"
+                placeholder="상세주소 입력"
+                className="self-stretch p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
+                value={deliveryInfo.detailAddress}
+                onChange={(e) =>
+                  setDeliveryInfo((prev) => ({
+                    ...prev,
+                    detailAddress: e.target.value,
+                  }))
+                }
+              />
             </div>
-            <input
-              type="text"
-              readOnly
-              className="self-stretch p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
-              value={address}
-            />
-            <input
-              type="text"
-              placeholder="상세주소 입력"
-              className="self-stretch p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
-              onChange={(e) => setDetailAddress(e.target.value)}
-            />
+            {validDelivery && (
+              <p className="body3-m text-Status-Negative pt-2">
+                주소를 입력해 주세요.
+              </p>
+            )}
           </div>
         </div>
       </div>

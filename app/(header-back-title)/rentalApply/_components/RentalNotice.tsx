@@ -1,11 +1,29 @@
 import React from 'react';
 import CheckIcon from '@/public/icons/check.svg';
+import Link from 'next/link';
 
-export default function RentalNotice() {
+interface AgreeNotice {
+  caution: boolean;
+  consent: boolean;
+}
+
+interface Props {
+  agreeNotice: AgreeNotice;
+  setAgreeNotice: React.Dispatch<React.SetStateAction<AgreeNotice>>;
+  validCaution: boolean;
+  validConsent: boolean;
+}
+
+export default function RentalNotice({
+  agreeNotice,
+  setAgreeNotice,
+  validCaution,
+  validConsent,
+}: Props) {
   return (
     <div className="self-stretch px-3.5 py-6 bg-Static-White inline-flex flex-col justify-start items-start gap-4">
-      <div className="self-stretch flex flex-col justify-start items-start gap-4">
-        <div className="flex flex-col justify-start items-start gap-2">
+      <div className="self-stretch flex flex-col justify-start items-start">
+        <div className="flex flex-col justify-start items-start gap-2 mb-4">
           <p className="justify-start text-Label-Subnormal title1-sb">
             체험 안내 및 주의사항
           </p>
@@ -18,17 +36,40 @@ export default function RentalNotice() {
           </p>
         </div>
         <div className="w-full p-3 rounded-md outline outline-offset-[-1px] outline-Line-Subtler flex justify-between items-center">
-          <div className="flex gap-2 text-Label-Assistive body1-sb">
-            <CheckIcon className="w-5 h-5 fill-Fill-70" />
+          <div
+            className={`flex gap-2 body1-sb cursor-pointer ${
+              agreeNotice.caution
+                ? 'text-Secondary-Normal'
+                : 'text-Label-Assistive'
+            } `}
+            onClick={() =>
+              setAgreeNotice((prev) => ({ ...prev, caution: true }))
+            }
+          >
+            <CheckIcon
+              className={`w-5 h-5  ${
+                agreeNotice.caution ? 'fill-Secondary-Normal' : 'fill-Fill-70'
+              }`}
+            />
             <p>체험 안내 확인 및 모든 약관 동의</p>
           </div>
           <div className="justify-start text-Label-Assistive text-xs font-normal font-['Pretendard'] underline leading-none">
-            자세히
+            <Link
+              href="https://www.notion.so/25dced6af6528053bdbaf593ea09db1b?source=copy_link"
+              aria-label="체험 및 이용 안내 바로가기"
+            >
+              자세히
+            </Link>
           </div>
         </div>
+        {validCaution && (
+          <p className="body3-m text-Status-Negative pt-2">
+            체험 안내 확인 및 약관 동의 체크해 주세요.
+          </p>
+        )}
       </div>
-      <div className="self-stretch flex flex-col justify-start items-start gap-4">
-        <div className="flex flex-col justify-start items-start gap-2">
+      <div className="self-stretch flex flex-col justify-start items-start">
+        <div className="flex flex-col justify-start items-start gap-2 mb-4">
           <p className="justify-start text-Label-Subnormal title1-sb">
             체험동의서
           </p>
@@ -41,14 +82,40 @@ export default function RentalNotice() {
           </p>
         </div>
         <div className="w-full p-3 rounded-md outline outline-offset-[-1px] outline-Line-Subtler flex justify-between items-center">
-          <div className="flex gap-2 text-Label-Assistive body1-sb">
-            <CheckIcon className="w-5 h-5 fill-Fill-70" />
+          <div
+            className={`flex gap-2 body1-sb cursor-pointer ${
+              agreeNotice.consent
+                ? 'text-Secondary-Normal'
+                : 'text-Label-Assistive'
+            } `}
+            onClick={() =>
+              setAgreeNotice((prev) => ({ ...prev, consent: true }))
+            }
+          >
+            <CheckIcon
+              className={`w-5 h-5  ${
+                agreeNotice.caution
+                  ? 'fill-Fill-[var(--color-Secondary-Normal)]'
+                  : 'fill-Fill-70'
+              }`}
+            />
             <p>체험동의서 확인 및 모든 약관 동의</p>
           </div>
           <div className="justify-start text-Label-Assistive text-xs font-normal font-['Pretendard'] underline leading-none">
-            자세히
+            <Link
+              href="https://www.notion.so/25dced6af652804bbdebccd365c34a32?source=copy_link"
+              aria-label="체험동의서 약관"
+            >
+              자세히
+            </Link>
           </div>
         </div>
+
+        {validConsent && (
+          <p className="body3-m text-Status-Negative pt-2">
+            체험동의서 확인 및 약관 동의 체크해 주세요.
+          </p>
+        )}
       </div>
     </div>
   );
