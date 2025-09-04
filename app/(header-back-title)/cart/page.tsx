@@ -34,13 +34,13 @@ export default function Page() {
   const [cartData, setCartData] = useState<CartItemState[]>(TEMPDATA);
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-screen overflow-hidden bg-Fill-99">
       <Header
         showBack
         title="장바구니"
       />
       <main
-        className="pb-3 flex flex-col gap-3 bg-Fill-95 overflow-y-scroll h-[calc(100vh-135px)]"
+        className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)]"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {!cartData.length ? (

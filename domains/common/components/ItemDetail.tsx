@@ -5,14 +5,14 @@ import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 
 interface Props {
   item: CartItemState;
-  checked: boolean;
-  toggleSelected: (id: string) => void;
+  checked?: boolean;
+  toggleSelected?: (id: string) => void;
   canCheck?: boolean;
 }
 
 export default function ItemDetail({
   item,
-  checked,
+  checked = false,
   toggleSelected,
   canCheck = false,
 }: Props) {
@@ -24,7 +24,7 @@ export default function ItemDetail({
           type="checkbox"
           className="w-4 h-4"
           checked={checked}
-          onChange={() => toggleSelected(item.id)}
+          onChange={() => toggleSelected?.(item.id)}
         />
       )}
       <div className="flex-1 flex justify-between items-start">
