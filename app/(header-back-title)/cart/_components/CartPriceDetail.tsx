@@ -10,7 +10,7 @@ export default function CartPriceDetail() {
       <div className="self-stretch flex flex-col justify-start items-start gap-2 text-Label-Normal body1-m">
         <div className="self-stretch inline-flex justify-between items-center">
           <div className="text-center justify-start text-Label-Normal body1-m">
-            하루 체험 금액
+            체험 금액
           </div>
           <div className="text-Label-Normal body1-m">Price 원</div>
         </div>
