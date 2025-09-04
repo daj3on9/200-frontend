@@ -13,7 +13,7 @@ export default function ReportTodo({ todoData }: Props) {
       {!todoData.length ? (
         <div className=" flex justify-center items-center">
           <p className="body1-m text-Label-Assistive">
-            작성가능한 리포트가 없어요.
+            작성 가능한 리포트가 없어요.
           </p>
         </div>
       ) : (

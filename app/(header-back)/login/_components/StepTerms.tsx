@@ -93,6 +93,7 @@ export default function StepTerms({ step, setStep }: Props) {
                   href={item.link}
                   aria-label={item.label}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <ArrowRightIcon className="w-[16px] h-[16px] fill-Fill-50" />
                 </Link>

@@ -59,6 +59,7 @@ export default function RentalNotice({
               href="https://www.notion.so/25dced6af6528053bdbaf593ea09db1b?source=copy_link"
               aria-label="체험 및 이용 안내 바로가기"
               target="_blank"
+              rel="noopener noreferrer"
             >
               자세히
             </Link>
@@ -107,6 +108,7 @@ export default function RentalNotice({
               href="https://www.notion.so/25dced6af652804bbdebccd365c34a32?source=copy_link"
               aria-label="체험동의서 약관"
               target="_blank"
+              rel="noopener noreferrer"
             >
               자세히
             </Link>
