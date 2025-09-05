@@ -43,7 +43,7 @@ function StepComponent() {
     try {
       const res = await postAPI<ResStatus, Payload>('/auth/signup', payload);
       if (res) {
-        setTokens(res.accessToken as string, res.refreshToken as string);
+        setTokens(res.accessToken as string);
       }
       setStep(step + 1);
       sessionStorage.removeItem('tempToken');

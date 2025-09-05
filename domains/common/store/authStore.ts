@@ -4,11 +4,10 @@ import { decodeJwt } from '../utils/decodeJwt';
 
 interface AuthState {
   accessToken: string | null;
-  refreshToken: string | null;
   isLoggedIn: boolean;
   nickname: string | null;
   email: string | null;
-  setTokens: (access: string, refresh: string) => void;
+  setTokens: (access: string) => void;
   logout: () => void;
 }
 
@@ -16,12 +15,11 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       accessToken: null,
-      refreshToken: null,
       isLoggedIn: false,
       nickname: null,
       email: null,
-      setTokens: (access, refresh) => {
-        set({ accessToken: access, refreshToken: refresh, isLoggedIn: true });
+      setTokens: (access) => {
+        set({ accessToken: access, isLoggedIn: true });
         const user = decodeJwt(access);
         if (user) {
           set({ nickname: user.nickname ?? '', email: user.email ?? '' });
@@ -31,7 +29,6 @@ export const useAuthStore = create<AuthState>()(
       logout: () =>
         set({
           accessToken: null,
-          refreshToken: null,
           isLoggedIn: false,
           nickname: null,
           email: null,
@@ -43,7 +40,6 @@ export const useAuthStore = create<AuthState>()(
         nickname: state.nickname,
         email: state.email,
         isLoggedIn: state.isLoggedIn,
-        refreshToken: state.refreshToken,
       }),
     }
   )
