@@ -2,9 +2,9 @@
 import LeftArrowIcon from '@/public/icons/leftarrow.svg';
 import LogoIcon from '@/public/icons/Logo.svg';
 import LogoTextIcon from '@/public/icons/Logo-text.svg';
-import BasketIcon from '@/public/icons/Score=0.svg';
 import HamburgerButton from './HamburgerButton';
 import HomeButton from './HomeButton';
+import CartButton from './CartButton';
 
 type HeaderProps = {
   title?: string;
@@ -37,7 +37,7 @@ export default function Header({
             aria-label="뒤로가기"
             onClick={onBack ?? (() => history.back())}
           >
-            <LeftArrowIcon className="w-6 h-6" />
+            <LeftArrowIcon className="w-6 h-6 cursor-pointer" />
           </button>
         )}
         {showLogo && (
@@ -54,7 +54,7 @@ export default function Header({
       </div>
 
       <div className="flex items-center gap-3">
-        {showCart && <BasketIcon className="w-6 h-6 fill-Fill-20" />}
+        {showCart && <CartButton />}
         {showHamburger && <HamburgerButton />}
         {showHome && <HomeButton />}
       </div>
