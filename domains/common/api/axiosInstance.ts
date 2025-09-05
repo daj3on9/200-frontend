@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 
@@ -32,8 +33,11 @@ axiosInstance.interceptors.response.use(
     const { setTokens, logout } = useAuthStore.getState();
     const originalRequest = error.config || {};
 
-    if (error.response.status === 401 && !originalRequest._retry) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const status = error?.response?.status;
+    const url = (originalRequest as any)?.url as string | undefined;
+    const isReissue = url?.includes('/auth/reissue');
+
+    if (status === 401 && !isReissue && !originalRequest._retry) {
       (originalRequest as any)._retry = true;
 
       try {
