@@ -26,7 +26,7 @@ export default function ProductDetail() {
         <div className="flex justify-start items-center gap-2">
           <div className="w-5 h-5 relative rounded-full border border-Line-Subtler body2-m"></div>
 
-          <div className="justify-start text-Label-Normal body2-m">Brand</div>
+          <p className="justify-start text-Label-Normal body2-m">Brand</p>
         </div>
       </div>
       <div className="self-stretch px-3.5 py-6 bg-Static-White flex flex-col justify-start items-start gap-3">
@@ -34,9 +34,9 @@ export default function ProductDetail() {
           <div className="justify-start text-Label-Normal h3-b">Title</div>
         </div>
         <div className="flex flex-col justify-start items-start gap-2">
-          <div className="text-center justify-start text-Label-Assistive body2-m ">
+          <p className="text-center justify-start text-Label-Assistive body2-m ">
             Option
-          </div>
+          </p>
           <div className="bg-Static-White inline-flex justify-start items-start gap-2.5">
             {['#bbb', '#f44236', '#36f4b8'].map((item) => (
               <div
@@ -49,14 +49,14 @@ export default function ProductDetail() {
         </div>
         <div className="flex flex-col justify-start items-start gap-2">
           <div className="flex items-center justify-center gap-1">
-            <div className="justify-start text-Label-Assistive body2-r">
+            <p className="justify-start text-Label-Assistive body2-r">
               대여 요금
-            </div>
+            </p>
             <div className="w-3.5 h-3.5 cursor-pointer">
               <QuestionIcon className=" fill-Fill-50" />
             </div>
           </div>
-          <div className="text-Label-Normal h4-b">일 Price 원</div>
+          <p className="text-Label-Normal h4-b">일 Price 원</p>
         </div>
       </div>
     </div>

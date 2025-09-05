@@ -21,9 +21,7 @@ export default function ProductDetailInfo() {
         <div className="w-6 h-6 flex items-center">
           <InfoIcon className="w-5 h-5 fill-Fill-10" />
         </div>
-        <div className="justify-start text-Label-Normal title2-sb">
-          상세정보
-        </div>
+        <p className="justify-start text-Label-Normal title2-sb">상세정보</p>
       </div>
 
       <div
@@ -32,12 +30,12 @@ export default function ProductDetailInfo() {
         }}
         className={`w-full transition-all duration-300 ease-in-out overflow-hidden`}
       >
-        <div
+        <p
           ref={contentRef}
           className="h-[500px] border"
         >
           상세 내용
-        </div>
+        </p>
       </div>
 
       <div className="w-full px-3.5 py-3 left-0 top-[216px] bg-Static-White ">
