@@ -4,7 +4,6 @@ import StepIndicator from './StepIndicator';
 import LoginNextBtn from './LoginNextBtn';
 import CheckIcon from '@/public/icons/check.svg';
 import ArrowRightIcon from '@/public/icons/arrow-right.svg';
-import Link from 'next/link';
 
 type TermsKey = 'terms' | 'privacy' | 'age' | 'marketing';
 type TermsState = Record<TermsKey, boolean>;
@@ -89,14 +88,14 @@ export default function StepTerms({ step, setStep }: Props) {
                 </div>
               </div>
               <div className="w-4 h-4 ml-auto">
-                <Link
+                <a
                   href={item.link}
                   aria-label={item.label}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <ArrowRightIcon className="w-[16px] h-[16px] fill-Fill-50" />
-                </Link>
+                </a>
               </div>
             </div>
           ))}

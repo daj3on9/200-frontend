@@ -3,7 +3,6 @@ import Header from '@/domains/common/components/header';
 import React from 'react';
 import ArrowRightIcon from '@/public/icons/arrow-right.svg';
 import { createModal } from '@/domains/common/store/modalStore';
-import Link from 'next/link';
 import { useAuthStore } from '@/domains/common/store/authStore';
 import { useRouter } from 'next/navigation';
 
@@ -54,7 +53,7 @@ export default function Page() {
               <p className="text-Label-Subnormal Body1-m">24시간 고객센터</p>
               <ArrowRightIcon className="w-5 h-5 fill-Fill-90" />
             </button>
-            <Link
+            <a
               href={
                 'https://www.notion.so/FAQ-25dced6af65280b2a1c0d52939fc6c6d?source=copy_link'
               }
@@ -65,24 +64,24 @@ export default function Page() {
             >
               <p className="text-Label-Subnormal Body1-m">자주 묻는 질문</p>
               <ArrowRightIcon className="w-5 h-5 fill-Fill-90" />
-            </Link>
-            <Link
+            </a>
+            <a
               href={
                 'https://www.notion.so/25dced6af6528053bdbaf593ea09db1b?source=copy_link'
               }
               aria-label="체험 및 이용안내 링크"
+              className="self-stretch py-3 flex justify-between items-center cursor-pointer"
               target="_blank"
               rel="noopener noreferrer"
-              className="self-stretch py-3 flex justify-between items-center cursor-pointer"
             >
               <p className="text-Label-Subnormal Body1-m">체험 및 이용안내</p>
               <ArrowRightIcon className="w-5 h-5 fill-Fill-90" />
-            </Link>
+            </a>
           </div>
         </div>
         <div className="self-stretch p-4 bg-Static-White rounded-2xl flex flex-col items-start gap-3 overflow-hidden">
           <div className="text-Label-Alternative title1-sb">약관 및 정책</div>
-          <Link
+          <a
             href={
               'https://www.notion.so/25dced6af65280f3b7d0ca995f437306?source=copy_link'
             }
@@ -93,8 +92,8 @@ export default function Page() {
           >
             <p className="text-Label-Subnormal Body1-m">개인정보 처리방침</p>
             <ArrowRightIcon className="w-5 h-5 fill-Fill-90" />
-          </Link>
-          <Link
+          </a>
+          <a
             href={
               'https://www.notion.so/25dced6af6528032bdb2fcfe1c775a61?source=copy_link'
             }
@@ -105,7 +104,7 @@ export default function Page() {
           >
             <p className="text-Label-Subnormal Body1-m">이용약관 및 정책</p>
             <ArrowRightIcon className="w-5 h-5 fill-Fill-90" />
-          </Link>
+          </a>
         </div>
         <button
           type="button"

@@ -49,12 +49,14 @@ export default function OrderCard({ order }: OrderProps) {
 
           {/* TODO : 구글폼 링크 필요 */}
           {canWriteReport && (
-            <Link
+            <a
               href="https://www.notion.so/25dced6af6528053a4eef3054a1f8fdb?source=copy_link"
               className="mt-2 w-full flex justify-center items-center px-m py-s ds-rounded-xs border-m border-Line-Subtler body2-m text-Label-Normal"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               리포트 작성하기
-            </Link>
+            </a>
           )}
         </div>
       ))}
