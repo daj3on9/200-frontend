@@ -15,12 +15,14 @@ export default function page() {
       <main className="pb-3 flex flex-col gap-3 bg-Static-White h-[calc(100vh-135px)] justify-center items-center">
         <div className="w-32 h-32 relative rounded border-1">img</div>
 
-        <div className="text-center justify-start text-Label-Alternative title2-sb">
+        <p className="text-center justify-start text-Label-Alternative title2-sb">
           현재 외부 링크를 통해 리포트를
           <br />
           수집하고 있습니다.
-        </div>
+        </p>
       </main>
+
+      {/* TODO : 리포트 폼 링크로 변경 */}
       <div className="w-full p-3.5 bg-Static-White">
         <Link
           href="/"
