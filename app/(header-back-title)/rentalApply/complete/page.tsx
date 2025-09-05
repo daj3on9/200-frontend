@@ -25,7 +25,7 @@ export default function page() {
                 해당 상품은 반납을 해야 되는 상품이에요
               </p>
             </div>
-            <div className="flex gap-3 items-center justify-cente">
+            <div className="flex gap-3 items-center">
               <div className="w-10 h-10 bg-Fill-99 rounded-full flex items-center justify-center">
                 <ReviewIcon className="w-5 h-5 fill-Fill-20" />
               </div>
@@ -33,7 +33,7 @@ export default function page() {
                 리뷰를 작성하면 체험 비용을 환급 받을 수 있어요
               </p>
             </div>
-            <div className="flex gap-3 items-center justify-cente">
+            <div className="flex gap-3 items-center">
               <div className="w-10 h-10 bg-Fill-99 rounded-full flex items-center justify-center">
                 <SparkleIcon className="w-5 h-5 fill-Fill-20" />
               </div>

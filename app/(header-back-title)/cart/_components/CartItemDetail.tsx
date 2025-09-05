@@ -49,8 +49,11 @@ export default function CartItemDetail({
           </label>
         </div>
         <button
-          className="text-center text-Label-Subnormal body2-m px-2 py-1 rounded outline outline-offset-[-1px] outline-Line-Subtler cursor-pointer"
+          className={`text-center text-Label-Subnormal body2-m px-2 py-1 rounded outline outline-offset-[-1px] outline-Line-Subtler ${
+            +selectedIds.length ? 'cursor-pointer' : ''
+          } `}
           onClick={() => deleteMutation.mutate(selectedIds)}
+          disabled={!selectedIds.length}
         >
           선택 삭제
         </button>

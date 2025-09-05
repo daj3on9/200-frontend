@@ -7,7 +7,7 @@ import ArrowUpIcon from '@/public/icons/arrow-up.svg';
 export default function ProductDetailInfo() {
   const [isWide, setIsWide] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     if (contentRef.current) {
