@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import QuestionIcon from '@/public/icons/question.svg';
+import { COLORS } from '@/lib/colors';
 
 export default function ProductDetail() {
   return (
@@ -38,10 +39,10 @@ export default function ProductDetail() {
             Option
           </p>
           <div className="bg-Static-White inline-flex justify-start items-start gap-2.5">
-            {['#bbb', '#f44236', '#36f4b8'].map((item) => (
+            {['MidnightBlue', 'DeepPlum', 'SandStone'].map((item) => (
               <div
                 key={item}
-                style={{ backgroundColor: item }}
+                style={{ backgroundColor: COLORS[item] }}
                 className={`w-3 h-3 rounded-full`}
               ></div>
             ))}

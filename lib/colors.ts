@@ -1,4 +1,4 @@
-export const COLORS = {
+export const COLORS: { [key: string]: string } = {
   midnight: '#2B313A',
   Starlight: '#EAE1D4',
   Blue: '#90A9B4',
@@ -6,14 +6,14 @@ export const COLORS = {
   orange: '#FFBF9D',
   PlatinumSilver: '#E4DED7',
   MidnightBlue: '#384556',
+  Graphite: '#737373',
   Golde: '#DFCAA7',
   Timber: '#AC6E48',
   BlackAnthracite: '#242528',
   WhiteSmoke: '#FFFFFF',
-  White: '#FFFFFF',
   LunaBlue: '#213360',
   DeepPlum: '#AD0043',
-  BlSandStoneue: '#B3AB9A',
+  SandStone: '#B3AB9A',
   Tan: '#D5C29E',
   Royalburgundy: '#793D3D',
   Darkforest: '#1B4E36',
@@ -23,4 +23,5 @@ export const COLORS = {
   Aluminium: '#EB9F2C',
   Champagne: '#CAC5C2',
   Black: '#000000',
+  White: '#FFFFFF',
 };
