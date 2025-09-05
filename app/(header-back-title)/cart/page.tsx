@@ -45,9 +45,9 @@ export default function Page() {
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {!cartData.length ? (
-          <div className="h-full flex justify-center items-center text-Label-Assistive body1-m">
+          <p className="h-full flex justify-center items-center text-Label-Assistive body1-m">
             장바구니가 비었어요.
-          </div>
+          </p>
         ) : (
           <div className="h-full flex flex-col gap-3">
             <CartItemDetail
