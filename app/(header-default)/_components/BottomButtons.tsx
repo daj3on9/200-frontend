@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import FAQIcon from '@/public/icons/FAQ.svg';
 import CallIcon from '@/public/icons/call.svg';
 import { createModal } from '@/domains/common/store/modalStore';
@@ -17,10 +16,12 @@ export default function BottomButtons() {
 
   return (
     <div className="self-stretch inline-flex justify-start items-center gap-m">
-      <Link
+      <a
         href="https://www.notion.so/FAQ-25dced6af65280b2a1c0d52939fc6c6d?source=copy_link"
         aria-label="FAQ 바로 가기"
         className="flex-1 self-stretch p-6 bg-Static-White ds-rounded-m flex justify-center items-center gap-m overflow-hidden"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <FAQIcon
           width={24}
@@ -28,7 +29,7 @@ export default function BottomButtons() {
           className="w-6 h-6 fill-Fill-20"
         />
         <div className="justify-start body1-sb text-Label-Subnormal">FAQ</div>
-      </Link>
+      </a>
       <button
         className="flex-1 self-stretch p-6 bg-Static-White ds-rounded-m flex justify-center items-center gap-m overflow-hidden cursor-pointer"
         onClick={handleClick}

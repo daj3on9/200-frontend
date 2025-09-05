@@ -16,13 +16,15 @@ export default function page() {
               <div className="text-center justify-start text-Label-Subnormal title3-sb">
                 체험 및 이용 안내
               </div>
-              <Link
+              <a
                 href="https://www.notion.so/25dced6af6528053bdbaf593ea09db1b?source=copy_link"
                 aria-label="체험 및 이용 안내 바로가기"
                 className="w-4 h-4 relative overflow-hidden"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <ArrowRightIcon className="w-[18px] h-[18px] fill-Fill-30" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

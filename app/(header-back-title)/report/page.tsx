@@ -2,7 +2,6 @@
 import Header from '@/domains/common/components/header';
 import React, { useState } from 'react';
 import RightArrowIcon from '@/public/icons/arrow-right.svg';
-import Link from 'next/link';
 import ReportTodo from './_components/ReportTodo';
 import ReportDone from './_components/ReportDone';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
@@ -58,7 +57,7 @@ export default function Page() {
                 나의 리포트 count 개
               </p>
 
-              <Link
+              <a
                 href={
                   'https://www.notion.so/25dced6af65280759a55c81629afd17d?source=copy_link'
                 }
@@ -67,12 +66,12 @@ export default function Page() {
                 className="justify-start text-Label-Assistive underline body2-r"
               >
                 환급 안내
-              </Link>
+              </a>
             </div>
           </div>
         </div>
         <div className="self-stretch px-3.5 py-3 bg-Static-White ">
-          <Link
+          <a
             href={
               'https://www.notion.so/25dced6af6528053a4eef3054a1f8fdb?source=copy_link'
             }
@@ -84,7 +83,7 @@ export default function Page() {
               리포트 작성 안내
             </p>
             <RightArrowIcon className="w-4 h-4 fill-Fill-20" />
-          </Link>
+          </a>
         </div>
         <div className="self-stretch px-4 bg-Static-White border-b border-Line-Subtler flex gap-2 justify-start items-center">
           <button

@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import CheckIcon from '@/public/icons/check.svg';
-import Link from 'next/link';
 
 interface AgreeNotice {
   caution: boolean;
@@ -55,14 +54,14 @@ export default function RentalNotice({
             <p>체험 안내 확인 및 모든 약관 동의</p>
           </button>
           <div className="justify-start text-Label-Assistive text-xs font-normal font-['Pretendard'] underline leading-none">
-            <Link
+            <a
               href="https://www.notion.so/25dced6af6528053bdbaf593ea09db1b?source=copy_link"
               aria-label="체험 및 이용 안내 바로가기"
               target="_blank"
               rel="noopener noreferrer"
             >
               자세히
-            </Link>
+            </a>
           </div>
         </div>
         {validCaution && (
@@ -104,14 +103,14 @@ export default function RentalNotice({
             <p>체험동의서 확인 및 모든 약관 동의</p>
           </button>
           <div className="justify-start text-Label-Assistive text-xs font-normal font-['Pretendard'] underline leading-none">
-            <Link
+            <a
               href="https://www.notion.so/25dced6af652804bbdebccd365c34a32?source=copy_link"
               aria-label="체험동의서 약관"
               target="_blank"
               rel="noopener noreferrer"
             >
               자세히
-            </Link>
+            </a>
           </div>
         </div>
 
