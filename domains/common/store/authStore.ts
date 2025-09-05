@@ -10,7 +10,6 @@ interface AuthState {
   email: string | null;
   setTokens: (access: string, refresh: string) => void;
   logout: () => void;
-  setUsers: (accessToken: string | undefined | null) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -21,8 +20,14 @@ export const useAuthStore = create<AuthState>()(
       isLoggedIn: false,
       nickname: null,
       email: null,
-      setTokens: (access, refresh) =>
-        set({ accessToken: access, refreshToken: refresh, isLoggedIn: true }),
+      setTokens: (access, refresh) => {
+        set({ accessToken: access, refreshToken: refresh, isLoggedIn: true });
+        const user = decodeJwt(access);
+        if (user) {
+          set({ nickname: user.nickname ?? '', email: user.email ?? '' });
+        }
+      },
+
       logout: () =>
         set({
           accessToken: null,
@@ -31,12 +36,6 @@ export const useAuthStore = create<AuthState>()(
           nickname: null,
           email: null,
         }),
-      setUsers: (accessToken) => {
-        const user = decodeJwt(accessToken ?? undefined);
-        if (user) {
-          set({ nickname: user.nickname ?? '', email: user.email ?? '' });
-        }
-      },
     }),
     {
       name: 'auth-storage',

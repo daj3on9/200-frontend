@@ -40,11 +40,6 @@ function Callback() {
             router.push(`/login/step`);
           }
         }
-
-        // accessToken 디코딩 후 저장
-        if (res?.accessToken) {
-          useAuthStore.getState().setUsers(res.accessToken);
-        }
       } catch (error) {
         if (error instanceof Error) {
           throw new Error(error.message);
