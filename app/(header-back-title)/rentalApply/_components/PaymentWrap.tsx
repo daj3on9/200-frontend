@@ -20,9 +20,9 @@ export default function PaymentWrap({
   ];
   return (
     <div className="px-3.5 py-6 bg-Static-White flex flex-col justify-start items-start">
-      <div className="justify-start text-Label-Subnormal title1-sb mb-4">
+      <p className="justify-start text-Label-Subnormal title1-sb mb-4">
         결제 수단
-      </div>
+      </p>
       <div className="flex flex-wrap justify-center items-center gap-4">
         {PaymentList.map((v) => (
           <button

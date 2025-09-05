@@ -9,10 +9,10 @@ export default function page() {
     <div className="h-screen overflow-hidden">
       <main className="pb-3 flex flex-col gap-3 bg-Static-White h-[calc(100vh-85px)] justify-center">
         <div className="flex flex-col justify-center items-center gap-6">
-          <div className="self-stretch text-center justify-start text-Label-Normal h4-sb">
+          <p className="self-stretch text-center justify-start text-Label-Normal h4-sb">
             체험 신청이 <br />
             완료 되었습니다!
-          </div>
+          </p>
           <div className="w-20 h-20 relative overflow-hidden">
             <CheckIcon className="w-20 h-20 left-[4.33px] top-[4.33px] absolute fill-Primary-Normal" />
           </div>
@@ -21,25 +21,25 @@ export default function page() {
               <div className="w-10 h-10 bg-Fill-99 rounded-full flex items-center justify-center">
                 <ReceiptIcon className="w-5 h-5 fill-Fill-20" />
               </div>
-              <div className="justify-center text-Label-Alternative body2-m">
+              <p className="justify-center text-Label-Alternative body2-m">
                 해당 상품은 반납을 해야 되는 상품이에요
-              </div>
+              </p>
             </div>
             <div className="flex gap-3 items-center justify-cente">
               <div className="w-10 h-10 bg-Fill-99 rounded-full flex items-center justify-center">
                 <ReviewIcon className="w-5 h-5 fill-Fill-20" />
               </div>
-              <div className="justify-center text-Label-Alternative body2-m">
+              <p className="justify-center text-Label-Alternative body2-m">
                 리뷰를 작성하면 체험 비용을 환급 받을 수 있어요
-              </div>
+              </p>
             </div>
             <div className="flex gap-3 items-center justify-cente">
               <div className="w-10 h-10 bg-Fill-99 rounded-full flex items-center justify-center">
                 <SparkleIcon className="w-5 h-5 fill-Fill-20" />
               </div>
-              <div className="justify-center text-Label-Alternative body2-m">
+              <p className="justify-center text-Label-Alternative body2-m">
                 체험을 통해 자신이 맞는 제품을 찾아보세요
-              </div>
+              </p>
             </div>
           </div>
         </div>
