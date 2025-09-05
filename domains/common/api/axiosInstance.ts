@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 import { postAPI } from '.';
@@ -37,7 +38,7 @@ axiosInstance.interceptors.response.use(
       !originalRequest._retry &&
       refreshToken
     ) {
-      originalRequest._retry = true;
+      (originalRequest as any)._retry = true;
 
       try {
         const res = await postAPI<TokenResponse, { refreshToken: string }>(

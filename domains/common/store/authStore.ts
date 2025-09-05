@@ -39,10 +39,11 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'auth-storage',
-      // nickname, email만 저장
       partialize: (state) => ({
         nickname: state.nickname,
         email: state.email,
+        isLoggedIn: state.isLoggedIn,
+        refreshToken: state.refreshToken,
       }),
     }
   )
