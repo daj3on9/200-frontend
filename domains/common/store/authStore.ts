@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { decodeJwt } from '../utils/decodeJwt';
 
 interface AuthState {
   accessToken: string | null;
@@ -8,8 +9,8 @@ interface AuthState {
   nickname: string | null;
   email: string | null;
   setTokens: (access: string, refresh: string) => void;
-  setUsers: (nickname: string, email: string) => void;
   logout: () => void;
+  setUsers: (accessToken: string | undefined | null) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -22,7 +23,6 @@ export const useAuthStore = create<AuthState>()(
       email: null,
       setTokens: (access, refresh) =>
         set({ accessToken: access, refreshToken: refresh, isLoggedIn: true }),
-      setUsers: (nickname, email) => set({ nickname, email }),
       logout: () =>
         set({
           accessToken: null,
@@ -31,6 +31,12 @@ export const useAuthStore = create<AuthState>()(
           nickname: null,
           email: null,
         }),
+      setUsers: (accessToken) => {
+        const user = decodeJwt(accessToken ?? undefined);
+        if (user) {
+          set({ nickname: user.nickname ?? '', email: user.email ?? '' });
+        }
+      },
     }),
     {
       name: 'auth-storage',
