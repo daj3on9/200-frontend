@@ -41,7 +41,7 @@ axiosInstance.interceptors.response.use(
 
       try {
         const res = await postAPI<TokenResponse, { refreshToken: string }>(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`,
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/reissue`,
           {
             refreshToken,
           }
@@ -57,22 +57,6 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
       }
     }
-    /*
-    if (error.response && error.response.data && error.response.data.detail) {
-      const errorData = error.response.data;
-      const { title, detail } = errorData;
-
-      console.error(`[🚨 API Error] ${title || 'Error'}: ${detail}`);
-    } else if (error.response) {
-      console.error(
-        `🚨 Error Response: ${error.response.status} ${error.response.statusText}`
-      );
-    } else if (error.request) {
-      console.error('🚨 Error Request:', error.request);
-    } else {
-      console.error('🚨 Error Message:', error.message);
-    }
-  */
     return Promise.reject(error);
   }
 );
