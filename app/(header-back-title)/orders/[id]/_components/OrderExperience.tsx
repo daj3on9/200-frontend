@@ -9,13 +9,17 @@ interface OrderExperienceProps {
 }
 
 export default function OrderExperience({ order }: OrderExperienceProps) {
+  const firstItem = order.items[0];
+
   return (
     <div className="flex flex-1 flex-col items-start gap-m">
       <ProductInfo items={order.items} />
-      <ExperiencePeriod
-        startDate={order.items[0].startDate}
-        endDate={order.items[0].endDate}
-      />
+      {firstItem?.startDate && firstItem?.endDate && (
+        <ExperiencePeriod
+          startDate={order.items[0].startDate}
+          endDate={order.items[0].endDate}
+        />
+      )}
       <TermsAndConditions />
       <CancelExperienceButton />
     </div>

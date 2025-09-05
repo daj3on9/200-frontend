@@ -18,7 +18,7 @@ export default function RentalFeeDetails({ items }: RentalFeeDetailsProps) {
             key={item.id}
             className="flex justify-between items-start self-stretch"
           >
-            <div className="self-strech flex flex-col items-start gap-xs">
+            <div className="self-stretch flex flex-col items-start gap-xs">
               <p className="body2-r text-Label-Alternative"> {item.title} </p>
               <p className="body3-r text-Label-Assistive">
                 {item.startDate} ~ {item.endDate}

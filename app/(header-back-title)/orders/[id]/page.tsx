@@ -3,12 +3,8 @@ import { mockOrders } from '@/domains/orders/api/mock';
 import OrderHeader from './_components/OrderHeader';
 import OrderTabs from './_components/OrderTabs';
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default function Page({ params }: { params: { id: string } }) {
+  const { id } = params;
   const order = mockOrders.find((order) => order.orderNumber === id);
 
   if (!order) {
