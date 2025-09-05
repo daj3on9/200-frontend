@@ -7,7 +7,7 @@ export default function CartPriceDetail() {
       <div className="text-center justify-start text-Label-Subnormal title1-sb">
         구매 금액
       </div>
-      <div className="self-stretch flex flex-col justify-start items-start gap-2 text-Label-Normal body1-m">
+      <div className="self-stretch flex flex-col justify-start items-start gap-2 text-Label-Normal body1-m pb-6 border-b border-Line-Subtler">
         <div className="self-stretch inline-flex justify-between items-center">
           <div className="text-center justify-start text-Label-Normal body1-m">
             체험 금액
@@ -34,7 +34,6 @@ export default function CartPriceDetail() {
           </div>
         </div>
       </div>
-      <div className="w-full h-0 outline outline-offset-[-0.50px] outline-Line-Subtler" />
       <div className="self-stretch flex flex-col justify-start items-start gap-2">
         <div className="self-stretch inline-flex justify-between items-center">
           <div className="text-center justify-start text-Label-Subnormal title1-sb">

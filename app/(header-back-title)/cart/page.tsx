@@ -32,6 +32,7 @@ const TEMPDATA = [
 
 export default function Page() {
   const [cartData, setCartData] = useState<CartItemState[]>(TEMPDATA);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   return (
     <div className="h-screen overflow-hidden bg-Fill-99">
@@ -49,7 +50,11 @@ export default function Page() {
           </div>
         ) : (
           <div className="h-full flex flex-col gap-3">
-            <CartItemDetail cartData={cartData} />
+            <CartItemDetail
+              cartData={cartData}
+              selectedIds={selectedIds}
+              setSelectedIds={setSelectedIds}
+            />
             <CartPriceDetail />
           </div>
         )}
@@ -65,9 +70,14 @@ export default function Page() {
         ) : (
           <button
             type="button"
-            className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
+            className={`w-full p-4 rounded  items-center title2-sb ${
+              !selectedIds.length
+                ? 'bg-Fill-99 text-Label-Disable'
+                : 'bg-Primary-Normal text-Static-White cursor-pointer'
+            }`}
+            disabled={!selectedIds.length}
           >
-            99,999원 결제하기
+            {!selectedIds.length ? '결제하기' : ` 99,999원 결제하기`}
           </button>
         )}
       </div>
