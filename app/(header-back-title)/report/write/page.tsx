@@ -1,9 +1,15 @@
 import Header from '@/domains/common/components/header';
-import ReceiptIcon from '@/public/icons/receipt.svg';
-import ReviewIcon from '@/public/icons/review.svg';
-import SparkleIcon from '@/public/icons/sparkle.svg';
-import CheckIcon from '@/public/icons/status-good.svg';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: '리포트 작성하기',
+  description:
+    'Cherry 리포트 작성하기 - 체험한 제품들의 리포트를 작성해 보세요.',
+  icons: {
+    icon: '/icons/Logo.svg',
+  },
+};
 
 export default function page() {
   return (

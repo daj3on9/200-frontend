@@ -2,7 +2,16 @@ import ReceiptIcon from '@/public/icons/receipt.svg';
 import ReviewIcon from '@/public/icons/review.svg';
 import SparkleIcon from '@/public/icons/sparkle.svg';
 import CheckIcon from '@/public/icons/status-good.svg';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: '체험 신청 완료',
+  description: 'Cherry 체험 신청 완료 - 체험 신청이 완료되었습니다.',
+  icons: {
+    icon: '/icons/Logo.svg',
+  },
+};
 
 export default function page() {
   return (
