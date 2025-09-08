@@ -8,7 +8,7 @@ import CalendarWrap from './CalendarWrap';
 import RentalItem from './RentalItem';
 import { useRentalApplyForm } from '@/domains/rentalApply/hooks/useRentalApplyForm';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const TEMPDATA = [
   {
