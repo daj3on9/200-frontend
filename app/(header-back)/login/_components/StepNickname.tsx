@@ -53,27 +53,27 @@ export default function StepNickname({
     setMessage('');
     setCanProceed(true);
 
-    // TODO : api 연결 후 주석 풀기
-    // try {
-    //   const res = await postAPI<ResStatus, { nickname: string }>(
-    //     '/api/check-nickname',
-    //     { nickname }
-    //   );
+    try {
+      const res = await postAPI<ResStatus, { nickname: string }>(
+        '/members/verify/nickname',
+        { nickname }
+      );
 
-    //   if (res?.isDuplicate) {
-    //     setMessage('동일한 닉네임이 입니다');
-    //     setStatus('duplicate');
-    // setCanProceed(false);
-    //   } else {
-    //     setMessage('사용 가능한 닉네임입니다');
-    //     setStatus('valid');
-    //     setCanProceed(true)
-    //   }
-    // } catch (error) {
-    //   setMessage('오류가 발생했습니다');
-    //   setStatus('default');
-    // setCanProceed(false);
-    // }
+      if (res?.isDuplicate) {
+        setMessage('동일한 닉네임이 입니다');
+        setStatus('duplicate');
+        setCanProceed(false);
+      } else {
+        setMessage('사용 가능한 닉네임입니다');
+        setStatus('valid');
+        setCanProceed(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setMessage('오류가 발생했습니다');
+      setStatus('default');
+      setCanProceed(false);
+    }
   };
 
   const handleJoin = () => {

@@ -44,26 +44,26 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
     setMessage('');
     setCanProceed(true);
 
-    // TODO : api 연결 후 주석 풀기
-    // try {
-    //   const res = await postAPI<ResStatus, { email: string }>(
-    //     '/api/check-email',
-    //     { email }
-    //   );
+    try {
+      const res = await postAPI<ResStatus, { emailAddress: string }>(
+        '/members/verify/email',
+        { emailAddress: email }
+      );
 
-    //   if (res?.isDuplicate) {
-    //     setMessage('동일한 이메일이 존재합니다');
-    //     setStatus('invalid');
-    // setCanProceed(false);
-    //   } else {
-    //     setMessage('사용 가능한 이메일입니다');
-    //     setCanProceed(true);
-    //   }
-    // } catch (error) {
-    //   setMessage('오류가 발생했습니다');
-    //   setStatus('default');
-    // setCanProceed(false);
-    // }
+      if (res?.isDuplicate) {
+        setMessage('동일한 이메일이 존재합니다');
+        setStatus('invalid');
+        setCanProceed(false);
+      } else {
+        setMessage('사용 가능한 이메일입니다');
+        setCanProceed(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setMessage('오류가 발생했습니다');
+      setStatus('default');
+      setCanProceed(false);
+    }
   };
 
   useEffect(() => {
