@@ -5,6 +5,7 @@ import { postAPI } from '@/domains/common/api';
 import { useToastStore } from '@/domains/common/store/toastStore';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 import { useAuthStore } from '@/domains/common/store/authStore';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   id: string;
@@ -22,6 +23,7 @@ export default function FooterBtn({
   setShowModal,
 }: Props) {
   const { isLoggedIn } = useAuthStore.getState();
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedColor, setSelectedColor] = useState('');
   const { showToast } = useToastStore();
@@ -78,6 +80,8 @@ export default function FooterBtn({
     if (selectedColor === '') {
       setShowModal(true);
     }
+    addMutation.mutate({ productId: id, color: selectedColor });
+    router.push('/rentalApplay');
   };
 
   return (
