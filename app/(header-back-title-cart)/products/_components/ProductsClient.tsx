@@ -55,7 +55,14 @@ export default function ProductsClient() {
           loading={isLoading && mapped.length === 0}
           products={mapped}
         />
-        {hasNextPage && <div ref={ref} />}
+        {hasNextPage && (
+          <div
+            ref={ref}
+            className="py-6 text-center body3-r text-Label-Assistive"
+          >
+            {isFetchingNextPage ? '' : ''}
+          </div>
+        )}
       </div>
     </>
   );
