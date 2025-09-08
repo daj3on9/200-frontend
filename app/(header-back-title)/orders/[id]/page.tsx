@@ -2,6 +2,16 @@ import Header from '@/domains/common/components/header';
 import { mockOrders } from '@/domains/orders/api/mock';
 import OrderHeader from './_components/OrderHeader';
 import OrderTabs from './_components/OrderTabs';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '주문 상세',
+  description:
+    'Cherry 주문 상세 — 주문한 상품의 체험 정보, 결제 내역을 확인하세요.',
+  icons: {
+    icon: '/icons/Logo.svg',
+  },
+};
 
 export default function Page({ params }: { params: { id: string } }) {
   const { id } = params;

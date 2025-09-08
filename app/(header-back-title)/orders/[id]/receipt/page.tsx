@@ -1,4 +1,14 @@
 import Header from '@/domains/common/components/header';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '영수증',
+  description:
+    'Cherry 영수증 — 결제 금액, 결제 수단, 승인 번호, 세부 내역을 확인하세요.',
+  icons: {
+    icon: '/icons/Logo.svg',
+  },
+};
 
 export default function Page() {
   return (
