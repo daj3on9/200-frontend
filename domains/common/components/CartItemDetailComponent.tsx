@@ -3,6 +3,8 @@ import CloseIcon from '@/public/icons/close.svg';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 import { formatDate } from '../utils/date';
+import Image from 'next/image';
+import { getImageUrl } from '../utils/image';
 
 interface Props {
   item: CartItemState;
@@ -34,7 +36,15 @@ export default function CartItemDetailComponent({
       )}
       <div className="flex-1 flex justify-between items-start">
         <div className="flex justify-start items-center gap-3">
-          <div className="w-20 h-20 relative rounded border-1">img</div>
+          <div className="w-20 h-20 relative rounded">
+            <Image
+              src={getImageUrl(item.productThumbnailUrl)}
+              alt={item.productName}
+              width={100}
+              height={100}
+              className="self-stretch"
+            />
+          </div>
           <div className="self-stretch flex flex-col justify-between items-start gap-1">
             <div>
               <p className="body2-r text-Label-Subnormal">{item.productName}</p>
