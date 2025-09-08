@@ -3,7 +3,7 @@
 import { BrandId } from '@/domains/products/types/ProductsType';
 import clsx from 'clsx';
 import { useMemo } from 'react';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash.debounce';
 
 const BRANDS: { id: BrandId; name: string }[] = [
   { id: 'SONY', name: 'SONY' },

@@ -12,7 +12,7 @@ export default function ProductsClient() {
   const [brands, setBrands] = useState<BrandId[] | undefined>(undefined);
   const [sort, setSort] = useState<SortType>('REGISTERED');
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useProductsInfinite(brands, sort, 6);
 
   const flat = useMemo(
@@ -51,15 +51,11 @@ export default function ProductsClient() {
         />
       </div>
       <div className="flex-1 overflow-y-auto no-scrollbar bg-Static-White">
-        <ProductGrid products={mapped} />
-        {hasNextPage && (
-          <div
-            ref={ref}
-            className="py-6 text-center body3-r text-Label-Assistive"
-          >
-            {isFetchingNextPage ? '불러오는 중…' : '더 보기'}
-          </div>
-        )}
+        <ProductGrid
+          loading={isLoading && mapped.length === 0}
+          products={mapped}
+        />
+        {hasNextPage && <div ref={ref} />}
       </div>
     </>
   );
