@@ -1,8 +1,5 @@
 import Header from '@/domains/common/components/header';
-import ProductGrid from './_components/ProductGrid';
-import { mockProducts } from '@/domains/products/api/mock';
-import FiltersBar from './_components/FiltersBar';
-import BrandTabs from './_components/BrandTabs';
+import ProductsClient from './_components/ProductsClient';
 
 export default function page() {
   return (
@@ -12,13 +9,7 @@ export default function page() {
         title="체험하기"
         showCart
       />
-      <div className="flex-shrink-0 bg-Static-White">
-        <BrandTabs />
-        <FiltersBar />
-      </div>
-      <div className="flex-1 overflow-y-auto no-scrollbar bg-Static-White">
-        <ProductGrid products={mockProducts} />
-      </div>
+      <ProductsClient />
     </div>
   );
 }

@@ -1,8 +1,17 @@
-import { Product } from '@/domains/products/types/ProductsType';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+}: {
+  product: {
+    id: string;
+    brand: string;
+    name: string;
+    dailyRentalPrice: number;
+    thumbnailImageUrl: string;
+  };
+}) {
   return (
     <Link
       href={`/products/${product.id}`}
@@ -12,8 +21,8 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="relative w-full aspect-square">
           <Image
             className="self-stretch"
-            src="https://placehold.co/195x195"
-            alt="placeholder"
+            src={product.thumbnailImageUrl}
+            alt={product.name}
             width={195}
             height={195}
             unoptimized
@@ -22,10 +31,10 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="self-stretch p-3 bg-Static-White flex flex-col justify-start items-start gap-2">
           <div className="flex flex-col justify-start items-start">
             <div className="justify-start text-Label-Alternative body3-m">
-              {product.brandName}
+              {product.brand}
             </div>
             <div className="w-40 justify-start text-Label-Normal title1-b truncate">
-              {product.title}
+              {product.name}
             </div>
           </div>
           <div className="self-stretch inline-flex justify-between items-center">
@@ -34,7 +43,7 @@ export default function ProductCard({ product }: { product: Product }) {
             </div>
             <div className="flex justify-start items-center">
               <div className="justify-start text-Label-Normal title2-b">
-                {product.pricePerDay} 원
+                {product.dailyRentalPrice} 원
               </div>
             </div>
           </div>
