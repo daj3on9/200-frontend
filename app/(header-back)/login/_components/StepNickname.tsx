@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import StepIndicator from './StepIndicator';
@@ -11,6 +12,7 @@ interface Props {
   setNickname: Dispatch<SetStateAction<string>>;
   onSubmit: () => void;
 }
+
 interface ResStatus {
   isDuplicate: boolean;
 }
@@ -58,21 +60,20 @@ export default function StepNickname({
         '/members/verify/nickname',
         { nickname }
       );
-
-      if (res?.isDuplicate) {
-        setMessage('동일한 닉네임이 입니다');
+      setMessage('사용 가능한 닉네임입니다');
+      setStatus('valid');
+      setCanProceed(true);
+    } catch (error: any) {
+      if (error.response?.status === 409) {
+        setMessage('이미 사용 중인 닉네임입니다');
         setStatus('duplicate');
         setCanProceed(false);
       } else {
-        setMessage('사용 가능한 닉네임입니다');
-        setStatus('valid');
-        setCanProceed(true);
+        console.error(error);
+        setMessage('오류가 발생했습니다');
+        setStatus('default');
+        setCanProceed(false);
       }
-    } catch (error) {
-      console.log(error);
-      setMessage('오류가 발생했습니다');
-      setStatus('default');
-      setCanProceed(false);
     }
   };
 

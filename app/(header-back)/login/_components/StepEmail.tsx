@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import StepIndicator from './StepIndicator';
@@ -50,19 +51,20 @@ export default function StepEmail({ step, setStep, email, setEmail }: Props) {
         { emailAddress: email }
       );
 
-      if (res?.isDuplicate) {
+      setMessage('사용 가능한 이메일입니다');
+      setStatus('valid');
+      setCanProceed(true);
+    } catch (error: any) {
+      if (error.response?.status === 409) {
         setMessage('동일한 이메일이 존재합니다');
         setStatus('invalid');
         setCanProceed(false);
       } else {
-        setMessage('사용 가능한 이메일입니다');
-        setCanProceed(true);
+        console.error(error);
+        setMessage('오류가 발생했습니다');
+        setStatus('default');
+        setCanProceed(false);
       }
-    } catch (error) {
-      console.log(error);
-      setMessage('오류가 발생했습니다');
-      setStatus('default');
-      setCanProceed(false);
     }
   };
 
