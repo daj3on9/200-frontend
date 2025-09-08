@@ -40,8 +40,8 @@ export default function page() {
         <div className="ds-rounded-m flex flex-col justify-start items-start overflow-hidden">
           <Image
             className="self-stretch relative"
-            src="https://placehold.co/360x300"
-            alt="placeholder"
+            src="/images/homeimage.png"
+            alt="Homeimg"
             width={360}
             height={300}
             unoptimized

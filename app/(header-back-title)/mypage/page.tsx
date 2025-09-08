@@ -40,7 +40,7 @@ export default function Page() {
       <main className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar px-3.5">
         <div className="self-stretch py-6 flex items-center gap-6">
           <Image
-            src="https://placehold.co/58x58"
+            src="/images/emptyprofile.png"
             alt="프로필 이미지"
             width={58}
             height={58}
