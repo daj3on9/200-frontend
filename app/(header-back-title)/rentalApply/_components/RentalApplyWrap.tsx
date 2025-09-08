@@ -99,7 +99,7 @@ export default function RentalApplyWrap() {
           className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
           onClick={handleSubmit}
         >
-          {totalPrice}원 결제하기
+          {totalPrice * 7}원 결제하기
         </button>
       </div>
     </div>
