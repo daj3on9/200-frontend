@@ -16,7 +16,9 @@ export default function CartPriceDetail({ totalPrice }: Props) {
           <p className="text-center justify-start text-Label-Normal body1-m">
             체험 금액
           </p>
-          <div className="text-Label-Normal body1-m">{totalPrice} 원</div>
+          <div className="text-Label-Normal body1-m">
+            {totalPrice.toLocaleString()} 원
+          </div>
         </div>
         <div className="self-stretch inline-flex justify-between items-center">
           <p className="text-center justify-start text-Label-Normal body1-m">
@@ -41,7 +43,9 @@ export default function CartPriceDetail({ totalPrice }: Props) {
           <p className="text-center justify-start text-Label-Subnormal title1-sb">
             총 결제 금액
           </p>
-          <div className="text-Primary-Normal h3-b">{totalPrice}*7 원</div>
+          <div className="text-Primary-Normal h3-b">
+            {totalPrice.toLocaleString()}*7 원
+          </div>
         </div>
         <p className="text-center justify-start text-Label-Assistive body2-m">
           현재 7일 체험만 가능합니다.

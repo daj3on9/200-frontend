@@ -48,7 +48,9 @@ export default function CartWrap() {
             }`}
             disabled={!selectedIds.length}
           >
-            {!selectedIds.length ? '결제하기' : `${totalPrice * 7}원 결제하기`}
+            {!selectedIds.length
+              ? '결제하기'
+              : `${(totalPrice * 7).toLocaleString()}원 결제하기`}
           </button>
         )}
       </div>
