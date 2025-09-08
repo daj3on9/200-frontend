@@ -73,7 +73,7 @@ export default function ProductDetail() {
         <div className="flex flex-col justify-start items-start gap-2">
           <div className="flex items-center justify-center gap-1">
             <p className="justify-start text-Label-Assistive body2-r">
-              대여 요금
+              하루 체험 요금
             </p>
             <div
               className="w-3.5 h-3.5 cursor-pointer relative"
@@ -83,8 +83,8 @@ export default function ProductDetail() {
               <QuestionIcon className="fill-Fill-50" />
 
               {showPopover && (
-                <div className="absolute -top-5 left-5 z-10 bg-gray-100 px-2 py-1 rounded-sm shadow-md whitespace-nowrap text-Label-Normal body2-m">
-                  대여요금은 하루당 계산합니다
+                <div className="absolute -top-2 left-5 z-10 bg-Fill-99 p-s ds-rounded-m whitespace-nowrap text-Label-Alternative body3-m">
+                  24시간 기준 체험 요금이에요
                 </div>
               )}
             </div>
