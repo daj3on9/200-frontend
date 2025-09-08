@@ -7,8 +7,11 @@ import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 
 export default function CartWrap() {
   const { cartQuery } = useCartQuery();
-  const cartItems = cartQuery.data ?? [];
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const { data: cartData } = cartQuery;
+  const cartItems = cartData?.carts || [];
+  const totalPrice = cartData?.totalPrice || 0;
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
   return (
     <div>
       <div className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
@@ -23,7 +26,7 @@ export default function CartWrap() {
               selectedIds={selectedIds}
               setSelectedIds={setSelectedIds}
             />
-            <CartPriceDetail cartData={cartItems} />
+            <CartPriceDetail totalPrice={totalPrice} />
           </div>
         )}
       </div>
@@ -45,7 +48,7 @@ export default function CartWrap() {
             }`}
             disabled={!selectedIds.length}
           >
-            {!selectedIds.length ? '결제하기' : ` 99,999원 결제하기`}
+            {!selectedIds.length ? '결제하기' : `${totalPrice}원 결제하기`}
           </button>
         )}
       </div>

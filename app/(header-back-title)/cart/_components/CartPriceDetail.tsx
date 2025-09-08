@@ -1,12 +1,11 @@
 import React from 'react';
 import LogoIcon from '@/public/icons/Logo.svg';
-import { CartItemState } from '@/domains/cart/types/cartItemType';
 
 interface Props {
-  cartData: CartItemState[];
+  totalPrice: number;
 }
 
-export default function CartPriceDetail({ cartData }: Props) {
+export default function CartPriceDetail({ totalPrice }: Props) {
   return (
     <div className="w-full px-3.5 py-4 bg-Static-White flex flex-col justify-start items-start gap-6">
       <p className="text-center justify-start text-Label-Subnormal title1-sb">
@@ -17,7 +16,7 @@ export default function CartPriceDetail({ cartData }: Props) {
           <p className="text-center justify-start text-Label-Normal body1-m">
             체험 금액
           </p>
-          <div className="text-Label-Normal body1-m">Price 원</div>
+          <div className="text-Label-Normal body1-m">{totalPrice} 원</div>
         </div>
         <div className="self-stretch inline-flex justify-between items-center">
           <p className="text-center justify-start text-Label-Normal body1-m">
@@ -42,7 +41,7 @@ export default function CartPriceDetail({ cartData }: Props) {
           <p className="text-center justify-start text-Label-Subnormal title1-sb">
             총 결제 금액
           </p>
-          <div className="text-Primary-Normal h3-b">Price*7 원</div>
+          <div className="text-Primary-Normal h3-b">{totalPrice}*7 원</div>
         </div>
         <p className="text-center justify-start text-Label-Assistive body2-m">
           현재 7일 체험만 가능합니다.
