@@ -17,3 +17,14 @@
 .rdrMonth {
   width: 100%;
 }
+
+/* calendar.css */
+.rdrDayDisabled .rdrDayNumber span {
+  color: #aeb9bf !important;
+}
+.rdrDayNumber span {
+  color: #333 !important;
+}
+.rdrDayPassive .rdrDayNumber span {
+  color: #333 !important;
+}

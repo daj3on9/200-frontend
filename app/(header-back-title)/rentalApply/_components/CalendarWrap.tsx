@@ -19,6 +19,8 @@ export default function CalendarWrap({
   validationErrs,
 }: Props) {
   const today = startOfDay(new Date());
+  const selectableStart = addDays(today, 2);
+  const selectableEnd = addDays(today, 60);
 
   const handleChange = (ranges: RangeKeyDict) => {
     const selectedStart = ranges.selection.startDate;
@@ -39,16 +41,19 @@ export default function CalendarWrap({
       <DateRange
         ranges={[
           {
-            startDate: range.startDate ?? today,
-            endDate: range.endDate ?? today,
+            startDate: range.startDate ?? selectableStart,
+            endDate: range.endDate ?? selectableEnd,
             key: 'selection',
           },
         ]}
         onChange={handleChange}
-        minDate={today}
+        minDate={selectableStart}
+        maxDate={selectableEnd}
         showMonthAndYearPickers={true}
         showDateDisplay={false}
-        rangeColors={['#01A83F']}
+        rangeColors={
+          range.startDate && range.endDate ? ['#01A83F'] : ['transparent']
+        }
         editableDateInputs={false}
         locale={ko}
       />

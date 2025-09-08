@@ -67,13 +67,11 @@ export default function DeliveryDetails({
 
   return (
     <div className="px-3.5 py-6 bg-Static-White flex flex-col justify-start items-start gap-4">
-      <div className="justify-start text-Label-Subnormal title1-sb">
-        배송 정보
-      </div>
+      <p className="justify-start text-Label-Subnormal title1-sb">배송 정보</p>
       <div className="self-stretch flex flex-col justify-start items-center gap-3">
         <div className="self-stretch flex justify-start items-start gap-3">
           <div className="flex justify-start pt-2 gap-0.5 body2-m">
-            <div className="text-Label-Subnormal">수령인</div>
+            <p className="text-Label-Subnormal">수령인</p>
             <div className="text-Status-Negative">*</div>
           </div>
           <div className="flex-1 flex flex-col">
@@ -100,7 +98,7 @@ export default function DeliveryDetails({
         </div>
         <div className="self-stretch flex justify-start items-start gap-3">
           <div className="flex justify-start pt-2 gap-0.5 body2-m">
-            <div className="text-Label-Subnormal">연락처</div>
+            <p className="text-Label-Subnormal">연락처</p>
             <div className="text-Status-Negative">*</div>
           </div>
           <div className="flex-1 flex flex-col">
@@ -125,7 +123,7 @@ export default function DeliveryDetails({
         </div>
         <div className="self-stretch flex justify-start items-start gap-3">
           <div className="flex justify-start gap-0.5 body2-m pt-2">
-            <div className="text-Label-Subnormal">배송지</div>
+            <p className="text-Label-Subnormal">배송지</p>
             <div className="text-Status-Negative">*</div>
           </div>
           <div>

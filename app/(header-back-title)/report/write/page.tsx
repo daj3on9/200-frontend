@@ -1,9 +1,15 @@
 import Header from '@/domains/common/components/header';
-import ReceiptIcon from '@/public/icons/receipt.svg';
-import ReviewIcon from '@/public/icons/review.svg';
-import SparkleIcon from '@/public/icons/sparkle.svg';
-import CheckIcon from '@/public/icons/status-good.svg';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: '리포트 작성하기',
+  description:
+    'Cherry 리포트 작성하기 - 체험한 제품들의 리포트를 작성해 보세요.',
+  icons: {
+    icon: '/icons/Logo.svg',
+  },
+};
 
 export default function page() {
   return (
@@ -15,12 +21,14 @@ export default function page() {
       <main className="pb-3 flex flex-col gap-3 bg-Static-White h-[calc(100vh-135px)] justify-center items-center">
         <div className="w-32 h-32 relative rounded border-1">img</div>
 
-        <div className="text-center justify-start text-Label-Alternative title2-sb">
+        <p className="text-center justify-start text-Label-Alternative title2-sb">
           현재 외부 링크를 통해 리포트를
           <br />
           수집하고 있습니다.
-        </div>
+        </p>
       </main>
+
+      {/* TODO : 리포트 폼 링크로 변경 */}
       <div className="w-full p-3.5 bg-Static-White">
         <Link
           href="/"

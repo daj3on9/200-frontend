@@ -42,8 +42,10 @@ function StepComponent() {
 
     try {
       const res = await postAPI<ResStatus, Payload>('/auth/signup', payload);
-      if (res) {
-        setTokens(res.accessToken as string, res.refreshToken as string);
+      if (res?.accessToken) {
+        setTokens(res.accessToken as string);
+      } else {
+        throw new Error('[accessToken 누락]');
       }
       setStep(step + 1);
       sessionStorage.removeItem('tempToken');

@@ -13,16 +13,16 @@ export default function PaymentWrap({
   validationErrs,
 }: Props) {
   const PaymentList = [
-    { id: 'general', name: '일반/카드', image: '/payment/card.png' },
-    { id: 'kakao', name: '카카오페이', image: '/payment/kakao.png' },
-    { id: 'naver', name: '네이버페이', image: '/payment/naver.png' },
-    { id: 'toss', name: '토스페이', image: '/payment/toss.png' },
+    { id: 'general', name: '일반/카드', image: '/images/payment/card.png' },
+    { id: 'kakao', name: '카카오페이', image: '/images/payment/kakao.png' },
+    { id: 'naver', name: '네이버페이', image: '/images/payment/naver.png' },
+    { id: 'toss', name: '토스페이', image: '/images/payment/toss.png' },
   ];
   return (
     <div className="px-3.5 py-6 bg-Static-White flex flex-col justify-start items-start">
-      <div className="justify-start text-Label-Subnormal title1-sb mb-4">
+      <p className="justify-start text-Label-Subnormal title1-sb mb-4">
         결제 수단
-      </div>
+      </p>
       <div className="flex flex-wrap justify-center items-center gap-4">
         {PaymentList.map((v) => (
           <button

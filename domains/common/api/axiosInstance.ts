@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
-import { postAPI } from '.';
 
 type TokenResponse = {
   newAccess: string;
@@ -18,6 +18,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use((config) => {
   const { accessToken } = useAuthStore.getState();
   if (accessToken) {
+    config.headers = config.headers ?? {};
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
   return config;
@@ -29,26 +30,25 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const { refreshToken, setTokens, logout } = useAuthStore.getState();
-    const originalRequest = error.config;
+    const { setTokens, logout } = useAuthStore.getState();
+    const originalRequest = error.config || {};
 
-    if (
-      error.response.status === 401 &&
-      !originalRequest._retry &&
-      refreshToken
-    ) {
-      originalRequest._retry = true;
+    const status = error?.response?.status;
+    const url = (originalRequest as any)?.url as string | undefined;
+    const isReissue = url?.includes('/auth/reissue');
+
+    if (status === 401 && !isReissue && !originalRequest._retry) {
+      (originalRequest as any)._retry = true;
 
       try {
-        const res = await postAPI<TokenResponse, { refreshToken: string }>(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`,
-          {
-            refreshToken,
-          }
+        const { data } = await axiosInstance.post<TokenResponse>(
+          '/auth/reissue',
+          {}
         );
-        if (res) {
-          setTokens(res.newAccess, res.newRefresh);
-          originalRequest.headers.Authorization = `Bearer ${res.newAccess}`;
+        if (data) {
+          setTokens(data.newAccess);
+          originalRequest.headers = originalRequest.headers ?? {};
+          originalRequest.headers.Authorization = `Bearer ${data.newAccess}`;
         }
         return axiosInstance(originalRequest);
       } catch (error) {
@@ -57,22 +57,6 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
       }
     }
-    /*
-    if (error.response && error.response.data && error.response.data.detail) {
-      const errorData = error.response.data;
-      const { title, detail } = errorData;
-
-      console.error(`[🚨 API Error] ${title || 'Error'}: ${detail}`);
-    } else if (error.response) {
-      console.error(
-        `🚨 Error Response: ${error.response.status} ${error.response.statusText}`
-      );
-    } else if (error.request) {
-      console.error('🚨 Error Request:', error.request);
-    } else {
-      console.error('🚨 Error Message:', error.message);
-    }
-  */
     return Promise.reject(error);
   }
 );

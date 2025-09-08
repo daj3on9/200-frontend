@@ -33,7 +33,7 @@ function Callback() {
           const TempToken = res.tempToken;
 
           if (!TempToken) {
-            setTokens(res.accessToken as string, res.refreshToken as string);
+            setTokens(res.accessToken as string);
             router.push('/');
           } else {
             sessionStorage.setItem('tempToken', TempToken);
