@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -8,6 +8,28 @@ import QuestionIcon from '@/public/icons/question.svg';
 import { COLORS } from '@/lib/colors';
 
 export default function ProductDetail() {
+  const [showPopover, setShowPopover] = useState(false);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        popoverRef.current &&
+        !popoverRef.current.contains(event.target as Node)
+      ) {
+        setShowPopover(false);
+      }
+    };
+
+    if (showPopover) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showPopover]);
+
   return (
     <div className="flex flex-col items-center">
       <div className="w-[var(--container-width)] h-96 p-5">
@@ -53,8 +75,18 @@ export default function ProductDetail() {
             <p className="justify-start text-Label-Assistive body2-r">
               대여 요금
             </p>
-            <div className="w-3.5 h-3.5 cursor-pointer">
-              <QuestionIcon className=" fill-Fill-50" />
+            <div
+              className="w-3.5 h-3.5 cursor-pointer relative"
+              onClick={() => setShowPopover((prev) => !prev)}
+              ref={popoverRef}
+            >
+              <QuestionIcon className="fill-Fill-50" />
+
+              {showPopover && (
+                <div className="absolute -top-5 left-5 z-10 bg-gray-100 px-2 py-1 rounded-sm shadow-md whitespace-nowrap text-Label-Normal body2-m">
+                  대여요금은 하루당 계산합니다
+                </div>
+              )}
             </div>
           </div>
           <p className="text-Label-Normal h4-b">일 Price 원</p>
