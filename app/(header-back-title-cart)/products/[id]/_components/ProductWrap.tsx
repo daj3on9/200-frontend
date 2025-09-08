@@ -8,22 +8,17 @@ import ToastComponent from '@/domains/common/components/ToastComponent';
 import ModalComponent from '@/domains/common/components/ModalComponent';
 import { useToastStore } from '@/domains/common/store/toastStore';
 import { getAPI } from '@/domains/common/api';
-
-interface ProductDetailType {
-  name: string;
-  price: number;
-  description: string;
-}
+import { Product } from '@/domains/products/types/ProductsType';
 
 export default function ProductWrap({ id }: { id: string }) {
-  const [detailData, setDetailData] = useState<ProductDetailType | null>(null);
+  const [detailData, setDetailData] = useState<Product | null>(null);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { show } = useToastStore.getState();
 
   useEffect(() => {
     const getData = async () => {
-      const res = await getAPI<ProductDetailType>(`/productDetail?${id}`);
+      const res = await getAPI<Product>(`/products?${id}`);
       setDetailData(res);
     };
 
@@ -31,11 +26,13 @@ export default function ProductWrap({ id }: { id: string }) {
     // getData();
   }, [id]);
 
+  // if (!detailData) return <p>Loading...</p>;
+
   return (
     <>
       <div className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        <ProductDetail />
-        <ProductDetailInfo />
+        <ProductDetail detailData={detailData} />
+        <ProductDetailInfo detailData={detailData} />
         <ProductDetailGuide />
       </div>
       <FooterBtn

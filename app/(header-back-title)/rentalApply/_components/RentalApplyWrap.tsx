@@ -9,6 +9,7 @@ import RentalItem from './RentalItem';
 import { useRentalApplyForm } from '@/domains/rentalApply/hooks/useRentalApplyForm';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
 import { useRouter } from 'next/navigation';
+import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 
 const TEMPDATA = [
   {
@@ -36,7 +37,8 @@ const TEMPDATA = [
 
 export default function RentalApplyWrap() {
   const router = useRouter();
-  const [cartData, setCartData] = useState<CartItemState[]>(TEMPDATA);
+  const { cartQuery, isLoading } = useCartQuery();
+  const [totalPrice, setTotalPrice] = useState(0);
   const {
     range,
     setRange,
@@ -72,10 +74,12 @@ export default function RentalApplyWrap() {
     //   }
     // }
   };
+
+  // if (isLoading) return <p>Loading...</p>;
   return (
     <div>
       <main className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        <RentalItem cartData={cartData} />
+        <RentalItem cartData={cartQuery.data!} />
 
         <div ref={calendarRef}>
           <CalendarWrap
@@ -120,7 +124,7 @@ export default function RentalApplyWrap() {
           className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
           onClick={handleSubmit}
         >
-          99,999원 결제하기
+          {totalPrice}원 결제하기
         </button>
       </div>
     </div>

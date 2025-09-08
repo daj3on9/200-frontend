@@ -29,5 +29,6 @@ export const useCartQuery = () => {
     cartQuery,
     addMutation,
     deleteMutation,
+    isLoading: cartQuery.isLoading,
   };
 };

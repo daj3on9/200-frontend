@@ -1,57 +1,34 @@
 'use client';
-import { CartItemState } from '@/domains/cart/types/cartItemType';
 import React, { useState } from 'react';
 import CartItemDetail from './CartItemDetail';
 import CartPriceDetail from './CartPriceDetail';
 import Link from 'next/link';
-
-const TEMPDATA = [
-  {
-    id: '1',
-    title: '이어폰 1',
-    option: '검정색',
-    price: '45,000',
-    image: '',
-  },
-  {
-    id: '2',
-    title: '이어폰 2',
-    option: '하늘색',
-    price: '45,000',
-    image: '',
-  },
-  {
-    id: '3',
-    title: '이어폰 3',
-    option: '흰색',
-    price: '45,000',
-    image: '',
-  },
-];
+import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 
 export default function CartWrap() {
-  const [cartData, setCartData] = useState<CartItemState[]>(TEMPDATA);
+  const { cartQuery } = useCartQuery();
+  const cartItems = cartQuery.data ?? [];
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   return (
     <div>
       <div className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        {!cartData.length ? (
+        {!cartItems.length ? (
           <p className="h-full flex justify-center items-center text-Label-Assistive body1-m">
             장바구니가 비었어요.
           </p>
         ) : (
           <div className="h-full flex flex-col gap-3">
             <CartItemDetail
-              cartData={cartData}
+              cartData={cartItems}
               selectedIds={selectedIds}
               setSelectedIds={setSelectedIds}
             />
-            <CartPriceDetail />
+            <CartPriceDetail cartData={cartItems} />
           </div>
         )}
       </div>
       <div className="w-full p-3.5 bg-Static-White">
-        {!cartData.length ? (
+        {!cartItems.length ? (
           <Link
             href="/products"
             className="w-full block p-4 rounded bg-Primary-Normal text-Static-White text-center title2-sb"

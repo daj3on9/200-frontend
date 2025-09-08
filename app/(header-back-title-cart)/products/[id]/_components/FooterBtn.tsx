@@ -72,7 +72,7 @@ export default function FooterBtn({
     addMutation.mutate({ productId: id, color: selectedColor });
   };
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (!isLoggedIn) {
       showToast('로그인 후 이용하실 수 있습니다.', 'close', false, 100);
       return;
@@ -80,8 +80,8 @@ export default function FooterBtn({
     if (selectedColor === '') {
       setShowModal(true);
     }
-    addMutation.mutate({ productId: id, color: selectedColor });
-    router.push('/rentalApplay');
+    await addMutation.mutateAsync({ productId: id, color: selectedColor });
+    router.push('/rentalApply');
   };
 
   return (

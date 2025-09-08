@@ -1,7 +1,12 @@
 import React from 'react';
 import LogoIcon from '@/public/icons/Logo.svg';
+import { CartItemState } from '@/domains/cart/types/cartItemType';
 
-export default function CartPriceDetail() {
+interface Props {
+  cartData: CartItemState[];
+}
+
+export default function CartPriceDetail({ cartData }: Props) {
   return (
     <div className="w-full px-3.5 py-4 bg-Static-White flex flex-col justify-start items-start gap-6">
       <p className="text-center justify-start text-Label-Subnormal title1-sb">

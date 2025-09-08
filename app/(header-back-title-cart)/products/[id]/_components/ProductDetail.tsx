@@ -6,8 +6,13 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import QuestionIcon from '@/public/icons/question.svg';
 import { COLORS } from '@/lib/colors';
+import { Product } from '@/domains/products/types/ProductsType';
 
-export default function ProductDetail() {
+interface Props {
+  detailData: Product;
+}
+
+export default function ProductDetail({ detailData }: Props) {
   const [showPopover, setShowPopover] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
 
