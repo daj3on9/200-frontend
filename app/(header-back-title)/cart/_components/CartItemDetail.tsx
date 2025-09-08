@@ -2,7 +2,7 @@
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
 import ItemDetail from '@/domains/common/components/ItemDetail';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
   cartData: CartItemState[];
@@ -20,7 +20,7 @@ export default function CartItemDetail({
     if (selectedIds.length === cartData.length) {
       setSelectedIds([]);
     } else {
-      setSelectedIds(cartData.map((item) => item.id));
+      setSelectedIds(cartData.map((item) => item.productId));
     }
   };
 
@@ -61,9 +61,9 @@ export default function CartItemDetail({
       <div className="h-[366px] px-3.5 flex flex-col justify-center">
         {cartData.map((item) => (
           <ItemDetail
-            key={item.id}
+            key={item.productId}
             item={item}
-            checked={selectedIds.includes(item.id)}
+            checked={selectedIds.includes(item.productId)}
             toggleSelected={toggleSelected}
             canCheck={true}
           />

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Score0Icon from '@/public/icons/Score=0.svg';
 import FAQIcon from '@/public/icons/FAQ.svg';
 import CloseIcon from '@/public/icons/close-circular.svg';
 import { useToastStore } from '../store/toastStore';
 
 export default function ToastComponent() {
-  const { show, icon, text, position } = useToastStore();
+  const { show, icon, text, devide, position } = useToastStore();
   const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
     cart: Score0Icon,
     faq: FAQIcon,
@@ -18,7 +18,7 @@ export default function ToastComponent() {
   return (
     <div
       style={{ bottom: `${position}px` }}
-      className={`absolute left-1/2 -translate-x-1/2 w-90 p-3 bg-blend-luminosity bg-Fill-30 rounded-lg backdrop-blur-[10px] inline-flex items-center ${
+      className={`z-50 absolute left-1/2 -translate-x-1/2 w-90 p-3 bg-blend-luminosity bg-Fill-30 rounded-lg backdrop-blur-[10px] inline-flex items-center ${
         icon === 'cart' ? 'justify-between' : 'justify-center'
       }`}
     >
@@ -30,7 +30,7 @@ export default function ToastComponent() {
           {text}
         </div>
       </div>
-      {icon === 'cart' && (
+      {devide && (
         <div className="text-center justify-start text-Static-White text-xs font-medium font-['Pretendard'] underline leading-none">
           장바구니로 이동
         </div>

@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { CartItemState } from '../types/cartItemType';
-import { getAPI, postAPI } from '@/domains/common/api';
+import { deleteAPI, getAPI, postAPI } from '@/domains/common/api';
 import { useToastStore } from '@/domains/common/store/toastStore';
 
 export const useCartQuery = () => {
@@ -21,7 +21,7 @@ export const useCartQuery = () => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (ids: string[]) => postAPI('/cart/delete', { ids }),
+    mutationFn: (cartIds: string[]) => deleteAPI('/cart', cartIds),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cart'] }),
   });
 
