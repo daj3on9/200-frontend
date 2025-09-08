@@ -1,3 +1,4 @@
+import { getImageUrl } from '@/domains/common/utils/image';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -21,7 +22,7 @@ export default function ProductCard({
         <div className="relative w-full aspect-square">
           <Image
             className="self-stretch"
-            src={product.thumbnailImageUrl}
+            src={getImageUrl(product.thumbnailImageUrl)}
             alt={product.name}
             width={195}
             height={195}
@@ -43,7 +44,7 @@ export default function ProductCard({
             </div>
             <div className="flex justify-start items-center">
               <div className="justify-start text-Label-Normal title2-b">
-                {product.dailyRentalPrice} 원
+                {product.dailyRentalPrice.toLocaleString()}원
               </div>
             </div>
           </div>
