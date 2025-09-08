@@ -1,0 +1,28 @@
+import { CartItemState } from '@/domains/cart/types/cartItemType';
+import React from 'react';
+import ReportDoneDetail from './ReportDoneDetail';
+interface Props {
+  doneData: CartItemState[];
+}
+export default function ReportDone({ doneData }: Props) {
+  return (
+    <>
+      {!doneData.length ? (
+        <div className="h-[calc(100vh-250px)] flex justify-center items-center">
+          <p className="body1-m text-Label-Assistive">
+            작성한 리포트가 없어요.
+          </p>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {doneData.map((item) => (
+            <ReportDoneDetail
+              key={item.id}
+              item={item}
+            />
+          ))}
+        </div>
+      )}
+    </>
+  );
+}

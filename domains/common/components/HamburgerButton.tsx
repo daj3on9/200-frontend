@@ -14,6 +14,7 @@ export default function HamburgerButton() {
     <button
       aria-label="메뉴 열기"
       onClick={openMenu}
+      className="cursor-pointer"
     >
       <HamburgerIcon className="w-6 h-6 fill-Fill-20" />
     </button>

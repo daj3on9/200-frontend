@@ -2,13 +2,18 @@
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
 import ItemDetail from '@/domains/common/components/ItemDetail';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 interface Props {
   cartData: CartItemState[];
+  selectedIds: string[];
+  setSelectedIds: Dispatch<SetStateAction<string[]>>;
 }
-export default function CartItemDetail({ cartData }: Props) {
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+export default function CartItemDetail({
+  cartData,
+  selectedIds,
+  setSelectedIds,
+}: Props) {
   const { deleteMutation } = useCartQuery();
 
   const handleSelectAll = () => {
@@ -44,8 +49,11 @@ export default function CartItemDetail({ cartData }: Props) {
           </label>
         </div>
         <button
-          className="text-center text-Label-Subnormal body2-m px-2 py-1 rounded outline outline-offset-[-1px] outline-Line-Subtler cursor-pointer"
+          className={`text-center text-Label-Subnormal body2-m px-2 py-1 rounded outline outline-offset-[-1px] outline-Line-Subtler ${
+            +selectedIds.length ? 'cursor-pointer' : ''
+          } `}
           onClick={() => deleteMutation.mutate(selectedIds)}
+          disabled={!selectedIds.length}
         >
           선택 삭제
         </button>

@@ -1,0 +1,30 @@
+.rdrDay.rdrDayToday .rdrDayNumber span::after {
+  background-color: #ff6b6b; /* 원하는 색상 */
+}
+.rdrYearPicker {
+  display: none;
+}
+.rdrMonthPicker select {
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  border: none;
+  padding-right: 0;
+}
+.rdrCalendarWrapper,
+.rdrMonth {
+  width: 100%;
+}
+
+/* calendar.css */
+.rdrDayDisabled .rdrDayNumber span {
+  color: #aeb9bf !important;
+}
+.rdrDayNumber span {
+  color: #333 !important;
+}
+.rdrDayPassive .rdrDayNumber span {
+  color: #333 !important;
+}

@@ -8,14 +8,16 @@ import clsx from 'clsx';
 type Menu = {
   label: string;
   href?: string;
-  needAuth?: boolean;
 };
 
 // TODO : 링크 추가
-const MENUS: Menu[] = [
-  { label: '내 정보', href: '/dummy', needAuth: true },
-  { label: '이용내역', href: '/dummy', needAuth: true },
-  { label: '리포트', href: '/dummy', needAuth: true },
+const InternalMenus: Menu[] = [
+  { label: '내 정보', href: '/mypage' },
+  { label: '이용내역', href: '/orders' },
+  { label: '리포트', href: '/report' },
+];
+
+const ExternalMenus: Menu[] = [
   {
     label: '공지사항',
     href: 'https://www.notion.so/25dced6af65280c3bc2eec2abd528ed5?source=copy_link',
@@ -33,16 +35,6 @@ export default function Hamburger() {
   const nickname = useAuthStore((s) => s.nickname);
   const email = useAuthStore((s) => s.email);
   const logout = useAuthStore((s) => s.logout);
-
-  const handleNavigate =
-    (href?: string, disabled?: boolean) => (e: React.MouseEvent) => {
-      if (disabled || !href) {
-        // 클릭 불가: 아무 동작 X (접근성 표시만)
-        e.preventDefault();
-        return;
-      }
-      router.push(href);
-    };
 
   return (
     <div
@@ -72,27 +64,35 @@ export default function Hamburger() {
         {/* 메뉴 리스트 */}
         <nav>
           <ul className="flex flex-col gap-2">
-            {MENUS.map((m) => {
-              const disabled = !isLoggedIn && m.needAuth;
-
-              return (
-                <li key={m.label}>
-                  <Link
-                    href={m.href ?? '#'}
-                    onClick={handleNavigate(m.href, disabled)}
-                    aria-disabled={disabled || undefined}
-                    className={clsx(
-                      'flex items-center self-stretch gap-2.5 px-xxl py-xl text-left transition border border-transparent body1-m',
-                      disabled
-                        ? 'text-Label-Disable cursor-not-allowed pointer-events-none'
-                        : 'text-Label-Alternative cursor-pointer'
-                    )}
-                  >
-                    {m.label}
-                  </Link>
-                </li>
-              );
-            })}
+            {InternalMenus.map((menu) => (
+              <li key={menu.label}>
+                <Link
+                  href={menu.href ?? ''}
+                  aria-disabled={!isLoggedIn || undefined}
+                  className={clsx(
+                    'flex items-center self-stretch gap-2.5 px-xxl py-xl text-left transition border border-transparent body1-m',
+                    isLoggedIn
+                      ? 'text-Label-Alternative cursor-pointer'
+                      : 'text-Label-Disable cursor-not-allowed pointer-events-none'
+                  )}
+                >
+                  {menu.label}
+                </Link>
+              </li>
+            ))}
+            {/* 외부 링크 */}
+            {ExternalMenus.map((menu) => (
+              <li key={menu.label}>
+                <a
+                  href={menu.href ?? ''}
+                  className="flex items-center self-stretch gap-2.5 px-xxl py-xl text-left transition border border-transparent body1-m text-Label-Alternative cursor-pointer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {menu.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

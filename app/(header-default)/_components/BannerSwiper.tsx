@@ -15,11 +15,10 @@ interface BannerSwiperProps {
 }
 
 const DEFAULT_IMAGES: BannerImage[] = [
-  { src: 'https://placehold.co/360x80?text=Banner+1', alt: '배너 1' },
-  { src: 'https://placehold.co/360x80?text=Banner+2', alt: '배너 2' },
-  { src: 'https://placehold.co/360x80?text=Banner+3', alt: '배너 3' },
-  { src: 'https://placehold.co/360x80?text=Banner+4', alt: '배너 4' },
-  { src: 'https://placehold.co/360x80?text=Banner+5', alt: '배너 5' },
+  { src: '/images/banner/Home banner01.png', alt: '배너 1' },
+  { src: '/images/banner/Home banner02.png', alt: '배너 2' },
+  { src: '/images/banner/Home banner03.png', alt: '배너 3' },
+  { src: '/images/banner/Home banner04.png', alt: '배너 4' },
 ];
 
 export default function BannerSwiper({

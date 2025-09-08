@@ -2,19 +2,25 @@ import React from 'react';
 import CloseIcon from '@/public/icons/close.svg';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
+import { OrderItemState } from '@/domains/orders/types/orderType';
+import { formatDate } from '../utils/date';
 
 interface Props {
-  item: CartItemState;
-  checked: boolean;
-  toggleSelected: (id: string) => void;
+  item: CartItemState | OrderItemState;
+  checked?: boolean;
+  toggleSelected?: (id: string) => void;
   canCheck?: boolean;
+  startDate?: number;
+  endDate?: number;
 }
 
 export default function ItemDetail({
   item,
-  checked,
+  checked = false,
   toggleSelected,
   canCheck = false,
+  startDate,
+  endDate,
 }: Props) {
   const { deleteMutation } = useCartQuery();
   return (
@@ -24,7 +30,7 @@ export default function ItemDetail({
           type="checkbox"
           className="w-4 h-4"
           checked={checked}
-          onChange={() => toggleSelected(item.id)}
+          onChange={() => toggleSelected?.(item.id)}
         />
       )}
       <div className="flex-1 flex justify-between items-start">
@@ -36,6 +42,11 @@ export default function ItemDetail({
               <p className="body2-r text-Label-Assistive">
                 옵션 : {item.option}
               </p>
+              {startDate && endDate && (
+                <p className="body2-r text-Label-Assistive">
+                  {formatDate(startDate)} ~ {formatDate(endDate)}
+                </p>
+              )}
             </div>
             <p className="title1-sb text-Label-Normal">{item.price} 원</p>
           </div>
