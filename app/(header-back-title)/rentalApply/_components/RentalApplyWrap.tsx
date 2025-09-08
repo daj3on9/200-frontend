@@ -1,5 +1,4 @@
 'use client';
-import React, { useState } from 'react';
 import RentalNotice from './RentalNotice';
 import PriceDetail from './PriceDetail';
 import PaymentWrap from './PaymentWrap';
@@ -7,38 +6,14 @@ import DeliveryDetails from './DeliveryDetails';
 import CalendarWrap from './CalendarWrap';
 import RentalItem from './RentalItem';
 import { useRentalApplyForm } from '@/domains/rentalApply/hooks/useRentalApplyForm';
-import { CartItemState } from '@/domains/cart/types/cartItemType';
 import { useRouter } from 'next/navigation';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
-
-const TEMPDATA = [
-  {
-    id: '1',
-    title: '이어폰 1',
-    option: '검정색',
-    price: '45,000',
-    image: '',
-  },
-  {
-    id: '2',
-    title: '이어폰 2',
-    option: '하늘색',
-    price: '45,000',
-    image: '',
-  },
-  {
-    id: '3',
-    title: '이어폰 3',
-    option: '흰색',
-    price: '45,000',
-    image: '',
-  },
-];
 
 export default function RentalApplyWrap() {
   const router = useRouter();
   const { cartQuery, isLoading } = useCartQuery();
-  const [totalPrice, setTotalPrice] = useState(0);
+  const cartItems = cartQuery.data?.carts || [];
+  const totalPrice = cartQuery.data?.totalPrice || 0;
   const {
     range,
     setRange,
@@ -79,7 +54,7 @@ export default function RentalApplyWrap() {
   return (
     <div>
       <main className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        <RentalItem cartData={cartQuery.data!} />
+        <RentalItem cartData={cartItems} />
 
         <div ref={calendarRef}>
           <CalendarWrap
