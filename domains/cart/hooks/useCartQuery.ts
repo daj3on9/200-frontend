@@ -19,7 +19,11 @@ export const useCartQuery = () => {
   });
 
   const addMutation = useMutation({
-    mutationFn: (item: CartItemState) => postAPI('/cart', item),
+    mutationFn: ({ productId, color }: { productId: number; color: string }) =>
+      postAPI('/cart', {
+        productId: productId,
+        color: color,
+      }),
     onSuccess: () => {
       showToast('장바구니에 추가되었습니다.', 'cart', true, 100);
       queryClient.invalidateQueries({ queryKey: ['cart'] });

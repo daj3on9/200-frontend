@@ -21,7 +21,7 @@ import ProductWrap from './_components/ProductWrap';
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: number }>;
 }) {
   const { id } = await params;
 

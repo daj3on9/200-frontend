@@ -10,7 +10,7 @@ import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 
 export default function CartButton() {
   const router = useRouter();
-  const { isLoggedIn } = useAuthStore.getState();
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const { cartQuery } = useCartQuery();
 
   const moveToCart = () => {

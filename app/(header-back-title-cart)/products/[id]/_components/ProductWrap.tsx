@@ -8,17 +8,17 @@ import ToastComponent from '@/domains/common/components/ToastComponent';
 import ModalComponent from '@/domains/common/components/ModalComponent';
 import { useToastStore } from '@/domains/common/store/toastStore';
 import { getAPI } from '@/domains/common/api';
-import { Product } from '@/domains/products/types/ProductsType';
+import { ProductRes } from '@/domains/products/types/ProductsType';
 
-export default function ProductWrap({ id }: { id: string }) {
-  const [detailData, setDetailData] = useState<Product | null>(null);
+export default function ProductWrap({ id }: { id: number }) {
+  const [detailData, setDetailData] = useState<ProductRes | null>(null);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { show } = useToastStore.getState();
 
   useEffect(() => {
     const getData = async () => {
-      const res = await getAPI<Product>(`/products?${id}`);
+      const res = await getAPI<ProductRes>(`/products?${id}`);
       setDetailData(res);
     };
 
@@ -36,7 +36,7 @@ export default function ProductWrap({ id }: { id: string }) {
         <ProductDetailGuide />
       </div>
       <FooterBtn
-        id={id as string}
+        id={id as number}
         showOptions={showOptions}
         setShowOptions={setShowOptions}
         showModal={showModal}
