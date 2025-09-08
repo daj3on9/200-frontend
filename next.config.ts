@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   reactStrictMode: true,
   webpack(config) {
     config.module.rules.push({
@@ -13,8 +14,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
+        hostname: process.env.NEXT_PUBLIC_IMAGE_BASE_URL ?? '',
         pathname: '/**',
       },
     ],
