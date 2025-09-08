@@ -23,7 +23,7 @@ export default function CartButton() {
   };
 
   const getBasketIcon = () => {
-    const cartItems = cartQuery.data ?? [];
+    const cartItems = cartQuery.data?.carts || [];
     const cartCount = cartItems.length;
     if (!isLoggedIn) return <BasketIcon className="w-6 h-6 fill-Fill-20" />;
     if (cartCount === 0) return <BasketIcon className="w-6 h-6 fill-Fill-20" />;
