@@ -82,6 +82,11 @@ export default function FooterBtn({
       return;
     }
 
+    if (cartItems?.length >= 3) {
+      showToast('장바구니에는 최대 3개만 담을 수 있어요', 'close', true, 100);
+      return;
+    }
+
     await addMutation.mutateAsync({ productId: id, color: selectedColor });
     router.push('/rentalApply');
   };

@@ -14,7 +14,7 @@ export default function ProductWrap({ id }: { id: number }) {
   const [detailData, setDetailData] = useState<ProductRes | null>(null);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { show } = useToastStore.getState();
+  const show = useToastStore((s) => s.show);
 
   useEffect(() => {
     const getData = async () => {
