@@ -53,7 +53,7 @@ export default function Page() {
             <p className="text-Label-Assistive body2-r">{email}</p>
           </div>
         </div>
-        <div className="self-stretch p-4 bg-Static-White rounded-2xl flex flex-col items-start gap-3 overflow-hidden">
+        <div className="self-stretch p-4 bg-Static-White rounded-2xl flex flex-col items-start gap-3">
           <div className="text-Label-Alternative title1-sb">도움말</div>
           <div className="self-stretch flex flex-col items-start">
             <button
@@ -90,7 +90,7 @@ export default function Page() {
             </a>
           </div>
         </div>
-        <div className="self-stretch p-4 bg-Static-White rounded-2xl flex flex-col items-start gap-3 overflow-hidden">
+        <div className="self-stretch p-4 bg-Static-White rounded-2xl flex flex-col items-start gap-3">
           <div className="text-Label-Alternative title1-sb">약관 및 정책</div>
           <a
             href={
