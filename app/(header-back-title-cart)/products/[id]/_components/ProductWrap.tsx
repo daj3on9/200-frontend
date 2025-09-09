@@ -8,22 +8,17 @@ import ToastComponent from '@/domains/common/components/ToastComponent';
 import ModalComponent from '@/domains/common/components/ModalComponent';
 import { useToastStore } from '@/domains/common/store/toastStore';
 import { getAPI } from '@/domains/common/api';
+import { ProductRes } from '@/domains/products/types/ProductsType';
 
-interface ProductDetailType {
-  name: string;
-  price: number;
-  description: string;
-}
-
-export default function ProductWrap({ id }: { id: string }) {
-  const [detailData, setDetailData] = useState<ProductDetailType | null>(null);
+export default function ProductWrap({ id }: { id: number }) {
+  const [detailData, setDetailData] = useState<ProductRes | null>(null);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { show } = useToastStore.getState();
+  const show = useToastStore((s) => s.show);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await getAPI<ProductDetailType>(`/productDetail?${id}`);
+      const res = await getAPI<ProductRes>(`/products?${id}`);
       setDetailData(res);
     };
 
@@ -31,15 +26,17 @@ export default function ProductWrap({ id }: { id: string }) {
     // getData();
   }, [id]);
 
+  // if (!detailData) return <p>Loading...</p>;
+
   return (
     <>
       <div className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        <ProductDetail />
-        <ProductDetailInfo />
+        <ProductDetail detailData={detailData} />
+        <ProductDetailInfo detailData={detailData} />
         <ProductDetailGuide />
       </div>
       <FooterBtn
-        id={id as string}
+        id={id as number}
         showOptions={showOptions}
         setShowOptions={setShowOptions}
         showModal={showModal}

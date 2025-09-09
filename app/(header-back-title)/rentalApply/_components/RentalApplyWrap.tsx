@@ -1,5 +1,4 @@
 'use client';
-import React, { useState } from 'react';
 import RentalNotice from './RentalNotice';
 import PriceDetail from './PriceDetail';
 import PaymentWrap from './PaymentWrap';
@@ -7,36 +6,14 @@ import DeliveryDetails from './DeliveryDetails';
 import CalendarWrap from './CalendarWrap';
 import RentalItem from './RentalItem';
 import { useRentalApplyForm } from '@/domains/rentalApply/hooks/useRentalApplyForm';
-import { CartItemState } from '@/domains/cart/types/cartItemType';
 import { useRouter } from 'next/navigation';
-
-const TEMPDATA = [
-  {
-    id: '1',
-    title: '이어폰 1',
-    option: '검정색',
-    price: '45,000',
-    image: '',
-  },
-  {
-    id: '2',
-    title: '이어폰 2',
-    option: '하늘색',
-    price: '45,000',
-    image: '',
-  },
-  {
-    id: '3',
-    title: '이어폰 3',
-    option: '흰색',
-    price: '45,000',
-    image: '',
-  },
-];
+import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 
 export default function RentalApplyWrap() {
   const router = useRouter();
-  const [cartData, setCartData] = useState<CartItemState[]>(TEMPDATA);
+  const { cartQuery, isLoading } = useCartQuery();
+  const cartItems = cartQuery.data?.carts || [];
+  const totalPrice = cartQuery.data?.totalPrice || 0;
   const {
     range,
     setRange,
@@ -72,10 +49,12 @@ export default function RentalApplyWrap() {
     //   }
     // }
   };
+
+  // if (isLoading) return <p>Loading...</p>;
   return (
     <div>
       <main className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        <RentalItem cartData={cartData} />
+        <RentalItem cartData={cartItems} />
 
         <div ref={calendarRef}>
           <CalendarWrap
@@ -120,7 +99,7 @@ export default function RentalApplyWrap() {
           className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
           onClick={handleSubmit}
         >
-          99,999원 결제하기
+          {(totalPrice * 7).toLocaleString()}원 결제하기
         </button>
       </div>
     </div>

@@ -3,8 +3,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import InfoIcon from '@/public/icons/info.svg';
 import ArrowDownIcon from '@/public/icons/arrow-down.svg';
 import ArrowUpIcon from '@/public/icons/arrow-up.svg';
+import { Product } from '@/domains/products/types/ProductsType';
 
-export default function ProductDetailInfo() {
+interface Props {
+  detailData: Product;
+}
+export default function ProductDetailInfo({ detailData }: Props) {
   const [isWide, setIsWide] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef<HTMLParagraphElement>(null);

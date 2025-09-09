@@ -1,19 +1,29 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { CartItemState } from '../types/cartItemType';
-import { getAPI, postAPI } from '@/domains/common/api';
+import { CartData, CartItemState } from '../types/cartItemType';
+import { deleteAPI, getAPI, postAPI } from '@/domains/common/api';
 import { useToastStore } from '@/domains/common/store/toastStore';
 
 export const useCartQuery = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToastStore.getState();
 
-  const cartQuery = useQuery<CartItemState[] | null>({
+  const cartQuery = useQuery<CartData | null>({
     queryKey: ['cart'],
-    queryFn: () => getAPI<CartItemState[]>('/cart'),
+    queryFn: async () => {
+      const response = await getAPI('/cart');
+      if (Array.isArray(response) && response.length === 0) {
+        return null;
+      }
+      return response as CartData;
+    },
   });
 
   const addMutation = useMutation({
-    mutationFn: (item: CartItemState) => postAPI('/cart', item),
+    mutationFn: ({ productId, color }: { productId: number; color: string }) =>
+      postAPI('/cart', {
+        productId: productId,
+        color: color,
+      }),
     onSuccess: () => {
       showToast('장바구니에 추가되었습니다.', 'cart', true, 100);
       queryClient.invalidateQueries({ queryKey: ['cart'] });
@@ -21,7 +31,7 @@ export const useCartQuery = () => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (ids: string[]) => postAPI('/cart/delete', { ids }),
+    mutationFn: (cartIds: number[]) => deleteAPI('/cart', cartIds),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cart'] }),
   });
 
@@ -29,5 +39,6 @@ export const useCartQuery = () => {
     cartQuery,
     addMutation,
     deleteMutation,
+    isLoading: cartQuery.isLoading,
   };
 };

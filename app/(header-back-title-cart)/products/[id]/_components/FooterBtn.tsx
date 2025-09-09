@@ -1,12 +1,13 @@
 'use client';
 import React, { Dispatch, useEffect, useRef, useState } from 'react';
 import OptionSelect from './OptionSelect';
-import { postAPI } from '@/domains/common/api';
 import { useToastStore } from '@/domains/common/store/toastStore';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
+import { useAuthStore } from '@/domains/common/store/authStore';
+import { useRouter } from 'next/navigation';
 
 interface Props {
-  id: string;
+  id: number;
   showOptions: boolean;
   setShowOptions: Dispatch<React.SetStateAction<boolean>>;
   showModal: boolean;
@@ -20,11 +21,13 @@ export default function FooterBtn({
   showModal,
   setShowModal,
 }: Props) {
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedColor, setSelectedColor] = useState('');
-  const { showToast } = useToastStore.getState();
+  const { showToast } = useToastStore();
   const { cartQuery, addMutation } = useCartQuery();
-  const cartItems = cartQuery.data ?? [];
+  const cartItems = cartQuery.data?.carts ?? [];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -55,19 +58,37 @@ export default function FooterBtn({
       return;
     }
 
-    if (cartItems.length >= 3) {
+    if (!isLoggedIn) {
+      showToast('로그인 후 이용하실 수 있습니다.', 'close', false, 100);
+      return;
+    }
+
+    if (cartItems?.length >= 3) {
       showToast('장바구니에는 최대 3개만 담을 수 있어요', 'close', true, 100);
       return;
     }
 
-    // TODO : 장바구니 API 연결후, 파라미터 추가
-    // addMutation.mutate()
+    addMutation.mutate({ productId: id, color: selectedColor });
   };
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
+    if (!isLoggedIn) {
+      showToast('로그인 후 이용하실 수 있습니다.', 'close', false, 100);
+      return;
+    }
+
     if (selectedColor === '') {
       setShowModal(true);
+      return;
     }
+
+    if (cartItems?.length >= 3) {
+      showToast('장바구니에는 최대 3개만 담을 수 있어요', 'close', true, 100);
+      return;
+    }
+
+    await addMutation.mutateAsync({ productId: id, color: selectedColor });
+    router.push('/rentalApply');
   };
 
   return (

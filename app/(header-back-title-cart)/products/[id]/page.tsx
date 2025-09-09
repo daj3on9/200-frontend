@@ -23,7 +23,8 @@ export default async function Page({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
+  const { id: idStr } = await params;
+  const id = Number(idStr);
 
   return (
     <div className="h-screen overflow-hidden relative bg-Fill-99">
