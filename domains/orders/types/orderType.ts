@@ -1,4 +1,4 @@
-export type OrderStatus = 'delivering' | 'testing' | 'returning' | 'completed';
+export type RentalStatus = 'delivering' | 'testing' | 'returning' | 'completed';
 
 export interface OrderItemState {
   id: string;
@@ -10,10 +10,26 @@ export interface OrderItemState {
   endDate?: number;
 }
 
-export interface Order {
-  orderNumber: string;
-  status: OrderStatus;
-  refundAmount?: number;
-  isReviewed?: 'completed' | 'expire' | 'yet';
-  items: OrderItemState[];
+export interface RentalItem {
+  productName: string;
+  color: string;
+  price: number;
+  productThumbnailUrl: string;
+}
+
+export interface Rental {
+  rentalId: number;
+  rentalNumber: string;
+  status: RentalStatus;
+  startAt: string;
+  endAt: string;
+  items: RentalItem[];
+  // TODO : 리포트 작성 상태 수정
+  isReviewed: boolean;
+}
+
+export interface RentalResponse {
+  rentals: Rental[];
+  hasNext: boolean;
+  lastRentalId: number | null;
 }

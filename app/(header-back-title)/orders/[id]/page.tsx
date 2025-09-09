@@ -23,13 +23,15 @@ export default async function Page({
 
   if (!order) {
     return (
-      <div className="flex flex-col h-screen items-center justify-center">
+      <div className="flex flex-col h-screen ">
         <Header
           showBack
           title="주문상세"
           showHome
         />
-        <p>주문 정보를 찾을 수 없습니다.</p>
+        <div className="flex flex-1 overflow-y-auto no-scrollbar justify-center items-center text-Label-Assistive bg-Fill-99">
+          <p>주문 정보를 찾을 수 없습니다.</p>
+        </div>
       </div>
     );
   }
