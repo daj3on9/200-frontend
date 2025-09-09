@@ -39,8 +39,7 @@ function RentalApplyWrap() {
   } = useRentalApplyForm();
 
   const handleSubmit = async () => {
-    const isValid = validateForm();
-    if (!isValid) return;
+    if (validateForm() === false) return;
 
     const payload = {
       rentStartAt: format(range.startDate!, 'yyyy-MM-dd'),
@@ -71,7 +70,7 @@ function RentalApplyWrap() {
     }
 
     try {
-      await postAPI('/rentals', {});
+      await postAPI('/rentals', payload);
       router.push('/rentalApply/complete');
     } catch (err) {
       if (err instanceof Error) {
@@ -129,7 +128,10 @@ function RentalApplyWrap() {
           className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
           onClick={handleSubmit}
         >
-          {(totalPrice * 7).toLocaleString()}원 결제하기
+          {isDirectRental
+            ? (rentalInfo.price * 7).toLocaleString()
+            : (totalPrice * 7).toLocaleString()}
+          원 결제하기
         </button>
       </div>
     </div>
