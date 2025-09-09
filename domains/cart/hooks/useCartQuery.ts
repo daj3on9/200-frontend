@@ -1,11 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { CartData, CartItemState } from '../types/cartItemType';
+import { CartData } from '../types/cartItemType';
 import { deleteAPI, getAPI, postAPI } from '@/domains/common/api';
 import { useToastStore } from '@/domains/common/store/toastStore';
+import { useAuthStore } from '@/domains/common/store/authStore';
 
 export const useCartQuery = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToastStore.getState();
+  const accessToken = useAuthStore((s) => s.accessToken);
 
   const cartQuery = useQuery<CartData | null>({
     queryKey: ['cart'],
@@ -16,6 +18,7 @@ export const useCartQuery = () => {
       }
       return response as CartData;
     },
+    enabled: !!accessToken,
   });
 
   const addMutation = useMutation({

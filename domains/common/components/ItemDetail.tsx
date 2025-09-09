@@ -6,7 +6,7 @@ import { OrderItemState } from '@/domains/orders/types/orderType';
 import { formatDate } from '../utils/date';
 
 interface Props {
-  item: CartItemState | OrderItemState;
+  item: OrderItemState;
   checked?: boolean;
   toggleSelected?: (id: string) => void;
   canCheck?: boolean;
@@ -54,7 +54,7 @@ export default function ItemDetail({
         {canCheck && (
           <CloseIcon
             className="w-4 h-4 fill-Fill-20 cursor-pointer"
-            onClick={() => deleteMutation.mutate([item.id])}
+            onClick={() => deleteMutation.mutate([Number(item.id)])}
           />
         )}
       </div>

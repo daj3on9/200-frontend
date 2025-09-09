@@ -20,18 +20,6 @@ export default function ProductsClient() {
     [data]
   );
 
-  const mapped = useMemo(
-    () =>
-      flat.map((p) => ({
-        id: String(p.id),
-        brand: p.brand,
-        name: p.name,
-        dailyRentalPrice: p.dailyRentalPrice,
-        thumbnailImageUrl: p.thumbnailImageUrl,
-      })),
-    [flat]
-  );
-
   const { ref, inView } = useInView({ rootMargin: '200px' });
 
   useEffect(() => {
@@ -52,8 +40,8 @@ export default function ProductsClient() {
       </div>
       <div className="flex-1 overflow-y-auto no-scrollbar bg-Static-White">
         <ProductGrid
-          loading={isLoading && mapped.length === 0}
-          products={mapped}
+          loading={isLoading && flat.length === 0}
+          products={flat}
         />
         {hasNextPage && (
           <div

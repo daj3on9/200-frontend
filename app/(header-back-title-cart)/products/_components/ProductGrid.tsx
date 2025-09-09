@@ -1,3 +1,4 @@
+import { Product } from '@/domains/products/types/ProductsType';
 import ProductCard from './ProductCard';
 
 export default function ProductGrid({
@@ -5,13 +6,7 @@ export default function ProductGrid({
   products,
 }: {
   loading?: boolean;
-  products: {
-    id: string;
-    brand: string;
-    name: string;
-    dailyRentalPrice: number;
-    thumbnailImageUrl: string;
-  }[];
+  products: Product[];
 }) {
   if (loading) {
     return (

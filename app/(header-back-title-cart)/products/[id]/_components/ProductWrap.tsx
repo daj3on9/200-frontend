@@ -8,25 +8,25 @@ import ToastComponent from '@/domains/common/components/ToastComponent';
 import ModalComponent from '@/domains/common/components/ModalComponent';
 import { useToastStore } from '@/domains/common/store/toastStore';
 import { getAPI } from '@/domains/common/api';
-import { ProductRes } from '@/domains/products/types/ProductsType';
+import { Product } from '@/domains/products/types/ProductsType';
 
 export default function ProductWrap({ id }: { id: number }) {
-  const [detailData, setDetailData] = useState<ProductRes | null>(null);
+  const [detailData, setDetailData] = useState<Product | null>(null);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const show = useToastStore((s) => s.show);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await getAPI<ProductRes>(`/products?${id}`);
+      const res = await getAPI<Product>(`/products?${id}`);
       setDetailData(res);
     };
 
     // TODO : api 연결 후 주석 해제
-    // getData();
+    getData();
   }, [id]);
 
-  // if (!detailData) return <p>Loading...</p>;
+  if (!detailData) return <p>Loading...</p>;
 
   return (
     <>
