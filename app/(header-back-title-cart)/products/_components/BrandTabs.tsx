@@ -1,11 +1,43 @@
 'use client';
 
-import { mockBrands } from '@/domains/products/api/mock';
+import { BrandId } from '@/domains/products/types/ProductsType';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useMemo } from 'react';
+import debounce from 'lodash.debounce';
 
-export default function BrandTabs() {
-  const [selected, setSelected] = useState<string>(mockBrands[0]?.id ?? '');
+const BRANDS: { id: BrandId; name: string }[] = [
+  { id: 'SONY', name: 'SONY' },
+  { id: 'APPLE', name: 'APPLE' },
+  { id: 'BOSE', name: 'BOSE' },
+  { id: 'SENNHEISER', name: 'SENNHEISER' },
+  { id: 'BANG_OLUFSEN', name: 'BANG & OLUFSEN' },
+  { id: 'BOWERS_WILKINS', name: 'BOWERS & WILKINS' },
+  { id: 'MARSHALL', name: 'MARSHALL' },
+  { id: 'DYSON', name: 'DYSON' },
+  { id: 'JBL', name: 'JBL' },
+  { id: 'NOTHING', name: 'NOTHING' },
+];
+
+export default function BrandTabs({
+  selected,
+  onChange,
+}: {
+  selected?: BrandId[];
+  onChange: (v: BrandId[] | undefined) => void;
+}) {
+  // 브랜드 선택 디바운싱
+  const debouncedOnChange = useMemo(() => debounce(onChange, 300), [onChange]);
+
+  // 브랜드 선택
+  const toggle = (id: BrandId) => {
+    if (!selected || selected.length === 0) {
+      return debouncedOnChange([id]);
+    }
+    const exists = selected.includes(id);
+    const next = exists ? selected.filter((b) => b !== id) : [...selected, id];
+    debouncedOnChange(next.length ? next : undefined);
+  };
+
   return (
     <div className="w-96 py-3 border-b-[0.50px] border-Line-Subtler flex justify-start items-center">
       <div className="w-20 shrink-0 border-r border-Line-Subtler flex justify-center items-center ">
@@ -13,20 +45,18 @@ export default function BrandTabs() {
       </div>
       <div className="flex-1 min-w-0">
         <div className="no-scrollbar overflow-x-auto whitespace-nowrap flex items-center gap-2 px-3">
-          {mockBrands.map((brand) => {
-            const isActive = selected === brand.id;
+          {BRANDS.map((b) => {
+            const active = selected?.includes(b.id) ?? false;
             return (
               <button
-                type="button"
-                key={brand.id}
-                onClick={() => setSelected(brand.id)}
-                data-active={isActive}
+                key={b.id}
+                onClick={() => toggle(b.id)}
                 className={clsx(
                   'body2-m px-2 py-1 rounded-full cursor-pointer',
-                  isActive ? 'text-Primary-Normal' : 'text-Label-Subnormal'
+                  active ? 'text-Primary-Normal' : 'text-Label-Subnormal'
                 )}
               >
-                {brand.name}
+                {b.name}
               </button>
             );
           })}

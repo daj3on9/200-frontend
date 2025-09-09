@@ -15,9 +15,12 @@ export default function Page() {
   return (
     <div className="w-full min-h-screen bg-Static-White inline-flex flex-col justify-between items-center overflow-hidden">
       <div className="w-full px-3.5 py-3 bg-Static-White inline-flex justify-start">
-        <div className="w-6 h-6 overflow-hidden">
+        <button
+          className="w-6 h-6 overflow-hidden cursor-pointer"
+          onClick={() => router.back()}
+        >
           <LeftArrowIcon className="w-[18px] h-[18px] fill-Fill-10" />
-        </div>
+        </button>
       </div>
       <div className="flex flex-col justify-center items-center gap-4">
         <div className="w-16 h-16 relative overflow-hidden">

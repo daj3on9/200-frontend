@@ -26,13 +26,15 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      logout: () =>
+      logout: () => {
         set({
           accessToken: null,
           isLoggedIn: false,
           nickname: null,
           email: null,
-        }),
+        });
+        localStorage.removeItem('auth-storage');
+      },
     }),
     {
       name: 'auth-storage',
