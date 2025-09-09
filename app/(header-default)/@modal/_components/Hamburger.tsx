@@ -75,6 +75,9 @@ export default function Hamburger() {
                       ? 'text-Label-Alternative cursor-pointer'
                       : 'text-Label-Disable cursor-not-allowed pointer-events-none'
                   )}
+                  onClick={(e) => {
+                    if (!isLoggedIn) e.preventDefault();
+                  }}
                 >
                   {menu.label}
                 </Link>
