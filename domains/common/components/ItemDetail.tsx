@@ -54,7 +54,7 @@ export default function ItemDetail({
         {canCheck && (
           <CloseIcon
             className="w-4 h-4 fill-Fill-20 cursor-pointer"
-            onClick={() => deleteMutation.mutate([item.id])}
+            onClick={() => deleteMutation.mutate([Number(item.id)])}
           />
         )}
       </div>
