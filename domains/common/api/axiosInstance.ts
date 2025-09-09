@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 
 type TokenResponse = {
-  accessToken: string;
+  newAccess: string;
+  newRefresh: string;
 };
 
 const axiosInstance = axios.create({
@@ -45,9 +46,9 @@ axiosInstance.interceptors.response.use(
           {}
         );
         if (data) {
-          setTokens(data.accessToken);
+          setTokens(data.newAccess);
           originalRequest.headers = originalRequest.headers ?? {};
-          originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
+          originalRequest.headers.Authorization = `Bearer ${data.newAccess}`;
         }
         return axiosInstance(originalRequest);
       } catch (error) {
