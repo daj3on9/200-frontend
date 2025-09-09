@@ -7,7 +7,7 @@ import { useAuthStore } from '@/domains/common/store/authStore';
 export const useCartQuery = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToastStore.getState();
-  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  const accessToken = useAuthStore((s) => s.accessToken);
 
   const cartQuery = useQuery<CartData | null>({
     queryKey: ['cart'],
@@ -18,7 +18,7 @@ export const useCartQuery = () => {
       }
       return response as CartData;
     },
-    enabled: isLoggedIn,
+    enabled: !!accessToken,
   });
 
   const addMutation = useMutation({
