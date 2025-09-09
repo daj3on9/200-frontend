@@ -101,16 +101,6 @@ export function useRentalApplyForm() {
       noticeRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return false;
     }
-
-    // return (
-    //   isDateValid &&
-    //   isNameValid &&
-    //   isNumberValid &&
-    //   isDeliveryValid &&
-    //   isPaymentValid &&
-    //   isCautionValid &&
-    //   isConsentValid
-    // );
   };
 
   return {
