@@ -1,18 +1,9 @@
 import { getImageUrl } from '@/domains/common/utils/image';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Product } from '@/domains/products/types/ProductsType';
 
-export default function ProductCard({
-  product,
-}: {
-  product: {
-    id: string;
-    brand: string;
-    name: string;
-    dailyRentalPrice: number;
-    thumbnailImageUrl: string;
-  };
-}) {
+export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/products/${product.id}`}
