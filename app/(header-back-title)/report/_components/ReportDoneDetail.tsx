@@ -9,9 +9,9 @@ export default function ReportDoneDetail({ item }: Props) {
     <div className="px-3.5 py-4 bg-Static-White flex flex-col justify-start items-start gap-6">
       <div className="self-stretch flex justify-between items-start">
         <div className="flex flex-col gap-1">
-          <p className="body3-m text-Label-Assistive">{item.id}</p>
-          <p className="title1-b text-Label-Subnormal">{item.title}</p>
-          <p className="body3-m text-Label-Assistive">{item.option}</p>
+          <p className="body3-m text-Label-Assistive">{item.cartId}</p>
+          <p className="title1-b text-Label-Subnormal">{item.productName}</p>
+          <p className="body3-m text-Label-Assistive">{item.color}</p>
         </div>
 
         <div className="w-24 h-24 border-1"> img</div>

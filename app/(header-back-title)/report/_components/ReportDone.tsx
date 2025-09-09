@@ -17,7 +17,7 @@ export default function ReportDone({ doneData }: Props) {
         <div className="flex flex-col gap-3">
           {doneData.map((item) => (
             <ReportDoneDetail
-              key={item.id}
+              key={item.cartId}
               item={item}
             />
           ))}

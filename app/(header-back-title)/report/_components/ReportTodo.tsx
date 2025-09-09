@@ -20,7 +20,7 @@ export default function ReportTodo({ todoData }: Props) {
         <div className="flex flex-col gap-3">
           {todoData.map((item) => (
             <div
-              key={item.id}
+              key={item.cartId}
               className="bg-Static-White px-3.5 py-4 flex flex-col gap-3"
             >
               <div className="self-stretch flex justify-start items-center gap-2">
@@ -32,7 +32,7 @@ export default function ReportTodo({ todoData }: Props) {
                   원 환급예정
                 </p>
               </div>
-              <ItemDetail item={item} />
+              {/* <ItemDetail item={item} /> */}
               <Link
                 href={'/report/write'}
                 className="w-full p-2 text-center outline rounded-md outline-offset-[-1px] outline-Line-Subtle text-Label-Subnormal title3-sb cursor-pointer"
