@@ -3,6 +3,18 @@ import { CartData } from '../types/cartItemType';
 import { deleteAPI, getAPI, postAPI } from '@/domains/common/api';
 import { useToastStore } from '@/domains/common/store/toastStore';
 import { useAuthStore } from '@/domains/common/store/authStore';
+import { AxiosError } from 'axios';
+
+interface APIErrRes {
+  code: string;
+  detail: string;
+  exception: string;
+  instance: string;
+  status: number;
+  timestamp: string;
+  title: string;
+  type: string;
+}
 
 export const useCartQuery = () => {
   const queryClient = useQueryClient();
@@ -30,6 +42,12 @@ export const useCartQuery = () => {
     onSuccess: () => {
       showToast('장바구니에 추가되었습니다.', 'cart', true, 100);
       queryClient.invalidateQueries({ queryKey: ['cart'] });
+    },
+    onError: (error: AxiosError<APIErrRes>) => {
+      const message =
+        error?.response?.data.detail || '알 수 없는 오류가 발생했습니다.';
+
+      showToast(message, 'close', false, 100);
     },
   });
 

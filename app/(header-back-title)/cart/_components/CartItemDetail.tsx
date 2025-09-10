@@ -58,7 +58,7 @@ export default function CartItemDetail({
           선택 삭제
         </button>
       </div>
-      <div className="h-[366px] px-3.5 flex flex-col justify-center">
+      <div className="h-[366px] px-3.5 flex flex-col ">
         {cartData.map((item) => (
           <CartItemDetailComponent
             key={item.cartId}

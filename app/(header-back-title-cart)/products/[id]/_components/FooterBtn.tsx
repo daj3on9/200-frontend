@@ -5,23 +5,24 @@ import { useToastStore } from '@/domains/common/store/toastStore';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 import { useAuthStore } from '@/domains/common/store/authStore';
 import { useRouter } from 'next/navigation';
+import { ProductDetailState } from '@/domains/products/types/ProductsType';
 
 interface Props {
   id: number;
-  price: number;
   showOptions: boolean;
   setShowOptions: Dispatch<React.SetStateAction<boolean>>;
   showModal: boolean;
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
+  detailData: ProductDetailState;
 }
 
 export default function FooterBtn({
   id,
-  price,
   showOptions,
   setShowOptions,
   showModal,
   setShowModal,
+  detailData,
 }: Props) {
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const router = useRouter();
@@ -87,7 +88,13 @@ export default function FooterBtn({
     sessionStorage.removeItem('rentalInfo');
     sessionStorage.setItem(
       'rentalInfo',
-      JSON.stringify({ productId: id, color: selectedColor, price: price })
+      JSON.stringify({
+        cartId: id,
+        color: selectedColor,
+        dailyRentalPrice: detailData.dailyRentalPrice,
+        productName: detailData.productName,
+        productThumbnailUrl: detailData.productThumbnailUrls[0],
+      })
     );
     router.push('/rentalApply?direct=true');
   };
@@ -104,6 +111,7 @@ export default function FooterBtn({
           setShowOptions={setShowOptions}
           selectedColor={selectedColor}
           setSelectedColor={setSelectedColor}
+          detailData={detailData}
         />
       )}
 

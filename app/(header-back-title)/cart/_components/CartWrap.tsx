@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CartItemDetail from './CartItemDetail';
 import CartPriceDetail from './CartPriceDetail';
 import Link from 'next/link';
@@ -11,12 +11,23 @@ export default function CartWrap() {
   const { cartQuery } = useCartQuery();
   const { data: cartData } = cartQuery;
   const cartItems = cartData?.carts || [];
-  const totalPrice = cartData?.totalPrice || 0;
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [selectPrice, setSelectPrice] = useState<number>(0);
 
   const handleRental = () => {
     router.push('/rentalApply?cart=true');
   };
+
+  useEffect(() => {
+    const selectedItems = cartItems.filter((item) =>
+      selectedIds.includes(item.cartId)
+    );
+    const price = selectedItems.reduce(
+      (acc, item) => acc + item.dailyRentalPrice,
+      0
+    );
+    setSelectPrice(price);
+  }, [selectedIds]);
 
   return (
     <div>
@@ -32,7 +43,7 @@ export default function CartWrap() {
               selectedIds={selectedIds}
               setSelectedIds={setSelectedIds}
             />
-            <CartPriceDetail totalPrice={totalPrice} />
+            <CartPriceDetail selectPrice={selectPrice} />
           </div>
         )}
       </div>
@@ -57,7 +68,7 @@ export default function CartWrap() {
           >
             {!selectedIds.length
               ? '결제하기'
-              : `${(totalPrice * 7).toLocaleString()}원 결제하기`}
+              : `${(selectPrice * 7).toLocaleString()}원 결제하기`}
           </button>
         )}
       </div>

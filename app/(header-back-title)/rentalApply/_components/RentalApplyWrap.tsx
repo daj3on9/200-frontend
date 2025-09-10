@@ -83,7 +83,7 @@ function RentalApplyWrap() {
   return (
     <div>
       <main className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        <RentalItem cartData={cartItems} />
+        <RentalItem cartData={isDirectRental ? rentalInfo : cartItems} />
 
         <div ref={calendarRef}>
           <CalendarWrap
