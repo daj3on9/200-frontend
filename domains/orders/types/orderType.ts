@@ -1,5 +1,7 @@
-export type RentalStatus = 'delivering' | 'testing' | 'returning' | 'completed';
+export type RentalStatus = 'PENDING' | 'ACTIVE' | 'IN_RETURN' | 'COMPLETED';
+export type ReveiwStatus = 'PENDING' | 'AVAILABLE' | 'COMPLETED';
 
+// OrderItemState는 안쓸거임 목데이터때문에 남겨둔거임
 export interface OrderItemState {
   id: string;
   title: string;
@@ -20,12 +22,11 @@ export interface RentalItem {
 export interface Rental {
   rentalId: number;
   rentalNumber: string;
-  status: RentalStatus;
+  rentalStatus: RentalStatus;
   startAt: string;
   endAt: string;
   items: RentalItem[];
-  // TODO : 리포트 작성 상태 수정
-  isReviewed: boolean;
+  reviewStatus: ReveiwStatus;
 }
 
 export interface RentalResponse {

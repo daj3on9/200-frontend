@@ -13,14 +13,14 @@ interface OrderProps {
 
 export default function OrderCard({ order }: OrderProps) {
   const canWriteReport =
-    order.isReviewed &&
-    (order.status === 'returning' || order.status === 'completed');
+    order.reviewStatus === 'AVAILABLE' &&
+    (order.rentalStatus === 'ACTIVE' || order.rentalStatus === 'COMPLETED');
 
   return (
     <div className="flex flex-col w-[390px] px-l py-layout items-start gap-xxl bg-Static-White">
       <div className="flex justify-between items-center self-stretch">
         <div className="flex items-center gap-s">
-          <OrderStatusLabel status={order.status} />
+          <OrderStatusLabel status={order.rentalStatus} />
           <p className="text-Label-Normal title3-sb"> {order.rentalNumber} </p>
         </div>
 
