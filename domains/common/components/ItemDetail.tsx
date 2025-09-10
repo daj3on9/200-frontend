@@ -37,7 +37,9 @@ export default function ItemDetail({ item, startDate, endDate }: Props) {
                 </p>
               )}
             </div>
-            <p className="title1-sb text-Label-Normal">{item.price} 원</p>
+            <p className="title1-sb text-Label-Normal">
+              {item.price.toLocaleString()} 원
+            </p>
           </div>
         </div>
       </div>
