@@ -6,6 +6,7 @@ import { createModal } from '@/domains/common/store/modalStore';
 import { useAuthStore } from '@/domains/common/store/authStore';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { postAPI } from '@/domains/common/api';
 
 export default function Page() {
   const router = useRouter();
@@ -29,6 +30,19 @@ export default function Page() {
       onConfirm: () => {},
       onCancel: () => {},
     });
+  };
+
+  const handleLogout = async () => {
+    try {
+      await postAPI('auth/logout', {});
+    } catch (err) {
+      if (err instanceof Error) {
+        throw new Error(`로그아웃 중 문제가 발생했어요: ${err.message}`);
+      }
+    } finally {
+      logout();
+      router.replace('/');
+    }
   };
 
   return (
@@ -130,10 +144,7 @@ export default function Page() {
         <button
           type="button"
           className="w-full p-4 rounded-2xl text-Label-Assistive bg-Static-White items-center cursor-pointer body1-m outline outline-offset-[-1px] outline-Line-Subtler"
-          onClick={() => {
-            logout();
-            router.replace('/');
-          }}
+          onClick={handleLogout}
         >
           로그아웃
         </button>
