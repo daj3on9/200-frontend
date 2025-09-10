@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import type { Rental } from '@/domains/orders/types/orderType';
+import type { Order } from '@/domains/orders/types/orderType';
 import { createModal } from '@/domains/common/store/modalStore';
 import { useToastStore } from '@/domains/common/store/toastStore';
 
 interface OrderCardBottomProps {
-  order: Rental;
+  order: Order;
 }
 
 export default function OrderCardBottom({ order }: OrderCardBottomProps) {

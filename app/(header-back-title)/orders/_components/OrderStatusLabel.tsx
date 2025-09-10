@@ -1,19 +1,19 @@
 import React from 'react';
 import clsx from 'clsx';
-import type { Rental } from '@/domains/orders/types/orderType';
+import type { Order } from '@/domains/orders/types/orderType';
 
 interface OrderStatusLabelProps {
-  status: Rental['rentalStatus'];
+  status: Order['rentalStatus'];
 }
 
-const statusLabel: Record<Rental['rentalStatus'], string> = {
+const statusLabel: Record<Order['rentalStatus'], string> = {
   PENDING: '배송중',
   ACTIVE: '체험중',
   IN_RETURN: '반납중',
   COMPLETED: '체험완료',
 };
 
-const statusColor: Record<Rental['rentalStatus'], string> = {
+const statusColor: Record<Order['rentalStatus'], string> = {
   PENDING: 'bg-Status-Cautionary text-Label-Subtler',
   ACTIVE: 'bg-Primary-Normal text-Label-Subtler',
   IN_RETURN: 'bg-Status-Positive text-Label-Subtler',

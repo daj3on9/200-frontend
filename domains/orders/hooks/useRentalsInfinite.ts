@@ -1,14 +1,14 @@
 'use client';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { RentalResponse } from '../types/orderType';
+import { OrderResponse } from '../types/orderType';
 import { getRentals } from '../api/orders';
 import { useAuthStore } from '@/domains/common/store/authStore';
 
 export function useRentalsInfinite(limit = 2) {
   const accessToken = useAuthStore((s) => s.accessToken);
 
-  return useInfiniteQuery<RentalResponse>({
+  return useInfiniteQuery<OrderResponse>({
     queryKey: ['rentals', { limit }],
     queryFn: ({ pageParam }) =>
       getRentals({ lastRentalId: pageParam as number | undefined, limit }),

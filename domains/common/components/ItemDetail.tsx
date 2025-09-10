@@ -1,11 +1,11 @@
 import React from 'react';
-import { RentalItem } from '@/domains/orders/types/orderType';
+import { OrderlItem } from '@/domains/orders/types/orderType';
 import { formatDate } from '../utils/date';
 import Image from 'next/image';
 import { getImageUrl } from '../utils/image';
 
 interface Props {
-  item: RentalItem;
+  item: OrderlItem;
   startDate?: string;
   endDate?: string;
 }

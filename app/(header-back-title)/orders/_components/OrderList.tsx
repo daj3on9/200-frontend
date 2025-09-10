@@ -24,7 +24,7 @@ export default function OrderList() {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
   if (!orders?.length) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-center text-Label-Assistive">
+      <div className="flex h-full items-center justify-center text-center text-Label-Assistive">
         <p> 이용 내역이 없어요.</p>
       </div>
     );

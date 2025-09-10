@@ -12,25 +12,25 @@ export interface OrderItemState {
   endDate?: number;
 }
 
-export interface RentalItem {
+export interface OrderlItem {
   productName: string;
   color: string;
   price: number;
   productThumbnailUrl: string;
 }
 
-export interface Rental {
+export interface Order {
   rentalId: number;
   rentalNumber: string;
   rentalStatus: RentalStatus;
   startAt: string;
   endAt: string;
-  items: RentalItem[];
+  items: OrderlItem[];
   reviewStatus: ReveiwStatus;
 }
 
-export interface RentalResponse {
-  rentals: Rental[];
+export interface OrderResponse {
+  rentals: Order[];
   hasNext: boolean;
   lastRentalId: number | null;
 }

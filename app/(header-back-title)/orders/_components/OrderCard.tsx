@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import type { Rental } from '@/domains/orders/types/orderType';
+import type { Order } from '@/domains/orders/types/orderType';
 import Link from 'next/link';
 import ItemDetail from '@/domains/common/components/ItemDetail';
 import OrderStatusLabel from '@/app/(header-back-title)/orders/_components/OrderStatusLabel';
 import OrderCardBottom from './OrderCardBottom';
 
 interface OrderProps {
-  order: Rental;
+  order: Order;
 }
 
 export default function OrderCard({ order }: OrderProps) {
