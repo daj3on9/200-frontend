@@ -2,14 +2,18 @@ import { Order } from '@/domains/orders/types/orderType';
 import OrderStatusLabel from '../../_components/OrderStatusLabel';
 
 interface OrderHeaderProps {
-  order: Order;
+  orderNumber: string;
+  rentalStatus: Order['rentalStatus'];
 }
 
-export default function OrderHeader({ order }: OrderHeaderProps) {
+export default function OrderHeader({
+  orderNumber,
+  rentalStatus,
+}: OrderHeaderProps) {
   return (
     <div className="flex w-full px-layout py-xxl items-center gap-m bg-Static-White">
-      <div className="h3-b text-Label-Subnormal"> {order.orderNumber}</div>
-      <OrderStatusLabel status={order.status} />
+      <div className="h3-b text-Label-Subnormal"> {orderNumber}</div>
+      <OrderStatusLabel status={rentalStatus} />
     </div>
   );
 }

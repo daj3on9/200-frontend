@@ -1,8 +1,6 @@
 import Header from '@/domains/common/components/header';
-import { mockOrders } from '@/domains/orders/api/mock';
-import OrderHeader from './_components/OrderHeader';
-import OrderTabs from './_components/OrderTabs';
 import { Metadata } from 'next';
+import OrderPageClient from './_components/OrderPageClient';
 
 export const metadata: Metadata = {
   title: '주문 상세',
@@ -18,23 +16,8 @@ export default async function Page({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
-  const order = mockOrders.find((order) => order.orderNumber === id);
-
-  if (!order) {
-    return (
-      <div className="flex flex-col h-screen ">
-        <Header
-          showBack
-          title="주문상세"
-          showHome
-        />
-        <div className="flex flex-1 overflow-y-auto no-scrollbar justify-center items-center text-Label-Assistive bg-Fill-99">
-          <p>주문 정보를 찾을 수 없습니다.</p>
-        </div>
-      </div>
-    );
-  }
+  const { id: idStr } = await params;
+  const rentalId = Number(idStr);
 
   return (
     <div className="flex flex-col h-screen">
@@ -43,10 +26,7 @@ export default async function Page({
         title="주문상세"
         showHome
       />
-      <div className="flex-1 overflow-y-auto no-scrollbar bg-Fill-99">
-        <OrderHeader order={order} />
-        <OrderTabs order={order} />
-      </div>
+      <OrderPageClient rentalId={rentalId} />
     </div>
   );
 }

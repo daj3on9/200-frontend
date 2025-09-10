@@ -20,7 +20,7 @@ export default function AppInitializer() {
     if (isLoggedIn) {
       reissue();
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return null;
 }

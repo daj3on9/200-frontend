@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
-import { Order } from '@/domains/orders/types/orderType';
+import { OrderDetailResponse } from '@/domains/orders/types/orderType';
 import OrderExperience from './OrderExperience';
 import ToastComponent from '@/domains/common/components/ToastComponent';
 import OrderPayList from './OrderPayList';
 import OrderEtc from './OrderEtc';
 
 interface OrderTabsProps {
-  order: Order;
+  order: OrderDetailResponse;
 }
 
 export default function OrderTabs({ order }: OrderTabsProps) {
@@ -22,7 +22,7 @@ export default function OrderTabs({ order }: OrderTabsProps) {
       case 'experience':
         return <OrderExperience order={order} />;
       case 'payment':
-        return <OrderPayList order={order} />;
+        return <OrderPayList paymentId={order.paymentId} />;
       case 'other':
         return <OrderEtc />;
       default:

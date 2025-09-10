@@ -1,11 +1,11 @@
 import React from 'react';
-import { OrderlItem } from '@/domains/orders/types/orderType';
+import { OrderItem } from '@/domains/orders/types/orderType';
 import { formatDate } from '../utils/date';
 import Image from 'next/image';
 import { getImageUrl } from '../utils/image';
 
 interface Props {
-  item: OrderlItem;
+  item: OrderItem;
   startDate?: string;
   endDate?: string;
 }
