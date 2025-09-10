@@ -2,7 +2,7 @@ import { getAPI } from '@/domains/common/api';
 import { buildQuery } from '@/domains/products/api/q';
 import { OrderResponse } from '../types/orderType';
 
-export async function getRentals(params: {
+export async function getOrders(params: {
   lastRentalId?: number;
   limit?: number;
 }) {

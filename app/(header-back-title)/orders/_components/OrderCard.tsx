@@ -35,7 +35,7 @@ export default function OrderCard({ order }: OrderProps) {
 
       {order.items.map((item) => (
         <div
-          key={order.rentalId}
+          key={`${order.rentalId}-${item.productName}`}
           className="w-full"
         >
           <ItemDetail
