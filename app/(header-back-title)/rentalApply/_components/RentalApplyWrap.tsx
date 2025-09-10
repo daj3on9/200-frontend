@@ -6,14 +6,21 @@ import DeliveryDetails from './DeliveryDetails';
 import CalendarWrap from './CalendarWrap';
 import RentalItem from './RentalItem';
 import { useRentalApplyForm } from '@/domains/rentalApply/hooks/useRentalApplyForm';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
+import { postAPI } from '@/domains/common/api';
+import { Suspense } from 'react';
+import { format } from 'date-fns';
 
-export default function RentalApplyWrap() {
+function RentalApplyWrap() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isDirectRental = searchParams.get('direct') === 'true';
+  const isCartRental = searchParams.get('cart') === 'true';
   const { cartQuery, isLoading } = useCartQuery();
   const cartItems = cartQuery.data?.carts || [];
   const totalPrice = cartQuery.data?.totalPrice || 0;
+  const rentalInfo = JSON.parse(sessionStorage.getItem('rentalInfo') || '{}');
   const {
     range,
     setRange,
@@ -32,22 +39,44 @@ export default function RentalApplyWrap() {
   } = useRentalApplyForm();
 
   const handleSubmit = async () => {
-    const isValid = validateForm();
-    if (!isValid) return;
+    if (validateForm() === false) return;
 
-    router.push('/rentalApply/complete');
+    const payload = {
+      rentStartAt: format(range.startDate!, 'yyyy-MM-dd'),
+      rentEndAt: format(range.endDate!, 'yyyy-MM-dd'),
+      shippingInfo: {
+        receiver: deliveryInfo.name,
+        phoneNumber: deliveryInfo.number,
+        address: {
+          postcode: deliveryInfo.zoneCode,
+          postAddress: deliveryInfo.address,
+          detailAddress: deliveryInfo.detailAddress,
+        },
+      },
+      paymentMethod: selectPayment,
+    };
 
-    // TODO : api 연결 후 주석 해제
-    // try {
-    //   await postAPI('/rental', {});
-    //   router.push('/rentalApply/complete');
-    // } catch (err) {
-    //   if (err instanceof Error) {
-    //     throw new Error(err.message);
-    //   } else {
-    //     throw new Error('카카오 로그인 오류');
-    //   }
-    // }
+    if (isDirectRental) {
+      Object.assign(payload, {
+        productId: rentalInfo.productId,
+        color: rentalInfo.color,
+      });
+    }
+
+    if (isCartRental) {
+      Object.assign(payload, {
+        cartIds: cartItems.map((item) => item.cartId),
+      });
+    }
+
+    try {
+      await postAPI('/rentals', payload);
+      router.push('/rentalApply/complete');
+    } catch (err) {
+      if (err instanceof Error) {
+        throw new Error(err.message);
+      }
+    }
   };
 
   // if (isLoading) return <p>Loading...</p>;
@@ -99,9 +128,20 @@ export default function RentalApplyWrap() {
           className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
           onClick={handleSubmit}
         >
-          {(totalPrice * 7).toLocaleString()}원 결제하기
+          {isDirectRental
+            ? (rentalInfo.price * 7).toLocaleString()
+            : (totalPrice * 7).toLocaleString()}
+          원 결제하기
         </button>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <RentalApplyWrap />
+    </Suspense>
   );
 }

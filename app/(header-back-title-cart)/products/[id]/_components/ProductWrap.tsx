@@ -37,6 +37,7 @@ export default function ProductWrap({ id }: { id: number }) {
       </div>
       <FooterBtn
         id={id as number}
+        price={detailData.dailyRentalPrice}
         showOptions={showOptions}
         setShowOptions={setShowOptions}
         showModal={showModal}
