@@ -1,6 +1,6 @@
 import React from 'react';
 import ReportDoneDetail from './ReportDoneDetail';
-import { RentalItem } from '@/domains/rentalApply/types/rentalItemType';
+import { RentalItem } from '@/domains/rentalApply/types/RentalItemType';
 interface Props {
   doneData: RentalItem[];
 }

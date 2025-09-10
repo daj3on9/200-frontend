@@ -1,7 +1,7 @@
 import { getImageUrl } from '@/domains/common/utils/image';
 import Image from 'next/image';
 import { formatDate } from '@/domains/common/utils/date';
-import { RentalItem } from '@/domains/rentalApply/types/rentalItemType';
+import { RentalItem } from '@/domains/rentalApply/types/RentalItemType';
 
 interface Props {
   item: RentalItem['items'][0];

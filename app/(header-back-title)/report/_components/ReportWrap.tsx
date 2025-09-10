@@ -6,7 +6,7 @@ import { getAPI } from '@/domains/common/api';
 import {
   RentalItem,
   RentalResponse,
-} from '@/domains/rentalApply/types/rentalItemType';
+} from '@/domains/rentalApply/types/RentalItemType';
 
 export default function ReportWrap() {
   const [selectTab, setSelectTab] = useState('Todo');
@@ -22,7 +22,7 @@ export default function ReportWrap() {
         const done: RentalItem[] = [];
 
         rentals.forEach((rental) => {
-          const target = rental.reviewStatus === 'COMPLETE' ? done : todo;
+          const target = rental.reviewStatus === 'COMPELTED' ? done : todo;
 
           rental.items.forEach((item) => {
             target.push({

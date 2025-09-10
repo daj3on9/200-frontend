@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ReportItemDetail from './ReportItemDetail';
-import { RentalItem } from '@/domains/rentalApply/types/rentalItemType';
+import { RentalItem } from '@/domains/rentalApply/types/RentalItemType';
 
 interface Props {
   todoData: RentalItem[];
