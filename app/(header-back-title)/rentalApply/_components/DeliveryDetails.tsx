@@ -104,15 +104,24 @@ export default function DeliveryDetails({
           <div className="flex-1 flex flex-col">
             <input
               type="tel"
+              inputMode="numeric"
               placeholder="010-0000-0000"
               className="flex-1 p-2 outline outline-offset-[-1px] rounded-md outline-Line-Subtler body2-r"
               value={deliveryInfo.number}
-              onChange={(e) =>
+              onChange={(e) => {
+                const onlyNums = e.target.value.replace(/\D/g, '');
                 setDeliveryInfo((prev) => ({
                   ...prev,
-                  number: formatPhoneNumber(e.target.value),
-                }))
-              }
+                  number: onlyNums,
+                }));
+              }}
+              onBlur={(e) => {
+                const formatted = formatPhoneNumber(e.target.value);
+                setDeliveryInfo((prev) => ({
+                  ...prev,
+                  number: formatted,
+                }));
+              }}
             />
             {validNumber && (
               <p className="body3-m text-Status-Negative pt-2">
