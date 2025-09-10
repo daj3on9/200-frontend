@@ -15,12 +15,10 @@ export default function AppInitializer() {
         setTokens(data.accessToken);
       } catch {
         logout();
-        localStorage.removeItem('isLoggedIn');
       }
     };
     if (isLoggedIn) {
       reissue();
-      return;
     }
   }, []);
 
