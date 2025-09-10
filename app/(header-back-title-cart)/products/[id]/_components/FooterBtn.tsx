@@ -90,7 +90,7 @@ export default function FooterBtn({
       'rentalInfo',
       JSON.stringify([
         {
-          cartId: id,
+          productId: id,
           color: selectedColor,
           dailyRentalPrice: detailData.dailyRentalPrice,
           productName: detailData.productName,

@@ -32,12 +32,13 @@ export default function ToastComponent() {
         </div>
       </div>
       {devide && (
-        <div
+        <button
+          type="button"
           className="text-center justify-start text-Static-White text-xs font-medium font-['Pretendard'] underline leading-none cursor-pointer"
           onClick={() => router.push('/cart')}
         >
           장바구니로 이동
-        </div>
+        </button>
       )}
     </div>
   );

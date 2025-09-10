@@ -12,14 +12,7 @@ interface Props {
 }
 export default function ProductDetailInfo({ detailData }: Props) {
   const [isWide, setIsWide] = useState(false);
-  const [contentHeight, setContentHeight] = useState(0);
-  const contentRef = useRef<HTMLParagraphElement>(null);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      setContentHeight(contentRef.current.scrollHeight);
-    }
-  }, []);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className=" flex flex-col justify-start items-start">

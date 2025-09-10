@@ -14,13 +14,18 @@ export default function ProductWrap({ id }: { id: number }) {
   const [detailData, setDetailData] = useState<ProductDetailState | null>(null);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [storageData, setStorageData] = useState();
   const show = useToastStore((s) => s.show);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await getAPI<ProductDetailState>(`/product/${id}`);
-      setDetailData(res);
+      try {
+        const res = await getAPI<ProductDetailState>(`/product/${id}`);
+        setDetailData(res);
+      } catch (err) {
+        if (err instanceof Error) {
+          throw new Error(err.message);
+        }
+      }
     };
 
     getData();

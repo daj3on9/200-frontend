@@ -25,7 +25,7 @@ export default function CartWrap() {
       'rentalInfo',
       JSON.stringify(
         selectedItems.map((item) => ({
-          cartId: item.cartId,
+          productId: item.cartId,
           color: item.color,
           dailyRentalPrice: item.dailyRentalPrice,
           productName: item.productName,

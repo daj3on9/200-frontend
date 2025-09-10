@@ -15,7 +15,7 @@ export default function ProductPrice({ detailData }: Props) {
             하루 체험 금액
           </p>
           <p className="flex justify-start items-center gap-0.5 text-center text-Label-Normal body1-sb">
-            {detailData.dailyRentalPrice} 원
+            {detailData.dailyRentalPrice.toLocaleString()} 원
           </p>
         </div>
         <div className="self-stretch inline-flex justify-between items-center">
@@ -51,7 +51,7 @@ export default function ProductPrice({ detailData }: Props) {
             총 결제 금액
           </p>
           <p className="flex justify-start items-center gap-0.5 text-center text-Primary-Normal h3-b">
-            {detailData.dailyRentalPrice * 7} 원
+            {(detailData.dailyRentalPrice * 7).toLocaleString()} 원
           </p>
         </div>
       </div>

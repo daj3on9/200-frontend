@@ -16,9 +16,9 @@ export const BRANDS: { id: string; name: string; image: string }[] = [
   { id: 'MARSHALL', name: 'MARSHALL', image: '/images/brandLogo/marshall.png' },
   { id: 'NOTHING', name: 'NOTHING', image: '/images/brandLogo/nothing.png' },
   {
-    id: 'SENHEISER',
+    id: 'SENNHEISER',
     name: 'SENNHEISER',
-    image: '/images/brandLogo/senheiser.png',
+    image: '/images/brandLogo/sennheiser.png',
   },
   { id: 'SONY', name: 'SONY', image: '/images/brandLogo/sony.png' },
 ];
