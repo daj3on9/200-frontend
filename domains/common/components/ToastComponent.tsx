@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
 import Score0Icon from '@/public/icons/Score=0.svg';
 import FAQIcon from '@/public/icons/FAQ.svg';
 import CloseIcon from '@/public/icons/close-circular.svg';
 import { useToastStore } from '../store/toastStore';
+import { useRouter } from 'next/navigation';
 
 export default function ToastComponent() {
+  const router = useRouter();
   const { show, icon, text, devide, position } = useToastStore();
   const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
     cart: Score0Icon,
@@ -31,7 +32,10 @@ export default function ToastComponent() {
         </div>
       </div>
       {devide && (
-        <div className="text-center justify-start text-Static-White text-xs font-medium font-['Pretendard'] underline leading-none">
+        <div
+          className="text-center justify-start text-Static-White text-xs font-medium font-['Pretendard'] underline leading-none cursor-pointer"
+          onClick={() => router.push('/cart')}
+        >
           장바구니로 이동
         </div>
       )}
