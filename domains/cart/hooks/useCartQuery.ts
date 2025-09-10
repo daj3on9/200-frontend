@@ -52,7 +52,7 @@ export const useCartQuery = () => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (cartIds: number[]) => deleteAPI('/cart', cartIds),
+    mutationFn: (cartIds: number[]) => deleteAPI('/cart', { cartIds }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cart'] }),
   });
 

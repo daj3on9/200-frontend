@@ -52,7 +52,10 @@ export default function CartItemDetail({
           className={`text-center text-Label-Subnormal body2-m px-2 py-1 rounded outline outline-offset-[-1px] outline-Line-Subtler ${
             +selectedIds.length ? 'cursor-pointer' : ''
           } `}
-          onClick={() => deleteMutation.mutate(selectedIds)}
+          onClick={() => {
+            deleteMutation.mutate(selectedIds);
+            setSelectedIds([]);
+          }}
           disabled={!selectedIds.length}
         >
           선택 삭제

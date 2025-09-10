@@ -88,13 +88,15 @@ export default function FooterBtn({
     sessionStorage.removeItem('rentalInfo');
     sessionStorage.setItem(
       'rentalInfo',
-      JSON.stringify({
-        cartId: id,
-        color: selectedColor,
-        dailyRentalPrice: detailData.dailyRentalPrice,
-        productName: detailData.productName,
-        productThumbnailUrl: detailData.productThumbnailUrls[0],
-      })
+      JSON.stringify([
+        {
+          cartId: id,
+          color: selectedColor,
+          dailyRentalPrice: detailData.dailyRentalPrice,
+          productName: detailData.productName,
+          productThumbnailUrl: detailData.productThumbnailUrls[0],
+        },
+      ])
     );
     router.push('/rentalApply?direct=true');
   };

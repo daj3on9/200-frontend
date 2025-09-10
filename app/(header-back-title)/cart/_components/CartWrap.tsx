@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import CartItemDetail from './CartItemDetail';
 import CartPriceDetail from './CartPriceDetail';
 import Link from 'next/link';
@@ -10,11 +10,29 @@ export default function CartWrap() {
   const router = useRouter();
   const { cartQuery } = useCartQuery();
   const { data: cartData } = cartQuery;
-  const cartItems = cartData?.carts || [];
+  const cartItems = useMemo(() => cartData?.carts || [], [cartData]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [selectPrice, setSelectPrice] = useState<number>(0);
 
   const handleRental = () => {
+    const selectedItems = cartItems.filter((item) =>
+      selectedIds.includes(item.cartId)
+    );
+
+    console.log(selectedItems);
+    sessionStorage.removeItem('rentalInfo');
+    sessionStorage.setItem(
+      'rentalInfo',
+      JSON.stringify(
+        selectedItems.map((item) => ({
+          cartId: item.cartId,
+          color: item.color,
+          dailyRentalPrice: item.dailyRentalPrice,
+          productName: item.productName,
+          productThumbnailUrl: item.productThumbnailUrl,
+        }))
+      )
+    );
     router.push('/rentalApply?cart=true');
   };
 
@@ -27,7 +45,7 @@ export default function CartWrap() {
       0
     );
     setSelectPrice(price);
-  }, [selectedIds]);
+  }, [selectedIds, cartItems]);
 
   return (
     <div>
