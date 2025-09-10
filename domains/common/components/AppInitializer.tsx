@@ -6,7 +6,7 @@ import { useAuthStore } from '@/domains/common/store/authStore';
 import axiosInstance from '@/domains/common/api/axiosInstance';
 
 export default function AppInitializer() {
-  const { setTokens, logout } = useAuthStore();
+  const { setTokens, logout, isLoggedIn } = useAuthStore();
 
   useEffect(() => {
     const reissue = async () => {
@@ -15,11 +15,11 @@ export default function AppInitializer() {
         setTokens(data.accessToken);
       } catch {
         logout();
-        localStorage.removeItem('isLoggedIn');
       }
     };
-
-    reissue();
+    if (isLoggedIn) {
+      reissue();
+    }
   }, []);
 
   return null;

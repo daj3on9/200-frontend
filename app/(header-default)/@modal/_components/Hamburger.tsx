@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/domains/common/store/authStore';
 import clsx from 'clsx';
+import { postAPI } from '@/domains/common/api';
 
 type Menu = {
   label: string;
@@ -35,6 +36,19 @@ export default function Hamburger() {
   const nickname = useAuthStore((s) => s.nickname);
   const email = useAuthStore((s) => s.email);
   const logout = useAuthStore((s) => s.logout);
+
+  const handleLogout = async () => {
+    try {
+      await postAPI('auth/logout', {});
+    } catch (err) {
+      if (err instanceof Error) {
+        throw new Error(`로그아웃 중 문제가 발생했어요: ${err.message}`);
+      }
+    } finally {
+      logout();
+      window.location.href = '/';
+    }
+  };
 
   return (
     <div
@@ -105,11 +119,8 @@ export default function Hamburger() {
         {isLoggedIn ? (
           <button
             type="button"
-            onClick={() => {
-              logout();
-              router.replace('/');
-            }}
-            className="justify-start text-Label-Assistive underline body1-m"
+            onClick={handleLogout}
+            className="justify-start text-Label-Assistive underline body1-m cursor-pointer"
           >
             로그아웃
           </button>
