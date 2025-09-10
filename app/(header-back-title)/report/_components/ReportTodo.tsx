@@ -1,17 +1,16 @@
-import { CartItemState } from '@/domains/cart/types/cartItemType';
-import React from 'react';
-import ItemDetail from '@/domains/common/components/ItemDetail';
 import Link from 'next/link';
+import ReportItemDetail from './ReportItemDetail';
+import { RentalItem } from '@/domains/rentalApply/types/RentalItemType';
 
 interface Props {
-  todoData: CartItemState[];
+  todoData: RentalItem[];
 }
 
 export default function ReportTodo({ todoData }: Props) {
   return (
     <>
       {!todoData.length ? (
-        <div className=" flex justify-center items-center">
+        <div className="h-[calc(100vh-250px)] flex justify-center items-center">
           <p className="body1-m text-Label-Assistive">
             작성 가능한 리포트가 없어요.
           </p>
@@ -20,7 +19,7 @@ export default function ReportTodo({ todoData }: Props) {
         <div className="flex flex-col gap-3">
           {todoData.map((item) => (
             <div
-              key={item.cartId}
+              key={item.rentalId}
               className="bg-Static-White px-3.5 py-4 flex flex-col gap-3"
             >
               <div className="self-stretch flex justify-start items-center gap-2">
@@ -32,7 +31,11 @@ export default function ReportTodo({ todoData }: Props) {
                   원 환급예정
                 </p>
               </div>
-              {/* <ItemDetail item={item} /> */}
+              <ReportItemDetail
+                item={item.items[0]}
+                startDate={item.startAt}
+                endDate={item.endAt}
+              />
               <Link
                 href={'/report/write'}
                 className="w-full p-2 text-center outline rounded-md outline-offset-[-1px] outline-Line-Subtle text-Label-Subnormal title3-sb cursor-pointer"
