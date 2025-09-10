@@ -13,10 +13,10 @@ export default function PaymentWrap({
   validationErrs,
 }: Props) {
   const PaymentList = [
-    { id: 'general', name: '일반/카드', image: '/images/payment/card.png' },
-    { id: 'kakao', name: '카카오페이', image: '/images/payment/kakao.png' },
-    { id: 'naver', name: '네이버페이', image: '/images/payment/naver.png' },
-    { id: 'toss', name: '토스페이', image: '/images/payment/toss.png' },
+    { id: 'CREDIT_CARD', name: '일반/카드', image: '/images/payment/card.png' },
+    { id: 'KAKAO_PAY', name: '카카오페이', image: '/images/payment/kakao.png' },
+    { id: 'NAVER_PAY', name: '네이버페이', image: '/images/payment/naver.png' },
+    { id: 'TOSS_PAY', name: '토스페이', image: '/images/payment/toss.png' },
   ];
   return (
     <div className="px-3.5 py-6 bg-Static-White flex flex-col justify-start items-start">

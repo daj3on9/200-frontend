@@ -4,13 +4,19 @@ import CartItemDetail from './CartItemDetail';
 import CartPriceDetail from './CartPriceDetail';
 import Link from 'next/link';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
+import { useRouter } from 'next/navigation';
 
 export default function CartWrap() {
+  const router = useRouter();
   const { cartQuery } = useCartQuery();
   const { data: cartData } = cartQuery;
   const cartItems = cartData?.carts || [];
   const totalPrice = cartData?.totalPrice || 0;
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
+  const handleRental = () => {
+    router.push('/rentalApply?cart=true');
+  };
 
   return (
     <div>
@@ -47,6 +53,7 @@ export default function CartWrap() {
                 : 'bg-Primary-Normal text-Static-White cursor-pointer'
             }`}
             disabled={!selectedIds.length}
+            onClick={selectedIds.length ? handleRental : undefined}
           >
             {!selectedIds.length
               ? '결제하기'
