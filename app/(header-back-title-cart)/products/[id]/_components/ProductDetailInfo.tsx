@@ -3,10 +3,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import InfoIcon from '@/public/icons/info.svg';
 import ArrowDownIcon from '@/public/icons/arrow-down.svg';
 import ArrowUpIcon from '@/public/icons/arrow-up.svg';
-import { Product } from '@/domains/products/types/ProductsType';
+import { ProductDetailState } from '@/domains/products/types/ProductsType';
+import Image from 'next/image';
+import { getImageUrl } from '@/domains/common/utils/image';
 
 interface Props {
-  detailData: Product;
+  detailData: ProductDetailState;
 }
 export default function ProductDetailInfo({ detailData }: Props) {
   const [isWide, setIsWide] = useState(false);
@@ -30,16 +32,23 @@ export default function ProductDetailInfo({ detailData }: Props) {
 
       <div
         style={{
-          maxHeight: isWide ? contentHeight : 240,
+          maxHeight: isWide ? '100%' : 240,
         }}
         className={`w-full transition-all duration-300 ease-in-out overflow-hidden`}
       >
-        <p
-          ref={contentRef}
-          className="h-[500px] border"
-        >
-          상세 내용
-        </p>
+        <div ref={contentRef}>
+          {detailData.productImageDetailUrls.map((v) => (
+            <Image
+              key={v}
+              className="self-stretch"
+              src={getImageUrl(v)}
+              alt={'상세 내용'}
+              width={390}
+              height={390}
+              unoptimized
+            />
+          ))}
+        </div>
       </div>
 
       <div className="w-full px-3.5 py-3 left-0 top-[216px] bg-Static-White ">

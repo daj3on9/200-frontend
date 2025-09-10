@@ -1,7 +1,12 @@
+import { ProductDetailState } from '@/domains/products/types/ProductsType';
 import Image from 'next/image';
 import React from 'react';
 
-export default function ProductPrice() {
+interface Props {
+  detailData: ProductDetailState;
+}
+
+export default function ProductPrice({ detailData }: Props) {
   return (
     <div className="w-90 mt-3.5 self-stretch inline-flex flex-col justify-start items-start gap-6">
       <div className="self-stretch flex flex-col justify-start items-start gap-2">
@@ -10,7 +15,7 @@ export default function ProductPrice() {
             하루 체험 금액
           </p>
           <p className="flex justify-start items-center gap-0.5 text-center text-Label-Normal body1-sb">
-            Price 원
+            {detailData.dailyRentalPrice} 원
           </p>
         </div>
         <div className="self-stretch inline-flex justify-between items-center">
@@ -46,7 +51,7 @@ export default function ProductPrice() {
             총 결제 금액
           </p>
           <p className="flex justify-start items-center gap-0.5 text-center text-Primary-Normal h3-b">
-            Price*7 원
+            {detailData.dailyRentalPrice * 7} 원
           </p>
         </div>
       </div>
