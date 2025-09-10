@@ -132,7 +132,7 @@ export default function Page() {
           className="w-full p-4 rounded-2xl text-Label-Assistive bg-Static-White items-center cursor-pointer body1-m outline outline-offset-[-1px] outline-Line-Subtler"
           onClick={() => {
             logout();
-            router.replace('/login');
+            router.replace('/');
           }}
         >
           로그아웃
