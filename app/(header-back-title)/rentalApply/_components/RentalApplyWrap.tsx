@@ -127,7 +127,7 @@ function RentalApplyWrap() {
           />
         </div>
 
-        <PriceDetail />
+        <PriceDetail totalPrice={totalPrice} />
 
         <div ref={noticeRef}>
           <RentalNotice
