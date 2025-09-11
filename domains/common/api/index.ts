@@ -49,12 +49,7 @@ export const updateAPI = async <T, D>(
 //   return response.data;
 // };
 
-export const deleteAPI = async <T, D>(
-  endpoint: string,
-  data: D
-): Promise<T | null> => {
-  const response = await axiosInstance.delete<T>(endpoint, {
-    data,
-  });
+export const deleteAPI = async <T>(endpoint: string): Promise<T | null> => {
+  const response = await axiosInstance.delete<T>(endpoint);
   return response.data;
 };

@@ -6,7 +6,7 @@ import { createModal } from '@/domains/common/store/modalStore';
 import { useAuthStore } from '@/domains/common/store/authStore';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { postAPI } from '@/domains/common/api';
+import { deleteAPI, postAPI } from '@/domains/common/api';
 
 export default function Page() {
   const router = useRouter();
@@ -27,9 +27,22 @@ export default function Page() {
       title: '정말 탈퇴하시겠습니까?',
       content:
         '탈퇴 시 계정 정보 및 이용내역이 삭제되며 한번 삭제된 정보는 복구가 불가능합니다.',
-      onConfirm: () => {},
+      onConfirm: () => requestDeleteAccount(),
       onCancel: () => {},
     });
+  };
+
+  // 회원 탈퇴
+  const requestDeleteAccount = async () => {
+    try {
+      await deleteAPI<null>('/members');
+
+      logout();
+
+      router.push('/');
+    } catch (e: unknown) {
+      console.error('[회원 탈퇴 에러] : ', e);
+    }
   };
 
   const handleLogout = async () => {
