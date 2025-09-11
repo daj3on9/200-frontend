@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import type { Order } from '@/domains/orders/types/orderType';
 import { createModal } from '@/domains/common/store/modalStore';
 import { useToastStore } from '@/domains/common/store/toastStore';
@@ -38,7 +38,7 @@ export default function OrderCardBottom({ order }: OrderCardBottomProps) {
       });
     } catch (e: unknown) {
       console.log('배송 정보 에러 : ', e);
-      showToast('배송 정보를 불러오지 못했습니다.', 'close', false, 30);
+      showToast('아직 배송이 시작되지 않았어요.', 'close', false, 30);
     }
   };
 
