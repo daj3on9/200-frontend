@@ -66,9 +66,7 @@ export default function ReportWrap() {
       const shouldInclude = selectTab === 'Todo' ? !isDone : isDone;
 
       if (shouldInclude) {
-        rental.items.forEach((item) => {
-          newData.push({ ...rental, ...item });
-        });
+        newData.push(rental);
       }
     });
 
