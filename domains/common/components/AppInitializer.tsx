@@ -10,11 +10,15 @@ export default function AppInitializer({
 }: {
   children: React.ReactNode;
 }) {
-  const { setTokens, logout, accessToken } = useAuthStore();
+  const { setTokens, logout, isLoggedIn } = useAuthStore();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const reissue = async () => {
+      if (!isLoggedIn) {
+        setReady(true);
+        return;
+      }
       try {
         const { data } = await axiosInstance.post('/auth/reissue', {});
         setTokens(data.accessToken);
