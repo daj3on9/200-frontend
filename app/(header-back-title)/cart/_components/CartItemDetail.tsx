@@ -52,13 +52,16 @@ export default function CartItemDetail({
           className={`text-center text-Label-Subnormal body2-m px-2 py-1 rounded outline outline-offset-[-1px] outline-Line-Subtler ${
             +selectedIds.length ? 'cursor-pointer' : ''
           } `}
-          onClick={() => deleteMutation.mutate(selectedIds)}
+          onClick={() => {
+            deleteMutation.mutate(selectedIds);
+            setSelectedIds([]);
+          }}
           disabled={!selectedIds.length}
         >
           선택 삭제
         </button>
       </div>
-      <div className="h-[366px] px-3.5 flex flex-col justify-center">
+      <div className="h-[366px] px-3.5 flex flex-col ">
         {cartData.map((item) => (
           <CartItemDetailComponent
             key={item.cartId}

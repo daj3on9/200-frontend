@@ -8,25 +8,33 @@ import ToastComponent from '@/domains/common/components/ToastComponent';
 import ModalComponent from '@/domains/common/components/ModalComponent';
 import { useToastStore } from '@/domains/common/store/toastStore';
 import { getAPI } from '@/domains/common/api';
-import { Product } from '@/domains/products/types/ProductsType';
+import { ProductDetailState } from '@/domains/products/types/ProductsType';
 
 export default function ProductWrap({ id }: { id: number }) {
-  const [detailData, setDetailData] = useState<Product | null>(null);
+  const [detailData, setDetailData] = useState<ProductDetailState | null>(null);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const show = useToastStore((s) => s.show);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await getAPI<Product>(`/products?${id}`);
-      setDetailData(res);
+      try {
+        const res = await getAPI<ProductDetailState>(`/product/${id}`);
+        setDetailData(res);
+      } catch (err) {
+        if (err instanceof Error) {
+          throw new Error(err.message);
+        }
+      }
     };
 
-    // TODO : api 연결 후 주석 해제
     getData();
   }, [id]);
 
-  if (!detailData) return <p>Loading...</p>;
+  if (!detailData)
+    return (
+      <p className="w-full h-[100vh] text-center content-evenly">Loading...</p>
+    );
 
   return (
     <>
@@ -37,11 +45,11 @@ export default function ProductWrap({ id }: { id: number }) {
       </div>
       <FooterBtn
         id={id as number}
-        price={detailData.dailyRentalPrice}
         showOptions={showOptions}
         setShowOptions={setShowOptions}
         showModal={showModal}
         setShowModal={setShowModal}
+        detailData={detailData}
       />
       {showOptions && (
         <div className="absolute inset-0 bg-black opacity-30 z-40" />

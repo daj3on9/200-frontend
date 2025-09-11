@@ -1,7 +1,11 @@
 import React from 'react';
 import LogoIcon from '@/public/icons/Logo_black.svg';
 
-export default function PriceDetail() {
+interface Props {
+  totalPrice: number;
+}
+
+export default function PriceDetail({ totalPrice }: Props) {
   return (
     <div className="self-stretch px-3.5 py-6 bg-Static-White inline-flex flex-col justify-start items-start gap-4">
       <p className="justify-start text-Label-Subnormal title1-sb">결제 금액</p>
@@ -10,7 +14,7 @@ export default function PriceDetail() {
           금액 합계
         </p>
         <p className="flex justify-start items-start text-Label-Alternative body1-sb">
-          Price 원
+          {(totalPrice * 7).toLocaleString()} 원
         </p>
       </div>
       <div className="self-stretch p-3 bg-Fill-99 rounded-md flex flex-col justify-start items-start gap-3">
@@ -19,7 +23,7 @@ export default function PriceDetail() {
             하루 체험 금액
           </p>
           <p className="flex justify-start items-start text-Label-Alternative">
-            Price 원
+            {totalPrice.toLocaleString()} 원
           </p>
         </div>
         <div className="self-stretch inline-flex justify-between items-center">
@@ -43,7 +47,7 @@ export default function PriceDetail() {
           총 결제 금액
         </p>
         <p className="flex justify-start items-start text-Primary-Normal h4-sb ">
-          Price 원
+          {(totalPrice * 7).toLocaleString()} 원
         </p>
       </div>
     </div>

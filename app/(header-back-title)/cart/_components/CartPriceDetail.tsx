@@ -2,10 +2,10 @@ import React from 'react';
 import LogoIcon from '@/public/icons/Logo.svg';
 
 interface Props {
-  totalPrice: number;
+  selectPrice: number;
 }
 
-export default function CartPriceDetail({ totalPrice }: Props) {
+export default function CartPriceDetail({ selectPrice }: Props) {
   return (
     <div className="w-full px-3.5 py-4 bg-Static-White flex flex-col justify-start items-start gap-6">
       <p className="text-center justify-start text-Label-Subnormal title1-sb">
@@ -17,7 +17,7 @@ export default function CartPriceDetail({ totalPrice }: Props) {
             체험 금액
           </p>
           <div className="text-Label-Normal body1-m">
-            {totalPrice.toLocaleString()} 원
+            {selectPrice.toLocaleString()} 원
           </div>
         </div>
         <div className="self-stretch inline-flex justify-between items-center">
@@ -44,7 +44,7 @@ export default function CartPriceDetail({ totalPrice }: Props) {
             총 결제 금액
           </p>
           <div className="text-Primary-Normal h3-b">
-            {totalPrice.toLocaleString()}*7 원
+            {selectPrice.toLocaleString()}*7 원
           </div>
         </div>
         <p className="text-center justify-start text-Label-Assistive body2-m">
