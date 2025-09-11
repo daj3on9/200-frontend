@@ -69,6 +69,7 @@ export default function CartItemDetail({
             checked={selectedIds.includes(item.cartId)}
             toggleSelected={toggleSelected}
             canCheck={true}
+            setSelectedIds={setSelectedIds}
           />
         ))}
       </div>

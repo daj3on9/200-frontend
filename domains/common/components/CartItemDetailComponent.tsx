@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import CloseIcon from '@/public/icons/close.svg';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
-import { formatDate } from '../utils/date';
 import Image from 'next/image';
 import { getImageUrl } from '../utils/image';
 
@@ -11,8 +10,7 @@ interface Props {
   checked?: boolean;
   toggleSelected?: (id: number) => void;
   canCheck?: boolean;
-  // startDate?: string;
-  // endDate?: string;
+  setSelectedIds?: Dispatch<SetStateAction<number[]>>;
 }
 
 export default function CartItemDetailComponent({
@@ -20,9 +18,8 @@ export default function CartItemDetailComponent({
   checked = false,
   toggleSelected,
   canCheck = false,
-}: // startDate,
-// endDate,
-Props) {
+  setSelectedIds,
+}: Props) {
   const { deleteMutation } = useCartQuery();
   return (
     <div className="py-3 flex justify-start items-start gap-3">
@@ -51,11 +48,6 @@ Props) {
               <p className="body2-r text-Label-Assistive">
                 옵션 : {item.color}
               </p>
-              {/* {startDate && endDate && (
-                <p className="body2-r text-Label-Assistive">
-                  {formatDate(startDate)} ~ {formatDate(endDate)}
-                </p>
-              )} */}
             </div>
             <p className="title1-sb text-Label-Normal">
               {item.dailyRentalPrice} 원
@@ -65,7 +57,10 @@ Props) {
         {canCheck && (
           <CloseIcon
             className="w-4 h-4 fill-Fill-20 cursor-pointer"
-            onClick={() => deleteMutation.mutate([item.cartId])}
+            onClick={() => {
+              setSelectedIds!([]);
+              deleteMutation.mutate([item.cartId]);
+            }}
           />
         )}
       </div>
