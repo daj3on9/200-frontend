@@ -8,6 +8,7 @@ interface Props {
 
 export default function ReportDoneDetail({ item }: Props) {
   const totalPrice = item.items.reduce((acc, v) => acc + v.price / 7, 0);
+  const restLeng = item.items.length - 1;
   const firstItem = item.items?.[0];
   if (!firstItem) return null;
 
@@ -17,7 +18,7 @@ export default function ReportDoneDetail({ item }: Props) {
         <div className="flex flex-col gap-1">
           <p className="body3-m text-Label-Assistive">{item.rentalId}</p>
           <p className="title1-b text-Label-Subnormal">
-            {firstItem.productName}
+            {firstItem.productName} {restLeng > 0 ? `외 ${restLeng} 건` : ``}
           </p>
           <p className="body3-m text-Label-Assistive">{firstItem.color}</p>
         </div>

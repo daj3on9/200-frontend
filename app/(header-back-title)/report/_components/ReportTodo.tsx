@@ -43,6 +43,7 @@ export default function ReportTodo({ todoData }: Props) {
                   item={item.items[0]}
                   startDate={item.startAt}
                   endDate={item.endAt}
+                  length={item.items.length}
                 />
                 <Link
                   href={'/report/write'}
