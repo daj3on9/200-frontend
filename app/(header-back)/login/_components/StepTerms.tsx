@@ -60,9 +60,9 @@ export default function StepTerms({ step, setStep }: Props) {
   };
 
   return (
-    <div className="flex flex-col justify-start items-start gap-12">
-      <div className="w-90">
-        <h2 className="h3-b mb-[48px] text-center">
+    <div className="flex flex-col justify-start items-start gap-12 h-full">
+      <div className="w-90 flex flex-col justify-between h-full gap-12">
+        <h2 className="h3-b text-center">
           체리에 오신 것을 <br />
           환영합니다!
         </h2>
@@ -100,20 +100,20 @@ export default function StepTerms({ step, setStep }: Props) {
             </div>
           ))}
         </div>
-      </div>
 
-      {!isAllChecked && (
-        <div className="p-4 bg-Fill-99 rounded-[999px] inline-flex justify-center items-center gap-3 my-[84px] cursor-pointer ml-[50%] translate-x-[-50%]">
-          <button
-            type="button"
-            className="flex items-center gap-2 title3-m cursor-pointer"
-            onClick={toggleAll}
-          >
-            <CheckIcon className="w-[24px] h-[24px] fill-Fill-50" />
-            전체 동의하기
-          </button>
-        </div>
-      )}
+        {!isAllChecked && (
+          <div className="p-4 bg-Fill-99 rounded-full cursor-pointer w-[140px] ml-[50%] translate-x-[-50%]">
+            <button
+              type="button"
+              className="flex items-center gap-2 title3-m cursor-pointer"
+              onClick={toggleAll}
+            >
+              <CheckIcon className="w-[24px] h-[24px] fill-Fill-50" />
+              전체 동의하기
+            </button>
+          </div>
+        )}
+      </div>
 
       <StepIndicator step={step} />
 

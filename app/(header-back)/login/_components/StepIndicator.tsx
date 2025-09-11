@@ -5,7 +5,7 @@ export default function StepIndicator({ step }: Props) {
   const totalSteps = 3;
 
   return (
-    <div className="absolute bottom-30 left-1/2 transform -translate-x-1/2 flex">
+    <div className="flex w-full justify-center absolute bottom-[70px] left-0">
       {Array.from({ length: totalSteps }).map((_, index) => (
         <div
           key={index}
