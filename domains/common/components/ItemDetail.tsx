@@ -10,8 +10,8 @@ interface Props {
   checked?: boolean;
   toggleSelected?: (id: string) => void;
   canCheck?: boolean;
-  startDate?: number;
-  endDate?: number;
+  startDate?: string;
+  endDate?: string;
 }
 
 export default function ItemDetail({

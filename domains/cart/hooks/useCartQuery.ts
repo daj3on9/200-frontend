@@ -19,7 +19,7 @@ interface APIErrRes {
 export const useCartQuery = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToastStore.getState();
-  const accessToken = useAuthStore((s) => s.accessToken);
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
 
   const cartQuery = useQuery<CartData | null>({
     queryKey: ['cart'],
@@ -30,7 +30,7 @@ export const useCartQuery = () => {
       }
       return response as CartData;
     },
-    enabled: !!accessToken,
+    enabled: !isLoggedIn,
   });
 
   const addMutation = useMutation({

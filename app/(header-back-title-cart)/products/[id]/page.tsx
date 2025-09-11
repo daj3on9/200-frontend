@@ -2,21 +2,24 @@ import Header from '@/domains/common/components/header';
 import ProductWrap from './_components/ProductWrap';
 // import { getAPI } from '@/domains/common/api';
 // import { Metadata } from 'next';
+// import { ProductDetailState } from '@/domains/products/types/ProductsType';
+// import { getImageUrl } from '@/domains/common/utils/image';
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { id: string };
-// }): Promise<Metadata> {
-//   const product = await getAPI(`/productDetail?${params.id}`);
-//   return {
-//     title: `${product.name} | CHERRY`,
-//     description: product.description,
-//     openGraph: {
-//       images: [product.image],
-//     },
-//   };
-// }
+// // export async function generateMetadata({
+// //   params,
+// // }: {
+// //   params: { id: string };
+// // }): Promise<Metadata> {
+// //   const { id } = await params;
+// //   const product = await getAPI<ProductDetailState>(`/product/${id}`);
+// //   return {
+// //     title: `${product?.productName} | CHERRY`,
+// //     description: `${product?.productName} 상세 페이지`,
+// //     openGraph: {
+// //       images: [getImageUrl(product?.productThumbnailUrls[0])],
+// //     },
+// //   };
+// // }
 
 export default async function Page({
   params,
