@@ -13,20 +13,20 @@ interface OrderProps {
 
 export default function OrderCard({ order }: OrderProps) {
   const canWriteReport =
-    order.isReviewed === 'yet' &&
-    (order.status === 'returning' || order.status === 'completed');
+    order.reviewStatus === 'AVAILABLE' &&
+    (order.rentalStatus === 'ACTIVE' || order.rentalStatus === 'COMPLETED');
 
   return (
     <div className="flex flex-col w-[390px] px-l py-layout items-start gap-xxl bg-Static-White">
       <div className="flex justify-between items-center self-stretch">
         <div className="flex items-center gap-s">
-          <OrderStatusLabel status={order.status} />
-          <p className="text-Label-Normal title3-sb"> {order.orderNumber} </p>
+          <OrderStatusLabel status={order.rentalStatus} />
+          <p className="text-Label-Normal title3-sb"> {order.rentalNumber} </p>
         </div>
 
         {/* TODO : 주문 상세 링크 추가 필요 */}
         <Link
-          href={`/orders/${order.orderNumber}`}
+          href={`/orders/${order.rentalId}`}
           className="body3-r text-Label-Assistive underline"
         >
           주문 상세
@@ -35,16 +35,13 @@ export default function OrderCard({ order }: OrderProps) {
 
       {order.items.map((item) => (
         <div
-          key={item.id}
+          key={`${order.rentalId}-${item.productName}`}
           className="w-full"
         >
           <ItemDetail
             item={item}
-            checked={false}
-            toggleSelected={() => {}}
-            canCheck={false}
-            startDate={item.startDate}
-            endDate={item.endDate}
+            startDate={order.startAt}
+            endDate={order.endAt}
           />
 
           {/* TODO : 구글폼 링크 필요 */}

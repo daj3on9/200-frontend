@@ -1,8 +1,6 @@
 import Header from '@/domains/common/components/header';
-import { mockOrders } from '@/domains/orders/api/mock';
-import OrderHeader from './_components/OrderHeader';
-import OrderTabs from './_components/OrderTabs';
 import { Metadata } from 'next';
+import OrderPageClient from './_components/OrderPageClient';
 
 export const metadata: Metadata = {
   title: '주문 상세',
@@ -18,18 +16,20 @@ export default async function Page({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
-  const order = mockOrders.find((order) => order.orderNumber === id);
+  const { id: idStr } = await params;
+  const rentalId = Number(idStr);
 
-  if (!order) {
+  if (Number.isNaN(rentalId)) {
     return (
-      <div className="flex flex-col h-screen items-center justify-center">
+      <div className="flex flex-col h-screen bg-Fill-99">
         <Header
           showBack
           title="주문상세"
           showHome
         />
-        <p>주문 정보를 찾을 수 없습니다.</p>
+        <div className="flex h-full items-center justify-center text-center text-Label-Assistive">
+          <p> 잘못된 주문 경로입니다.</p>
+        </div>
       </div>
     );
   }
@@ -41,10 +41,7 @@ export default async function Page({
         title="주문상세"
         showHome
       />
-      <div className="flex-1 overflow-y-auto no-scrollbar bg-Fill-99">
-        <OrderHeader order={order} />
-        <OrderTabs order={order} />
-      </div>
+      <OrderPageClient rentalId={rentalId} />
     </div>
   );
 }

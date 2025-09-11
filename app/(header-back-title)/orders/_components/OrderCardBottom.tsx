@@ -12,6 +12,9 @@ interface OrderCardBottomProps {
 export default function OrderCardBottom({ order }: OrderCardBottomProps) {
   const { showToast } = useToastStore();
 
+  // 환급 금액 계산
+  const refundAmount = order.items.reduce((sum, item) => sum + item.price, 0);
+
   // 배송 조회
   const handleDeliveryTrackClick = () => {
     createModal({
@@ -41,13 +44,13 @@ export default function OrderCardBottom({ order }: OrderCardBottomProps) {
     });
   };
 
-  if (order.isReviewed === 'completed' && order.refundAmount) {
+  if (order.reviewStatus === 'COMPLETED' && refundAmount) {
     return (
       <div className="w-full flex justify-center items-center p-m ds-rounded-xs bg-Fill-99 ">
         <p className="title3-m text-Label-Alternative">
           리포트 작성으로
           <span className="title3-sb text-Secondary-Normal p-1">
-            {order.refundAmount}원
+            {refundAmount}원
           </span>
           환급 받았어요!
         </p>
@@ -55,7 +58,7 @@ export default function OrderCardBottom({ order }: OrderCardBottomProps) {
     );
   }
 
-  if (order.status === 'delivering') {
+  if (order.rentalStatus === 'PENDING') {
     return (
       <div className="w-full grid-2">
         <button
@@ -74,7 +77,7 @@ export default function OrderCardBottom({ order }: OrderCardBottomProps) {
     );
   }
 
-  if (order.status === 'testing') {
+  if (order.rentalStatus === 'ACTIVE') {
     return (
       <div className="w-full grid-2">
         <button

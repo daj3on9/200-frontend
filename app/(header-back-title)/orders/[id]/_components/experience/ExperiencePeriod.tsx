@@ -1,6 +1,6 @@
 interface ExperiencePeriodProps {
-  startDate: number | undefined;
-  endDate: number | undefined;
+  startDate: string;
+  endDate: string;
 }
 
 export default function ExperiencePeriod({

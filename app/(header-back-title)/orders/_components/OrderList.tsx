@@ -1,17 +1,31 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import OrderCard from './OrderCard';
 import ToastComponent from '@/domains/common/components/ToastComponent';
-import { mockOrders } from '@/domains/orders/api/mock';
+import { useRentalsInfinite } from '@/domains/orders/hooks/useRentalsInfinite';
+import { useInView } from 'react-intersection-observer';
 
 export default function OrderList() {
-  const orders = mockOrders;
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useRentalsInfinite(2);
 
+  const orders = useMemo(
+    () => (data?.pages ?? []).flatMap((p) => p.rentals),
+    [data]
+  );
+
+  const { ref, inView } = useInView({ rootMargin: '200px' });
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
   if (!orders?.length) {
     return (
-      <div className="w-[390px] py-10 text-center text-Label-Assistive">
-        주문 내역이 없습니다.
+      <div className="flex h-full items-center justify-center text-center text-Label-Assistive">
+        <p> 이용 내역이 없어요.</p>
       </div>
     );
   }
@@ -21,10 +35,18 @@ export default function OrderList() {
       <div className="flex flex-col items-center gap-4">
         {orders.map((order) => (
           <OrderCard
-            key={order.orderNumber}
+            key={order.rentalId}
             order={order}
           />
         ))}
+        {hasNextPage && (
+          <div
+            ref={ref}
+            className="py-6 text-center body3-r text-Label-Assistive"
+          >
+            {isFetchingNextPage ? '' : ''}
+          </div>
+        )}
       </div>
       <ToastComponent />
     </>
