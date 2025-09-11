@@ -32,9 +32,10 @@ export default function RootLayout({
       <body className="antialiased bg-Fill-95">
         <div className="layout-container-no-padding">
           <QueryProvider>
-            <AppInitializer />
-            {children}
-            <ModalProvider />
+            <AppInitializer>
+              {children}
+              <ModalProvider />
+            </AppInitializer>
           </QueryProvider>
         </div>
       </body>

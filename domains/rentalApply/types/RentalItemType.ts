@@ -2,7 +2,7 @@ export interface RentalItem {
   rentalId: number;
   rentalNumber: string;
   rentalStatus: 'ACTIVE' | 'RETURNED' | 'CANCELLED';
-  reviewStatus: 'AVAILABLE' | 'PENDING' | 'COMPELTED';
+  reviewStatus: 'AVAILABLE' | 'PENDING' | 'COMPLETED';
   startAt: string;
   endAt: string;
   items: {
@@ -17,4 +17,8 @@ export interface RentalResponse {
   rentals: RentalItem[];
   hasNext: boolean;
   lastRentalId: number;
+}
+export interface RentalCountState {
+  count: number;
+  totalRefundPrice: number;
 }

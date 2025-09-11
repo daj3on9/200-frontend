@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_IMAGE_BASE_URL ?? '',
+        hostname: 'cherry-dev-assets.s3.ap-northeast-2.amazonaws.com',
         pathname: '/**',
       },
     ],

@@ -7,6 +7,9 @@ interface Props {
 }
 
 export default function ReportTodo({ todoData }: Props) {
+  const refundPrice = todoData
+    .flatMap((rental) => rental.items)
+    .reduce((acc, item) => acc + item.price / 7, 0);
   return (
     <>
       {!todoData.length ? (
@@ -17,9 +20,9 @@ export default function ReportTodo({ todoData }: Props) {
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {todoData.map((item) => (
+          {todoData.map((item, i) => (
             <div
-              key={item.rentalId}
+              key={`${item.rentalId}_${i}`}
               className="bg-Static-White px-3.5 py-4 flex flex-col gap-3"
             >
               <div className="self-stretch flex justify-start items-center gap-2">
@@ -27,7 +30,10 @@ export default function ReportTodo({ todoData }: Props) {
                   <p className=" text-Label-Alternative caption-m">D- 99</p>
                 </div>
                 <p className=" text-Label-Subnormal body3-m">
-                  작성 시 <span className="text-Secondary-Normal">Price*7</span>{' '}
+                  작성 시{' '}
+                  <span className="text-Secondary-Normal">
+                    {refundPrice.toLocaleString()}
+                  </span>{' '}
                   원 환급예정
                 </p>
               </div>

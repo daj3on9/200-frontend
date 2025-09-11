@@ -25,3 +25,13 @@ export interface ProductsApiResponse {
   hasNext: boolean;
   lastProductId: number | null;
 }
+
+export interface ProductDetailState {
+  productId: number;
+  productName: string;
+  brand: string;
+  dailyRentalPrice: number;
+  colors: string[];
+  productThumbnailUrls: string[];
+  productImageDetailUrls: string[];
+}

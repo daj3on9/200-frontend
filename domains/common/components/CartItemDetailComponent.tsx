@@ -11,8 +11,8 @@ interface Props {
   checked?: boolean;
   toggleSelected?: (id: number) => void;
   canCheck?: boolean;
-  startDate?: number;
-  endDate?: number;
+  // startDate?: string;
+  // endDate?: string;
 }
 
 export default function CartItemDetailComponent({
@@ -20,9 +20,9 @@ export default function CartItemDetailComponent({
   checked = false,
   toggleSelected,
   canCheck = false,
-  startDate,
-  endDate,
-}: Props) {
+}: // startDate,
+// endDate,
+Props) {
   const { deleteMutation } = useCartQuery();
   return (
     <div className="py-3 flex justify-start items-start gap-3">
@@ -51,11 +51,11 @@ export default function CartItemDetailComponent({
               <p className="body2-r text-Label-Assistive">
                 옵션 : {item.color}
               </p>
-              {startDate && endDate && (
+              {/* {startDate && endDate && (
                 <p className="body2-r text-Label-Assistive">
                   {formatDate(startDate)} ~ {formatDate(endDate)}
                 </p>
-              )}
+              )} */}
             </div>
             <p className="title1-sb text-Label-Normal">
               {item.dailyRentalPrice} 원

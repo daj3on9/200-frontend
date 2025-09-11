@@ -27,12 +27,9 @@ export default function CartButton() {
     const cartCount = cartItems.length;
     if (!isLoggedIn) return <BasketIcon className="w-6 h-6 fill-Fill-20" />;
     if (cartCount === 0) return <BasketIcon className="w-6 h-6 fill-Fill-20" />;
-    if (cartCount === 1)
-      return <Basket1Icon className="w-6 h-6 fill-Fill-20" />;
-    if (cartCount === 2)
-      return <Basket2Icon className="w-6 h-6 fill-Fill-20" />;
-    if (cartCount === 3)
-      return <Basket3Icon className="w-6 h-6 fill-Fill-20" />;
+    if (cartCount === 1) return <Basket1Icon className="w-12 fill-Fill-20" />;
+    if (cartCount === 2) return <Basket2Icon className="w-12 fill-Fill-20" />;
+    if (cartCount === 3) return <Basket3Icon className="w-12 fill-Fill-20" />;
   };
 
   return (

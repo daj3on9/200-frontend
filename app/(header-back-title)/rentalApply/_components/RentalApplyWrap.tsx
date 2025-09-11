@@ -7,20 +7,21 @@ import CalendarWrap from './CalendarWrap';
 import RentalItem from './RentalItem';
 import { useRentalApplyForm } from '@/domains/rentalApply/hooks/useRentalApplyForm';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 import { postAPI } from '@/domains/common/api';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { format } from 'date-fns';
+import { CartItemState } from '@/domains/cart/types/cartItemType';
 
 function RentalApplyWrap() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isDirectRental = searchParams.get('direct') === 'true';
   const isCartRental = searchParams.get('cart') === 'true';
-  const { cartQuery, isLoading } = useCartQuery();
-  const cartItems = cartQuery.data?.carts || [];
-  const totalPrice = cartQuery.data?.totalPrice || 0;
-  const rentalInfo = JSON.parse(sessionStorage.getItem('rentalInfo') || '{}');
+  const [rentalInfo, setRentalInfo] = useState<CartItemState[]>([]);
+  const totalPrice = rentalInfo.reduce(
+    (a: number, item: CartItemState) => a + item.dailyRentalPrice,
+    0
+  );
   const {
     range,
     setRange,
@@ -42,8 +43,8 @@ function RentalApplyWrap() {
     if (validateForm() === false) return;
 
     const payload = {
-      rentStartAt: format(range.startDate!, 'yyyy-MM-dd'),
-      rentEndAt: format(range.endDate!, 'yyyy-MM-dd'),
+      rentStartAt: format(new Date(range.startDate!), 'yyyy-MM-dd'),
+      rentEndAt: format(new Date(range.endDate!), 'yyyy-MM-dd'),
       shippingInfo: {
         receiver: deliveryInfo.name,
         phoneNumber: deliveryInfo.number,
@@ -58,14 +59,14 @@ function RentalApplyWrap() {
 
     if (isDirectRental) {
       Object.assign(payload, {
-        productId: rentalInfo.productId,
-        color: rentalInfo.color,
+        productId: rentalInfo[0].cartId,
+        color: rentalInfo[0].color,
       });
     }
 
     if (isCartRental) {
       Object.assign(payload, {
-        cartIds: cartItems.map((item) => item.cartId),
+        cartIds: rentalInfo.map((item: { cartId: number }) => item.cartId),
       });
     }
 
@@ -79,11 +80,26 @@ function RentalApplyWrap() {
     }
   };
 
-  // if (isLoading) return <p>Loading...</p>;
+  useEffect(() => {
+    const raw = sessionStorage.getItem('rentalInfo');
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        setRentalInfo(parsed);
+      } catch (err) {
+        console.error('세션 파싱 오류:', err);
+      }
+    }
+  }, []);
+
+  if (!rentalInfo.length)
+    return (
+      <p className="w-full h-[100vh] text-center content-evenly">Loading...</p>
+    );
   return (
     <div>
       <main className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        <RentalItem cartData={cartItems} />
+        <RentalItem cartData={rentalInfo} />
 
         <div ref={calendarRef}>
           <CalendarWrap
@@ -111,7 +127,7 @@ function RentalApplyWrap() {
           />
         </div>
 
-        <PriceDetail />
+        <PriceDetail totalPrice={totalPrice} />
 
         <div ref={noticeRef}>
           <RentalNotice
@@ -128,10 +144,7 @@ function RentalApplyWrap() {
           className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
           onClick={handleSubmit}
         >
-          {isDirectRental
-            ? (rentalInfo.price * 7).toLocaleString()
-            : (totalPrice * 7).toLocaleString()}
-          원 결제하기
+          {(totalPrice * 7).toLocaleString()}원 결제하기
         </button>
       </div>
     </div>

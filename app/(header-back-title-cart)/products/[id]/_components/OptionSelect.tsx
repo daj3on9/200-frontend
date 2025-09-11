@@ -1,26 +1,23 @@
 'use client';
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import ArrowDownIcon from '@/public/icons/arrow-down.svg';
 import ArrowUpIcon from '@/public/icons/arrow-up.svg';
 import SelectColor from './SelectColor';
 import ProductPrice from './ProductPrice';
+import { ProductDetailState } from '@/domains/products/types/ProductsType';
 
 interface Props {
   setShowOptions: Dispatch<SetStateAction<boolean>>;
   selectedColor: string;
   setSelectedColor: Dispatch<SetStateAction<string>>;
+  detailData: ProductDetailState;
 }
 
 export default function OptionSelect({
   setShowOptions,
   selectedColor,
   setSelectedColor,
+  detailData,
 }: Props) {
   const [showColorPicker, setShowColorPicker] = useState(false);
 
@@ -46,9 +43,10 @@ export default function OptionSelect({
           )}
         </div>
       </div>
-      {selectedColor && <ProductPrice />}
+      {selectedColor && <ProductPrice detailData={detailData} />}
       {showColorPicker && (
         <SelectColor
+          detailData={detailData}
           onSelect={(color, event) => {
             event.stopPropagation();
             setSelectedColor(color);
