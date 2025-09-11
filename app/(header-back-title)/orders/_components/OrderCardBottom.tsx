@@ -1,12 +1,18 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { Order } from '@/domains/orders/types/orderType';
 import { createModal } from '@/domains/common/store/modalStore';
 import { useToastStore } from '@/domains/common/store/toastStore';
+import { getAPI } from '@/domains/common/api';
 
 interface OrderCardBottomProps {
   order: Order;
+}
+
+interface ShippingTypes {
+  trackingNumber: string;
+  startAt: string;
 }
 
 export default function OrderCardBottom({ order }: OrderCardBottomProps) {
@@ -16,13 +22,24 @@ export default function OrderCardBottom({ order }: OrderCardBottomProps) {
   const refundAmount = order.items.reduce((sum, item) => sum + item.price, 0);
 
   // 배송 조회
-  const handleDeliveryTrackClick = () => {
-    createModal({
-      title: '송장번호  Tracking number',
-      content: '발송일  Order date',
-      align: 'left',
-      onConfirm: () => {},
-    });
+  const handleDeliveryTrackClick = async () => {
+    try {
+      const shippingData = await getAPI<ShippingTypes>(
+        `/shipping/${order.rentalId}`
+      );
+
+      if (!shippingData) return;
+
+      createModal({
+        title: `송장번호  ${shippingData?.trackingNumber}`,
+        content: `발송일  ${shippingData?.startAt}`,
+        align: 'left',
+        onConfirm: () => {},
+      });
+    } catch (e: unknown) {
+      console.log('배송 정보 에러 : ', e);
+      showToast('배송 정보를 불러오지 못했습니다.', 'close', false, 30);
+    }
   };
 
   // 주문 취소
