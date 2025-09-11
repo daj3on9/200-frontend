@@ -17,7 +17,7 @@ export default function RentalFeeDetails({
     <div className="w-full flex flex-col justify-center items-center px-layout py-xxl gap-xs bg-Static-White">
       <div className="flex justify-between items-start self-stretch text-Label-Subnormal title2-sb">
         <p> 체험 요금 </p>
-        <p> {totalAmount}</p>
+        <p> {totalAmount.toLocaleString()}</p>
       </div>
       <hr className="my-4 self-stretch border-t-[1px] border-Fill-95 " />
       <div className="self-stretch flex flex-col justify-start items-start gap-4">
@@ -37,7 +37,7 @@ export default function RentalFeeDetails({
             </div>
             <div>
               <p className="text-Label-Alternative body1-m">
-                {(item.price * 7).toLocaleString()} 원
+                {item.price.toLocaleString()} 원
               </p>
             </div>
           </div>

@@ -27,12 +27,12 @@ export default function OrderCardBottom({ order }: OrderCardBottomProps) {
 
   // 주문 취소
   const handleCancelOrderClick = () => {
-    showToast('주문 취소는 고객센터로 문의주시길 바랍니다.', 'faq', true, 100);
+    showToast('주문 취소는 고객센터로 문의주시길 바랍니다.', 'faq', false, 30);
   };
 
   // 조기 반납
   const handleEarlyReturnClick = () => {
-    showToast('조기반납은 고객센터로 문의주시길 바랍니다.', 'faq', true, 100);
+    showToast('조기반납은 고객센터로 문의주시길 바랍니다.', 'faq', false, 30);
   };
 
   // 고객센터

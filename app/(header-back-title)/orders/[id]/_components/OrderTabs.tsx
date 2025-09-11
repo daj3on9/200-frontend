@@ -35,7 +35,7 @@ export default function OrderTabs({ order }: OrderTabsProps) {
       <div className="px-3.5 bg-Static-White border-b border-Line-Subtler inline-flex justify-start items-center">
         <button
           className={clsx(
-            'p-3  flex justify-center items-center gap-3  text-Label-Normal',
+            'p-3  flex justify-center items-center gap-3  text-Label-Normal cursor-pointer',
             activeTab === 'experience'
               ? 'title2-b border-b-2 border-Primary-Normal'
               : 'body1-m'
@@ -46,7 +46,7 @@ export default function OrderTabs({ order }: OrderTabsProps) {
         </button>
         <button
           className={clsx(
-            'p-3 flex justify-center items-center gap-3  text-Label-Normal',
+            'p-3 flex justify-center items-center gap-3  text-Label-Normal cursor-pointer',
             activeTab === 'payment'
               ? 'title2-b border-b-2 border-Primary-Normal'
               : 'body1-m'
@@ -57,7 +57,7 @@ export default function OrderTabs({ order }: OrderTabsProps) {
         </button>
         <button
           className={clsx(
-            'p-3  flex justify-center items-center gap-3  text-Label-Normal',
+            'p-3  flex justify-center items-center gap-3  text-Label-Normal cursor-pointer',
             activeTab === 'other'
               ? 'title2-b border-b-2 border-Primary-Normal'
               : 'body1-m'

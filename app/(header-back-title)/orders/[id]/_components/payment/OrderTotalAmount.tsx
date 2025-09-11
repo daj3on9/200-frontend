@@ -19,14 +19,18 @@ export default function OrderTotalAmount({
         <p className="text-center justify-start text-Label-Assistive title3-sb">
           서비스 이용 총 금액
         </p>
-        <div className="flex justify-start items-center gap-[5px]">
-          <p className="justify-start text-Label-Assistive body3-m">
-            카드 영수증 보기
-          </p>
-          <Link href={`${pathname}/receipt`}>
+        <Link
+          href={`${pathname}/receipt`}
+          className="cursor-pointer"
+        >
+          <div className="flex justify-start items-center gap-[5px]">
+            <p className="justify-start text-Label-Assistive body3-m">
+              카드 영수증 보기
+            </p>
+
             <RightArrowIcon className="w-4 h-4 fill-Fill-80" />
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
       <div className="w-full py-1 inline-flex justify-between items-end">
         <p className="justify-start text-Label-Subnormal title2-sb">결제금액</p>
