@@ -1,12 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuthStore } from '@/domains/common/store/authStore';
 import axiosInstance from '@/domains/common/api/axiosInstance';
 
-export default function AppInitializer() {
-  const { setTokens, logout, isLoggedIn } = useAuthStore();
+export default function AppInitializer({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { setTokens, logout, accessToken } = useAuthStore();
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const reissue = async () => {
@@ -17,10 +22,13 @@ export default function AppInitializer() {
         logout();
       }
     };
-    if (isLoggedIn) {
+    if (!accessToken) {
       reissue();
+    } else {
+      setReady(true);
     }
-  }, [isLoggedIn]);
+  }, [accessToken]);
 
-  return null;
+  if (!ready) return null;
+  return <>{children}</>;
 }
