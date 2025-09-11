@@ -30,7 +30,7 @@ export const useCartQuery = () => {
       }
       return response as CartData;
     },
-    enabled: !isLoggedIn,
+    enabled: !!isLoggedIn,
   });
 
   const addMutation = useMutation({
