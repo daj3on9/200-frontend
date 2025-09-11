@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function ReportDoneDetail({ item }: Props) {
-  const totalPrice = item.items.reduce((acc, v) => acc + v.price, 0);
+  const totalPrice = item.items.reduce((acc, v) => acc + v.price / 7, 0);
   const firstItem = item.items?.[0];
   if (!firstItem) return null;
 
