@@ -13,8 +13,8 @@ interface OrderProps {
 
 export default function OrderCard({ order }: OrderProps) {
   const canWriteReport =
-    order.reviewStatus === 'AVAILABLE' &&
-    (order.rentalStatus === 'ACTIVE' || order.rentalStatus === 'COMPLETED');
+    order.rentalStatus === 'IN_RETURN' ||
+    (order.reviewStatus === 'AVAILABLE' && order.rentalStatus === 'COMPLETED');
 
   return (
     <div className="flex flex-col w-[390px] px-l py-layout items-start gap-xxl bg-Static-White">
