@@ -8,9 +8,9 @@ interface Props {
 export default function RentalItem({ cartData }: Props) {
   return (
     <div className="px-3.5 flex flex-col justify-center bg-Static-White">
-      {cartData.map((item) => (
+      {cartData.map((item, i) => (
         <CartItemDetailComponent
-          key={item.cartId}
+          key={`${item.cartId}_${i}`}
           item={item}
         />
       ))}
