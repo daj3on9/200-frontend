@@ -35,7 +35,7 @@ export default function Page() {
   // 회원 탈퇴
   const requestDeleteAccount = async () => {
     try {
-      await deleteAPI<null>('/members');
+      await deleteAPI<null, undefined>('/members', undefined);
 
       logout();
 
