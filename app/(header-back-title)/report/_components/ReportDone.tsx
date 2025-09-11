@@ -5,13 +5,6 @@ interface Props {
   doneData: RentalItem[];
 }
 export default function ReportDone({ doneData }: Props) {
-  const totalPrice = doneData.reduce((acc, rental) => {
-    const itemTotal = rental.items.reduce(
-      (sum, item) => sum + item.price / 7,
-      0
-    );
-    return acc + itemTotal;
-  }, 0);
   return (
     <>
       {!doneData.length ? (
@@ -22,10 +15,6 @@ export default function ReportDone({ doneData }: Props) {
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {/* <ReportDoneDetail
-            item={doneData[0]}
-            totalPrice={totalPrice}
-          /> */}
           {doneData.map((item, i) => (
             <ReportDoneDetail
               key={`${item.rentalId}_${i}`}
