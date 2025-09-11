@@ -1,9 +1,9 @@
-import { Order } from '@/domains/orders/types/orderType';
+import { RentalStatus } from '@/domains/orders/types/orderType';
 import OrderStatusLabel from '../../_components/OrderStatusLabel';
 
 interface OrderHeaderProps {
   orderNumber: string;
-  rentalStatus: Order['rentalStatus'];
+  rentalStatus: RentalStatus;
 }
 
 export default function OrderHeader({

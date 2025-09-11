@@ -31,7 +31,7 @@ export interface OrderDetailResponse {
   rentalStatus: RentalStatus;
   startAt: string;
   endAt: string;
-  reviewState: ReviewStatus;
+  reviewStatus: ReviewStatus;
   items: OrderItem[];
   paymentId: number;
 }
