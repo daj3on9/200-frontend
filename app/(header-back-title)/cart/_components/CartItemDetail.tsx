@@ -62,9 +62,9 @@ export default function CartItemDetail({
         </button>
       </div>
       <div className="h-[366px] px-3.5 flex flex-col ">
-        {cartData.map((item) => (
+        {cartData.map((item, i) => (
           <CartItemDetailComponent
-            key={item.cartId}
+            key={`${item.cartId}_${i}`}
             item={item}
             checked={selectedIds.includes(item.cartId)}
             toggleSelected={toggleSelected}
