@@ -15,9 +15,9 @@ export default function ProductInfo({
   return (
     <div className="self-stretch flex flex-col items-start px-layout py-xxl gap-xxl bg-Static-White">
       <p className="title2-sb text-Label-Subnormal"> 제품 정보 </p>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <div
-          key={item.productName}
+          key={`${item.productName}-${index}`}
           className="w-full"
         >
           <ItemDetail
