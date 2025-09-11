@@ -39,7 +39,7 @@ export default function BannerSwiper({
         autoplay={
           isLoop
             ? {
-                delay: 3000, // 3초마다
+                delay: 4000, // 3초마다
                 disableOnInteraction: false,
               }
             : false
