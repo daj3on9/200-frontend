@@ -8,7 +8,7 @@ import { PaymentResponse } from '../types/orderType';
 export function usePaymentQuery(rentalId: number) {
   const accessToken = useAuthStore((s) => s.accessToken);
   return useQuery({
-    queryKey: ['rental', rentalId],
+    queryKey: ['rentalPayment', rentalId],
     queryFn: () => getAPI<PaymentResponse>(`/rentals/${rentalId}/payment`),
     enabled: !!accessToken,
   });
