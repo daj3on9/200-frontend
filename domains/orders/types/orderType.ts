@@ -33,7 +33,6 @@ export interface OrderDetailResponse {
   endAt: string;
   reviewStatus: ReviewStatus;
   items: OrderItem[];
-  paymentId: number;
 }
 
 // 결제 내역 타입

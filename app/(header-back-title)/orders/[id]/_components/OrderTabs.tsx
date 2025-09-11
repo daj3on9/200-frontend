@@ -22,7 +22,7 @@ export default function OrderTabs({ order }: OrderTabsProps) {
       case 'experience':
         return <OrderExperience order={order} />;
       case 'payment':
-        return <OrderPayList paymentId={order.paymentId} />;
+        return <OrderPayList rentalId={order.rentalId} />;
       case 'other':
         return <OrderEtc />;
       default:

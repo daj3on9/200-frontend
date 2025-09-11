@@ -19,6 +19,21 @@ export default async function Page({
   const { id: idStr } = await params;
   const rentalId = Number(idStr);
 
+  if (Number.isNaN(rentalId)) {
+    return (
+      <div className="flex flex-col h-screen bg-Fill-99">
+        <Header
+          showBack
+          title="주문상세"
+          showHome
+        />
+        <div className="flex h-full items-center justify-center text-center text-Label-Assistive">
+          <p> 잘못된 주문 경로입니다.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col h-screen">
       <Header
