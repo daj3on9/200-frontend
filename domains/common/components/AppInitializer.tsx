@@ -20,9 +20,11 @@ export default function AppInitializer({
         setTokens(data.accessToken);
       } catch {
         logout();
+      } finally {
+        setReady(true);
       }
     };
-    if (!accessToken) {
+    if (accessToken) {
       reissue();
     } else {
       setReady(true);
