@@ -24,12 +24,13 @@ export default function AppInitializer({
         setReady(true);
       }
     };
-    if (!accessToken) {
-      reissue();
-    } else {
-      setReady(true);
-    }
-  }, [accessToken]);
+    reissue();
+    // if (!accessToken) {
+    //   reissue();
+    // } else {
+    //   setReady(true);
+    // }
+  }, []);
 
   if (!ready) return null;
   return <>{children}</>;
