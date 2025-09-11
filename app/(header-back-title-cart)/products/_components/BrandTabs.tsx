@@ -1,5 +1,6 @@
 'use client';
 
+import { BRANDS as ALL_BRANDS } from '@/lib/brands';
 import { BrandId } from '@/domains/products/types/ProductsType';
 import clsx from 'clsx';
 import { useMemo } from 'react';
@@ -8,18 +9,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { FreeMode } from 'swiper/modules';
 
-const BRANDS: { id: BrandId; name: string }[] = [
-  { id: 'SONY', name: 'SONY' },
-  { id: 'APPLE', name: 'APPLE' },
-  { id: 'BOSE', name: 'BOSE' },
-  { id: 'SENNHEISER', name: 'SENNHEISER' },
-  { id: 'BANG_OLUFSEN', name: 'BANG & OLUFSEN' },
-  { id: 'BOWERS_WILKINS', name: 'BOWERS & WILKINS' },
-  { id: 'MARSHALL', name: 'MARSHALL' },
-  { id: 'DYSON', name: 'DYSON' },
-  { id: 'JBL', name: 'JBL' },
-  { id: 'NOTHING', name: 'NOTHING' },
-];
+const BRAND_OPTIONS: { id: BrandId; name: string }[] = ALL_BRANDS.map((b) => ({
+  id: b.id as BrandId,
+  name: b.name,
+}));
 
 export default function BrandTabs({
   selected,
@@ -51,10 +44,9 @@ export default function BrandTabs({
           modules={[FreeMode]}
           slidesPerView={'auto'}
           spaceBetween={8}
-          // freeMode={{ enabled: true, momentum: false }}
           freeMode={true}
         >
-          {BRANDS.map((b) => {
+          {BRAND_OPTIONS.map((b) => {
             const active = selected?.includes(b.id) ?? false;
             return (
               <SwiperSlide
