@@ -1,8 +1,8 @@
 export interface RentalItem {
   rentalId: number;
   rentalNumber: string;
-  rentalStatus: 'ACTIVE' | 'RETURNED' | 'CANCELLED';
-  reviewStatus: 'AVAILABLE' | 'PENDING' | 'COMPLETED';
+  rentalStatus: 'PENDING' | 'ACTIVE' | 'IN_RETURN' | 'COMPLETED';
+  reviewStatus: 'PENDING' | 'AVAILABLE' | 'COMPLETED';
   startAt: string;
   endAt: string;
   items: {

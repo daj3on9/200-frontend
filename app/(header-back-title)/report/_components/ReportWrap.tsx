@@ -30,9 +30,18 @@ export default function ReportWrap() {
         const done: RentalItem[] = [];
 
         rentals.forEach((rental) => {
-          const target = rental.reviewStatus === 'COMPLETED' ? done : todo;
+          let target;
+          if (
+            rental.rentalStatus === 'IN_RETURN' ||
+            (rental.rentalStatus === 'COMPLETED' &&
+              rental.reviewStatus === 'AVAILABLE')
+          ) {
+            target = todo;
+          } else if (rental.reviewStatus === 'COMPLETED') {
+            target = done;
+          }
 
-          target.push(rental);
+          if (target) target.push(rental);
         });
         setTodoData(todo);
         setDoneData(done);
