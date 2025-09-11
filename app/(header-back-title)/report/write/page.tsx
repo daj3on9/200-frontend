@@ -39,7 +39,7 @@ export default function page() {
       {/* TODO : 리포트 폼 링크로 변경 */}
       <div className="w-full p-3.5 bg-Static-White">
         <Link
-          href="/"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSclkpkCd4B0Xg0xIWVOHthhYP-HUyF9MvTfk4lZ-e_YV0gd7A/viewform"
           className="block w-full p-4 rounded bg-Primary-Normal text-Static-White text-center cursor-pointer title2-sb"
           aria-label="리포트 작성하러 가기"
         >
