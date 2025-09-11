@@ -10,10 +10,12 @@ export default function AppInitializer({
 }: {
   children: React.ReactNode;
 }) {
-  const { setTokens, logout, isLoggedIn } = useAuthStore();
+  const { setTokens, logout } = useAuthStore();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    const raw = localStorage.getItem('auth-storage');
+    const isLoggedIn = raw ? JSON.parse(raw).state.isLoggedIn : false;
     const reissue = async () => {
       if (!isLoggedIn) {
         setReady(true);
