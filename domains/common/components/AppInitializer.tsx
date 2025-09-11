@@ -24,7 +24,7 @@ export default function AppInitializer({
         setReady(true);
       }
     };
-    if (accessToken) {
+    if (!accessToken) {
       reissue();
     } else {
       setReady(true);
