@@ -11,16 +11,37 @@ https://200-cherry.vercel.app/
 - **Language** : `TypeScript` (코드 안정성과 유지보수성 향상)
 - **Framework / Library** : `Next(App Router)` (SEO 최적화, 빠른 페이지 로딩)
 - **UI** : `Tailwind CSS` (빠른 개발, 일관된 디자인, 협업 효율 향상)
-- **State Management** : `React Query`(서버 상태 관리), `Zustand`(UI 상태 관리)
+- **State Management** : `Tanstack Query`(서버 상태 관리), `Zustand`(UI 상태 관리)
 - **Build Tool / Bundler** : `Vite` (빠른 개발 서버와 빌드 속도, 간편한 설정)
 - **HTTP Client** : `Axios` (간결한 API 요청 처리, 응답 인터셉터로 공통 로직 관리 용이)
 
-## 🛠️주요 기능
-
 ## 💻담당 역할
 ### 정다정(FE리드)
+| 담당 페이지 | 주요 기능  |
+|-------------|----------------------------|
+|||
 
 ### 김소연(FE)
+| 담당 페이지 | 주요 기능  |
+|-------------|----------------------------|
+| 로그인 페이지 | 카카오 oAuth를 활용한 간편 로그인 기능, 닉네임, 아이디 중복확인 기능 |
+| 상품 상세 페이지 | 상품 상세 데이터 출력, 장바구니 담기 기능(Tanstack Query를 활용해 헤더에 장바구니 개수 출력), 바로 결제 기능 |
+| 장바구니 페이지 | 장바구니 데이터 출력, 장바구니 상품 삭제 기능, 선택 상품 결제 기능 |
+| 체험 신청 페이지 (결제) | 장바구니 리스트 결제/바로 결제 분기 처리, 달력 라이브러리, 다음 도로명 API호출, 유효성 검사 기능 |
+| 리포트 페이지 | 리포트 작성 가능/ 이미 작성한 리포트 탭 분리, 무한 스크롤 기능 |
+| 마이 페이지 | UI 작업 |
+
+## 🛠️주요 기능
+| 페이지 |  |
+|-------------|----------------------------|
+| 메인 페이지     | <img width="386" height="822" alt="image" src="https://github.com/user-attachments/assets/85d317a8-7828-4b4f-b59a-81557232be7f" />|
+| 상품 페이지    | <img width="382" height="903" alt="image" src="https://github.com/user-attachments/assets/9229921d-a535-4049-8bdd-6c49aae949dc" />|
+| 상품 상세 페이지     | <img width="392" height="905" alt="image" src="https://github.com/user-attachments/assets/ce9c08fb-27c3-4318-92a3-690bca8748e6" />|
+| 장바구니 페이지     | <img width="387" height="904" alt="image" src="https://github.com/user-attachments/assets/accc5172-dd13-441e-bc6e-4c364f7c8587" />|
+| 체험 신청 페이지     | <img width="382" height="903" alt="image" src="https://github.com/user-attachments/assets/f457195f-9819-4cf2-a9e8-f8be1cb71f5d" />|
+| 리포트 페이지     | |
+| 이용 내역 페이지     | <img width="395" height="746" alt="image" src="https://github.com/user-attachments/assets/7b34d86b-d5b9-4bc1-a31c-1e6fd2d10a6d" />|
+| 마이 페이지     | <img width="384" height="904" alt="image" src="https://github.com/user-attachments/assets/b96193de-ad45-49e6-8992-5bc81ddc5130" />|
 
 ## ✏️컨벤션
 - Git : GitHub Flow, Merge
