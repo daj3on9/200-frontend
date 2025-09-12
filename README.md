@@ -43,7 +43,7 @@ https://200-cherry.vercel.app/
 | 상품 상세 페이지     | <img width="392" height="905" alt="image" src="https://github.com/user-attachments/assets/ce9c08fb-27c3-4318-92a3-690bca8748e6" />|
 | 장바구니 페이지     | <img width="387" height="904" alt="image" src="https://github.com/user-attachments/assets/accc5172-dd13-441e-bc6e-4c364f7c8587" />|
 | 체험 신청 페이지     | <img width="382" height="903" alt="image" src="https://github.com/user-attachments/assets/f457195f-9819-4cf2-a9e8-f8be1cb71f5d" />|
-| 리포트 페이지     | |
+| 리포트 페이지     |<img width="387" height="712" alt="image" src="https://github.com/user-attachments/assets/f8fbfc4d-825f-4772-9d7b-1ff9959fb94c" />|
 | 이용 내역 페이지     | <img width="395" height="746" alt="image" src="https://github.com/user-attachments/assets/7b34d86b-d5b9-4bc1-a31c-1e6fd2d10a6d" />|
 | 마이 페이지     | <img width="384" height="904" alt="image" src="https://github.com/user-attachments/assets/b96193de-ad45-49e6-8992-5bc81ddc5130" />|
 
