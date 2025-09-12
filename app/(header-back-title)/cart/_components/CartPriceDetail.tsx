@@ -44,7 +44,7 @@ export default function CartPriceDetail({ selectPrice }: Props) {
             총 결제 금액
           </p>
           <div className="text-Primary-Normal h3-b">
-            {selectPrice.toLocaleString()}*7 원
+            {(selectPrice * 7).toLocaleString()} 원
           </div>
         </div>
         <p className="text-center justify-start text-Label-Assistive body2-m">

@@ -53,12 +53,10 @@ export default function ProductDetail({ detailData }: Props) {
             <SwiperSlide key={v}>
               <Image
                 key={v}
-                className="self-stretch"
                 src={getImageUrl(v)}
-                alt={'상세 내용'}
+                alt={'상세 제품 이미지'}
                 width={390}
                 height={390}
-                unoptimized
               />
             </SwiperSlide>
           ))}

@@ -13,8 +13,8 @@ interface OrderProps {
 
 export default function OrderCard({ order }: OrderProps) {
   const canWriteReport =
-    order.reviewStatus === 'AVAILABLE' &&
-    (order.rentalStatus === 'ACTIVE' || order.rentalStatus === 'COMPLETED');
+    order.rentalStatus === 'IN_RETURN' ||
+    (order.reviewStatus === 'AVAILABLE' && order.rentalStatus === 'COMPLETED');
 
   return (
     <div className="flex flex-col w-[390px] px-l py-layout items-start gap-xxl bg-Static-White">
@@ -33,9 +33,9 @@ export default function OrderCard({ order }: OrderProps) {
         </Link>
       </div>
 
-      {order.items.map((item) => (
+      {order.items.map((item, index) => (
         <div
-          key={`${order.rentalId}-${item.productName}`}
+          key={`${item.productName}-${index}`}
           className="w-full"
         >
           <ItemDetail
@@ -43,20 +43,18 @@ export default function OrderCard({ order }: OrderProps) {
             startDate={order.startAt}
             endDate={order.endAt}
           />
-
-          {/* TODO : 구글폼 링크 필요 */}
-          {canWriteReport && (
-            <a
-              href="https://www.notion.so/25dced6af6528053a4eef3054a1f8fdb?source=copy_link"
-              className="mt-2 w-full flex justify-center items-center px-m py-s ds-rounded-xs border-m border-Line-Subtler body2-m text-Label-Normal"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              리포트 작성하기
-            </a>
-          )}
         </div>
       ))}
+      {canWriteReport && (
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSclkpkCd4B0Xg0xIWVOHthhYP-HUyF9MvTfk4lZ-e_YV0gd7A/viewform"
+          className="w-full flex justify-center items-center px-m py-s ds-rounded-xs border-m border-Line-Subtler body2-m text-Label-Normal"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          리포트 작성하기
+        </a>
+      )}
 
       <OrderCardBottom order={order} />
     </div>

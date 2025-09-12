@@ -4,9 +4,15 @@ import React from 'react';
 import type { Order } from '@/domains/orders/types/orderType';
 import { createModal } from '@/domains/common/store/modalStore';
 import { useToastStore } from '@/domains/common/store/toastStore';
+import { getAPI } from '@/domains/common/api';
 
 interface OrderCardBottomProps {
   order: Order;
+}
+
+interface ShippingTypes {
+  trackingNumber: string;
+  startAt: string;
 }
 
 export default function OrderCardBottom({ order }: OrderCardBottomProps) {
@@ -16,23 +22,34 @@ export default function OrderCardBottom({ order }: OrderCardBottomProps) {
   const refundAmount = order.items.reduce((sum, item) => sum + item.price, 0);
 
   // 배송 조회
-  const handleDeliveryTrackClick = () => {
-    createModal({
-      title: '송장번호  Tracking number',
-      content: '발송일  Order date',
-      align: 'left',
-      onConfirm: () => {},
-    });
+  const handleDeliveryTrackClick = async () => {
+    try {
+      const shippingData = await getAPI<ShippingTypes>(
+        `/shipping/${order.rentalId}`
+      );
+
+      if (!shippingData) return;
+
+      createModal({
+        title: `송장번호  ${shippingData?.trackingNumber}`,
+        content: `발송일  ${shippingData?.startAt}`,
+        align: 'left',
+        onConfirm: () => {},
+      });
+    } catch (e: unknown) {
+      console.log('배송 정보 에러 : ', e);
+      showToast('아직 배송이 시작되지 않았어요.', 'close', false, 30);
+    }
   };
 
   // 주문 취소
   const handleCancelOrderClick = () => {
-    showToast('주문 취소는 고객센터로 문의주시길 바랍니다.', 'faq', true, 100);
+    showToast('주문 취소는 고객센터로 문의주시길 바랍니다.', 'faq', false, 30);
   };
 
   // 조기 반납
   const handleEarlyReturnClick = () => {
-    showToast('조기반납은 고객센터로 문의주시길 바랍니다.', 'faq', true, 100);
+    showToast('조기반납은 고객센터로 문의주시길 바랍니다.', 'faq', false, 30);
   };
 
   // 고객센터

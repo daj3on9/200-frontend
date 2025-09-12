@@ -82,14 +82,9 @@ function RentalApplyWrap() {
 
   useEffect(() => {
     const raw = sessionStorage.getItem('rentalInfo');
-    if (raw) {
-      try {
-        const parsed = JSON.parse(raw);
-        setRentalInfo(parsed);
-      } catch (err) {
-        console.error('세션 파싱 오류:', err);
-      }
-    }
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    setRentalInfo(parsed);
   }, []);
 
   if (!rentalInfo.length)

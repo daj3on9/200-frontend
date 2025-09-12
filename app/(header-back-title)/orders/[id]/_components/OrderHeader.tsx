@@ -12,7 +12,7 @@ export default function OrderHeader({
 }: OrderHeaderProps) {
   return (
     <div className="flex w-full px-layout py-xxl items-center gap-m bg-Static-White">
-      <div className="h3-b text-Label-Subnormal"> {orderNumber}</div>
+      <div className="h4-b text-Label-Subnormal"> {orderNumber}</div>
       <OrderStatusLabel status={rentalStatus} />
     </div>
   );

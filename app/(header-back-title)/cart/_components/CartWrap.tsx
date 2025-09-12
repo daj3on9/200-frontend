@@ -19,13 +19,12 @@ export default function CartWrap() {
       selectedIds.includes(item.cartId)
     );
 
-    console.log(selectedItems);
     sessionStorage.removeItem('rentalInfo');
     sessionStorage.setItem(
       'rentalInfo',
       JSON.stringify(
         selectedItems.map((item) => ({
-          productId: item.cartId,
+          cartId: item.cartId,
           color: item.color,
           dailyRentalPrice: item.dailyRentalPrice,
           productName: item.productName,

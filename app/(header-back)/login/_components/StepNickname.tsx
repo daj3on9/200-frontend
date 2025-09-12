@@ -39,6 +39,13 @@ export default function StepNickname({
       return;
     }
 
+    if (/\s/.test(nickname)) {
+      setMessage('닉네임에는 띄어쓰기를 포함할 수 없습니다.');
+      setStatus('invalid');
+      setCanProceed(false);
+      return;
+    }
+
     const nicknameRegex = /^[가-힣a-zA-Z0-9ㄱ-ㅎ]{2,10}$/;
     const trimmed = nickname.replace(/\s/g, '');
 

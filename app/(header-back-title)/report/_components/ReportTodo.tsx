@@ -7,9 +7,6 @@ interface Props {
 }
 
 export default function ReportTodo({ todoData }: Props) {
-  const refundPrice = todoData
-    .flatMap((rental) => rental.items)
-    .reduce((acc, item) => acc + item.price / 7, 0);
   return (
     <>
       {!todoData.length ? (
@@ -20,36 +17,43 @@ export default function ReportTodo({ todoData }: Props) {
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {todoData.map((item, i) => (
-            <div
-              key={`${item.rentalId}_${i}`}
-              className="bg-Static-White px-3.5 py-4 flex flex-col gap-3"
-            >
-              <div className="self-stretch flex justify-start items-center gap-2">
-                <div className="px-2 py-1 bg-Fill-99 rounded ">
-                  <p className=" text-Label-Alternative caption-m">D- 99</p>
-                </div>
-                <p className=" text-Label-Subnormal body3-m">
-                  작성 시{' '}
-                  <span className="text-Secondary-Normal">
-                    {refundPrice.toLocaleString()}
-                  </span>{' '}
-                  원 환급예정
-                </p>
-              </div>
-              <ReportItemDetail
-                item={item.items[0]}
-                startDate={item.startAt}
-                endDate={item.endAt}
-              />
-              <Link
-                href={'/report/write'}
-                className="w-full p-2 text-center outline rounded-md outline-offset-[-1px] outline-Line-Subtle text-Label-Subnormal title3-sb cursor-pointer"
+          {todoData.map((item, i) => {
+            const refundPrice = item.items.reduce(
+              (sum, product) => sum + product.price / 7,
+              0
+            );
+            return (
+              <div
+                key={`${item.rentalId}_${i}`}
+                className="bg-Static-White px-3.5 py-4 flex flex-col gap-3"
               >
-                리포트 작성하기
-              </Link>
-            </div>
-          ))}
+                <div className="self-stretch flex justify-start items-center gap-2">
+                  <div className="px-2 py-1 bg-Fill-99 rounded ">
+                    <p className=" text-Label-Alternative caption-m">D- 99</p>
+                  </div>
+                  <p className=" text-Label-Subnormal body3-m">
+                    작성 시{' '}
+                    <span className="text-Secondary-Normal">
+                      {refundPrice.toLocaleString()}
+                    </span>{' '}
+                    원 환급예정
+                  </p>
+                </div>
+                <ReportItemDetail
+                  item={item.items[0]}
+                  startDate={item.startAt}
+                  endDate={item.endAt}
+                  length={item.items.length}
+                />
+                <Link
+                  href={'/report/write'}
+                  className="w-full p-2 text-center outline rounded-md outline-offset-[-1px] outline-Line-Subtle text-Label-Subnormal title3-sb cursor-pointer"
+                >
+                  리포트 작성하기
+                </Link>
+              </div>
+            );
+          })}
         </div>
       )}
     </>

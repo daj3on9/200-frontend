@@ -9,8 +9,8 @@ export default function CancelExperienceButton() {
     showToast(
       '체험 취소는 고객 센터로 문의해주시길 바랍니다.',
       'faq',
-      true,
-      100
+      false,
+      30
     );
   };
 

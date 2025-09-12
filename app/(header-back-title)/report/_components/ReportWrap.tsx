@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReportTodo from './ReportTodo';
 import ReportDone from './ReportDone';
 import { getAPI } from '@/domains/common/api';
@@ -7,7 +7,6 @@ import {
   RentalItem,
   RentalResponse,
 } from '@/domains/rentalApply/types/RentalItemType';
-import { useReportQuery } from '@/domains/report/hooks/useReportQuery';
 
 export default function ReportWrap() {
   const [selectTab, setSelectTab] = useState('Todo');
@@ -23,7 +22,7 @@ export default function ReportWrap() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await getAPI<RentalResponse>('/rentals?limit=3');
+        const res = await getAPI<RentalResponse>('/rentals?limit=10');
         if (!res) return;
 
         const rentals = res?.rentals ?? [];
@@ -31,14 +30,18 @@ export default function ReportWrap() {
         const done: RentalItem[] = [];
 
         rentals.forEach((rental) => {
-          const target = rental.reviewStatus === 'COMPLETED' ? done : todo;
+          let target;
+          if (
+            rental.rentalStatus === 'IN_RETURN' ||
+            (rental.rentalStatus === 'COMPLETED' &&
+              rental.reviewStatus === 'AVAILABLE')
+          ) {
+            target = todo;
+          } else if (rental.reviewStatus === 'COMPLETED') {
+            target = done;
+          }
 
-          rental.items.forEach((item) => {
-            target.push({
-              ...rental,
-              ...item,
-            });
-          });
+          if (target) target.push(rental);
         });
         setTodoData(todo);
         setDoneData(done);
@@ -59,7 +62,7 @@ export default function ReportWrap() {
   const fetchMoreData = async (selectTab: 'Todo' | 'Done') => {
     const lastId = selectTab === 'Todo' ? todoLastId : doneLastId;
     const res = await getAPI<RentalResponse>(
-      `/rentals?limit=3&lastRentalId=${lastId}`
+      `/rentals?limit=10&lastRentalId=${lastId}`
     );
 
     if (!res) return;
@@ -72,9 +75,7 @@ export default function ReportWrap() {
       const shouldInclude = selectTab === 'Todo' ? !isDone : isDone;
 
       if (shouldInclude) {
-        rental.items.forEach((item) => {
-          newData.push({ ...rental, ...item });
-        });
+        newData.push(rental);
       }
     });
 
@@ -110,48 +111,6 @@ export default function ReportWrap() {
     container.addEventListener('scroll', handleScroll);
     return () => container.removeEventListener('scroll', handleScroll);
   }, [selectTab, todoHasNext, todoLastId, doneHasNext, doneLastId]);
-
-  // const [selectTab, setSelectTab] = useState<'Todo' | 'Done'>('Todo');
-  // const scrollRef = useRef<HTMLDivElement>(null);
-  // const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-  //   useReportQuery();
-
-  // const { todoData, doneData } = useMemo(() => {
-  //   const todo: RentalItem[] = [];
-  //   const done: RentalItem[] = [];
-
-  //   data?.pages.forEach((page) => {
-  //     page.rentals.forEach((rental) => {
-  //       const target = rental.reviewStatus === 'COMPLETED' ? done : todo;
-  //       rental.items.forEach((item) => {
-  //         target.push({ ...rental, ...item });
-  //       });
-  //     });
-  //   });
-
-  //   return { todoData: todo, doneData: done };
-  // }, [data]);
-
-  // useEffect(() => {
-  //   const container = scrollRef.current;
-  //   if (!container || !hasNextPage) return;
-
-  //   const handleScroll = () => {
-  //     const isBottom =
-  //       container.scrollHeight - container.scrollTop <=
-  //       container.clientHeight + 10;
-  //     if (isBottom && !isFetchingNextPage) {
-  //       fetchNextPage();
-  //     }
-  //   };
-
-  //   container.addEventListener('scroll', handleScroll);
-  //   return () => container.removeEventListener('scroll', handleScroll);
-  // }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>; // 로딩 상태 처리
-  // }
 
   return (
     <div>
