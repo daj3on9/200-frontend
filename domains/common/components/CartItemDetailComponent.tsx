@@ -3,6 +3,7 @@ import CloseIcon from '@/public/icons/close.svg';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
 import { useCartQuery } from '@/domains/cart/hooks/useCartQuery';
 import Image from 'next/image';
+import { getImageUrl } from '../utils/image';
 
 interface Props {
   item: CartItemState;
@@ -34,7 +35,7 @@ export default function CartItemDetailComponent({
         <div className="flex justify-start items-center gap-3">
           <div className="w-20 h-20 relative rounded">
             <Image
-              src={item.productThumbnailUrl}
+              src={getImageUrl(item.productThumbnailUrl)}
               alt={item.productName}
               width={100}
               height={100}

@@ -2,6 +2,7 @@ import React from 'react';
 import { OrderItem } from '@/domains/orders/types/orderType';
 import { formatDate } from '../utils/date';
 import Image from 'next/image';
+import { getImageUrl } from '../utils/image';
 
 interface Props {
   item: OrderItem;
@@ -17,7 +18,7 @@ export default function ItemDetail({ item, startDate, endDate }: Props) {
           {/* 이미지 추가 필요 */}
           <div className="w-20 h-20 relative ds-rounded-xs">
             <Image
-              src={item.productThumbnailUrl}
+              src={getImageUrl(item.productThumbnailUrl)}
               alt={item.productName}
               fill
               className="object-cover"

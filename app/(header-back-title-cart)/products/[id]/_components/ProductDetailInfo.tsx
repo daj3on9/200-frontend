@@ -5,6 +5,7 @@ import ArrowDownIcon from '@/public/icons/arrow-down.svg';
 import ArrowUpIcon from '@/public/icons/arrow-up.svg';
 import { ProductDetailState } from '@/domains/products/types/ProductsType';
 import Image from 'next/image';
+import { getImageUrl } from '@/domains/common/utils/image';
 
 interface Props {
   detailData: ProductDetailState;
@@ -33,7 +34,7 @@ export default function ProductDetailInfo({ detailData }: Props) {
             <Image
               key={v}
               className="self-stretch"
-              src={v}
+              src={getImageUrl(v)}
               alt={'상세 내용'}
               width={390}
               height={390}
