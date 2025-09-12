@@ -20,7 +20,7 @@ export default function ReportItemDetail({
     <div className="py-3 flex justify-start items-start gap-3">
       <div className="flex-1 flex justify-between items-start">
         <div className="flex justify-start items-center gap-3">
-          <div className="w-20 h-20 relative rounded border-1">
+          <div className="w-20 h-20 relative">
             <Image
               src={getImageUrl(item.productThumbnailUrl)}
               alt={item.productName}
