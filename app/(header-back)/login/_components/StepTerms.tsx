@@ -88,14 +88,16 @@ export default function StepTerms({ step, setStep }: Props) {
                 </div>
               </div>
               <div className="w-4 h-4 ml-auto">
-                <a
-                  href={item.link}
-                  aria-label={item.label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ArrowRightIcon className="w-[16px] h-[16px] fill-Fill-50" />
-                </a>
+                {item.link !== '' ? (
+                  <a
+                    href={item.link}
+                    aria-label={item.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ArrowRightIcon className="w-[16px] h-[16px] fill-Fill-50" />
+                  </a>
+                ) : null}
               </div>
             </div>
           ))}

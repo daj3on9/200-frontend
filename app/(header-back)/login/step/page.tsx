@@ -64,18 +64,20 @@ function StepComponent() {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-white">
-      <div
-        className="absolute top-4 left-4 cursor-pointer"
-        onClick={() => {
-          if (step === 0) {
-            router.push('/');
-          } else {
-            setStep(step - 1);
-          }
-        }}
-      >
-        <LeftArrowIcon className="w-[18px] h-[18px] fill-Fill-10" />
-      </div>
+      {step === 3 ? null : (
+        <div
+          className="absolute top-4 left-4 cursor-pointer"
+          onClick={() => {
+            if (step === 0) {
+              router.push('/');
+            } else {
+              setStep(step - 1);
+            }
+          }}
+        >
+          <LeftArrowIcon className="w-[18px] h-[18px] fill-Fill-10" />
+        </div>
+      )}
 
       <div className="h-full">
         {step === 0 && (
