@@ -57,6 +57,7 @@ export default function ProductDetail({ detailData }: Props) {
                 alt={'상세 제품 이미지'}
                 width={390}
                 height={390}
+                unoptimized
               />
             </SwiperSlide>
           ))}
