@@ -6,6 +6,7 @@ import { createModal } from '@/domains/common/store/modalStore';
 import { useAuthStore } from '@/domains/common/store/authStore';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { deleteAPI, postAPI } from '@/domains/common/api';
 
 export default function Page() {
   const router = useRouter();
@@ -26,9 +27,35 @@ export default function Page() {
       title: '정말 탈퇴하시겠습니까?',
       content:
         '탈퇴 시 계정 정보 및 이용내역이 삭제되며 한번 삭제된 정보는 복구가 불가능합니다.',
-      onConfirm: () => {},
+      onConfirm: () => requestDeleteAccount(),
       onCancel: () => {},
     });
+  };
+
+  // 회원 탈퇴
+  const requestDeleteAccount = async () => {
+    try {
+      await deleteAPI<null, undefined>('/members', undefined);
+
+      logout();
+
+      router.push('/');
+    } catch (e: unknown) {
+      console.error('[회원 탈퇴 에러] : ', e);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await postAPI('auth/logout', {});
+    } catch (err) {
+      if (err instanceof Error) {
+        throw new Error(`로그아웃 중 문제가 발생했어요: ${err.message}`);
+      }
+    } finally {
+      logout();
+      router.replace('/');
+    }
   };
 
   return (
@@ -53,7 +80,7 @@ export default function Page() {
             <p className="text-Label-Assistive body2-r">{email}</p>
           </div>
         </div>
-        <div className="self-stretch p-4 bg-Static-White rounded-2xl flex flex-col items-start gap-3 overflow-hidden">
+        <div className="self-stretch p-4 bg-Static-White rounded-2xl flex flex-col items-start gap-3">
           <div className="text-Label-Alternative title1-sb">도움말</div>
           <div className="self-stretch flex flex-col items-start">
             <button
@@ -90,7 +117,7 @@ export default function Page() {
             </a>
           </div>
         </div>
-        <div className="self-stretch p-4 bg-Static-White rounded-2xl flex flex-col items-start gap-3 overflow-hidden">
+        <div className="self-stretch p-4 bg-Static-White rounded-2xl flex flex-col items-start gap-3">
           <div className="text-Label-Alternative title1-sb">약관 및 정책</div>
           <a
             href={
@@ -130,10 +157,7 @@ export default function Page() {
         <button
           type="button"
           className="w-full p-4 rounded-2xl text-Label-Assistive bg-Static-White items-center cursor-pointer body1-m outline outline-offset-[-1px] outline-Line-Subtler"
-          onClick={() => {
-            logout();
-            router.replace('/login');
-          }}
+          onClick={handleLogout}
         >
           로그아웃
         </button>

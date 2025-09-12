@@ -1,7 +1,12 @@
 export interface CartItemState {
-  id: string;
-  title: string;
-  option: string;
-  price: string;
-  image: string;
+  cartId: number;
+  productName: string;
+  productThumbnailUrl: string;
+  color: string;
+  dailyRentalPrice: number;
+}
+
+export interface CartData {
+  carts: CartItemState[];
+  totalPrice: number;
 }

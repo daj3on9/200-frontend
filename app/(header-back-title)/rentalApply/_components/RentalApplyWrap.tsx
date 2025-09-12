@@ -1,5 +1,4 @@
 'use client';
-import React, { useState } from 'react';
 import RentalNotice from './RentalNotice';
 import PriceDetail from './PriceDetail';
 import PaymentWrap from './PaymentWrap';
@@ -7,36 +6,22 @@ import DeliveryDetails from './DeliveryDetails';
 import CalendarWrap from './CalendarWrap';
 import RentalItem from './RentalItem';
 import { useRentalApplyForm } from '@/domains/rentalApply/hooks/useRentalApplyForm';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { postAPI } from '@/domains/common/api';
+import { Suspense, useEffect, useState } from 'react';
+import { format } from 'date-fns';
 import { CartItemState } from '@/domains/cart/types/cartItemType';
-import { useRouter } from 'next/navigation';
 
-const TEMPDATA = [
-  {
-    id: '1',
-    title: '이어폰 1',
-    option: '검정색',
-    price: '45,000',
-    image: '',
-  },
-  {
-    id: '2',
-    title: '이어폰 2',
-    option: '하늘색',
-    price: '45,000',
-    image: '',
-  },
-  {
-    id: '3',
-    title: '이어폰 3',
-    option: '흰색',
-    price: '45,000',
-    image: '',
-  },
-];
-
-export default function RentalApplyWrap() {
+function RentalApplyWrap() {
   const router = useRouter();
-  const [cartData, setCartData] = useState<CartItemState[]>(TEMPDATA);
+  const searchParams = useSearchParams();
+  const isDirectRental = searchParams.get('direct') === 'true';
+  const isCartRental = searchParams.get('cart') === 'true';
+  const [rentalInfo, setRentalInfo] = useState<CartItemState[]>([]);
+  const totalPrice = rentalInfo.reduce(
+    (a: number, item: CartItemState) => a + item.dailyRentalPrice,
+    0
+  );
   const {
     range,
     setRange,
@@ -55,27 +40,61 @@ export default function RentalApplyWrap() {
   } = useRentalApplyForm();
 
   const handleSubmit = async () => {
-    const isValid = validateForm();
-    if (!isValid) return;
+    if (validateForm() === false) return;
 
-    router.push('/rentalApply/complete');
+    const payload = {
+      rentStartAt: format(new Date(range.startDate!), 'yyyy-MM-dd'),
+      rentEndAt: format(new Date(range.endDate!), 'yyyy-MM-dd'),
+      shippingInfo: {
+        receiver: deliveryInfo.name,
+        phoneNumber: deliveryInfo.number,
+        address: {
+          postcode: deliveryInfo.zoneCode,
+          postAddress: deliveryInfo.address,
+          detailAddress: deliveryInfo.detailAddress,
+        },
+      },
+      paymentMethod: selectPayment,
+    };
 
-    // TODO : api 연결 후 주석 해제
-    // try {
-    //   await postAPI('/rental', {});
-    //   router.push('/rentalApply/complete');
-    // } catch (err) {
-    //   if (err instanceof Error) {
-    //     throw new Error(err.message);
-    //   } else {
-    //     throw new Error('카카오 로그인 오류');
-    //   }
-    // }
+    if (isDirectRental) {
+      Object.assign(payload, {
+        productId: rentalInfo[0].cartId,
+        color: rentalInfo[0].color,
+      });
+    }
+
+    if (isCartRental) {
+      Object.assign(payload, {
+        cartIds: rentalInfo.map((item: { cartId: number }) => item.cartId),
+      });
+    }
+
+    try {
+      await postAPI('/rentals', payload);
+      router.push('/rentalApply/complete');
+    } catch (err) {
+      if (err instanceof Error) {
+        throw new Error(err.message);
+      }
+    }
   };
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem('rentalInfo');
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    setRentalInfo(parsed);
+  }, []);
+
+  if (!rentalInfo.length)
+    return (
+      <p className="w-full h-[100vh] text-center content-evenly">Loading...</p>
+    );
   return (
     <div>
       <main className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        <RentalItem cartData={cartData} />
+        <RentalItem cartData={rentalInfo} />
 
         <div ref={calendarRef}>
           <CalendarWrap
@@ -103,7 +122,7 @@ export default function RentalApplyWrap() {
           />
         </div>
 
-        <PriceDetail />
+        <PriceDetail totalPrice={totalPrice} />
 
         <div ref={noticeRef}>
           <RentalNotice
@@ -120,9 +139,17 @@ export default function RentalApplyWrap() {
           className="w-full p-4 rounded bg-Primary-Normal text-Static-White items-center cursor-pointer title2-sb"
           onClick={handleSubmit}
         >
-          99,999원 결제하기
+          {(totalPrice * 7).toLocaleString()}원 결제하기
         </button>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <RentalApplyWrap />
+    </Suspense>
   );
 }

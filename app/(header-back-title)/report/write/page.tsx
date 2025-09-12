@@ -1,5 +1,6 @@
 import Header from '@/domains/common/components/header';
 import { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -19,7 +20,14 @@ export default function page() {
         title="리포트 작성하기"
       />
       <main className="pb-3 flex flex-col gap-3 bg-Static-White h-[calc(100vh-135px)] justify-center items-center">
-        <div className="w-32 h-32 relative rounded border-1">img</div>
+        <div className="w-32 h-32 relative">
+          <Image
+            src={'/icons/Logo.svg'}
+            alt="로고"
+            width={150}
+            height={150}
+          />
+        </div>
 
         <p className="text-center justify-start text-Label-Alternative title2-sb">
           현재 외부 링크를 통해 리포트를
@@ -31,7 +39,7 @@ export default function page() {
       {/* TODO : 리포트 폼 링크로 변경 */}
       <div className="w-full p-3.5 bg-Static-White">
         <Link
-          href="/"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSclkpkCd4B0Xg0xIWVOHthhYP-HUyF9MvTfk4lZ-e_YV0gd7A/viewform"
           className="block w-full p-4 rounded bg-Primary-Normal text-Static-White text-center cursor-pointer title2-sb"
           aria-label="리포트 작성하러 가기"
         >

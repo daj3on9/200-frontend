@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
-import { Order } from '@/domains/orders/types/orderType';
+import { OrderDetailResponse } from '@/domains/orders/types/orderType';
 import OrderExperience from './OrderExperience';
 import ToastComponent from '@/domains/common/components/ToastComponent';
 import OrderPayList from './OrderPayList';
 import OrderEtc from './OrderEtc';
 
 interface OrderTabsProps {
-  order: Order;
+  order: OrderDetailResponse;
 }
 
 export default function OrderTabs({ order }: OrderTabsProps) {
@@ -22,7 +22,7 @@ export default function OrderTabs({ order }: OrderTabsProps) {
       case 'experience':
         return <OrderExperience order={order} />;
       case 'payment':
-        return <OrderPayList order={order} />;
+        return <OrderPayList rentalId={order.rentalId} />;
       case 'other':
         return <OrderEtc />;
       default:
@@ -35,7 +35,7 @@ export default function OrderTabs({ order }: OrderTabsProps) {
       <div className="px-3.5 bg-Static-White border-b border-Line-Subtler inline-flex justify-start items-center">
         <button
           className={clsx(
-            'p-3  flex justify-center items-center gap-3  text-Label-Normal',
+            'p-3  flex justify-center items-center gap-3  text-Label-Normal cursor-pointer',
             activeTab === 'experience'
               ? 'title2-b border-b-2 border-Primary-Normal'
               : 'body1-m'
@@ -46,7 +46,7 @@ export default function OrderTabs({ order }: OrderTabsProps) {
         </button>
         <button
           className={clsx(
-            'p-3 flex justify-center items-center gap-3  text-Label-Normal',
+            'p-3 flex justify-center items-center gap-3  text-Label-Normal cursor-pointer',
             activeTab === 'payment'
               ? 'title2-b border-b-2 border-Primary-Normal'
               : 'body1-m'
@@ -57,7 +57,7 @@ export default function OrderTabs({ order }: OrderTabsProps) {
         </button>
         <button
           className={clsx(
-            'p-3  flex justify-center items-center gap-3  text-Label-Normal',
+            'p-3  flex justify-center items-center gap-3  text-Label-Normal cursor-pointer',
             activeTab === 'other'
               ? 'title2-b border-b-2 border-Primary-Normal'
               : 'body1-m'

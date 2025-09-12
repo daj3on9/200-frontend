@@ -37,7 +37,7 @@ export default function Page() {
           서비스 입니다.
         </div>
       </div>
-      <div className="self-stretch py-5 bg-yellow-300 flex flex-col justify-center items-center">
+      <div className="self-stretch py-5 bg-yellow-300 flex flex-col justify-center items-center cursor-pointer">
         <div
           className="justify-start title2-b cursor-pointer"
           onClick={kakaoLogin}

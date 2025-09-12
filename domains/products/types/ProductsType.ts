@@ -12,7 +12,7 @@ export type BrandId =
 
 export type SortType = 'REGISTERED' | 'LAUNCHED' | 'PRICE_ASC' | 'PRICE_DESC';
 
-export interface ProductRes {
+export interface Product {
   id: number;
   name: string;
   brand: BrandId;
@@ -21,7 +21,17 @@ export interface ProductRes {
 }
 
 export interface ProductsApiResponse {
-  products: ProductRes[];
+  products: Product[];
   hasNext: boolean;
   lastProductId: number | null;
+}
+
+export interface ProductDetailState {
+  productId: number;
+  productName: string;
+  brand: string;
+  dailyRentalPrice: number;
+  colors: string[];
+  productThumbnailUrls: string[];
+  productImageDetailUrls: string[];
 }

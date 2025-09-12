@@ -1,23 +1,23 @@
 import React from 'react';
 import clsx from 'clsx';
-import type { Order } from '@/domains/orders/types/orderType';
+import type { RentalStatus } from '@/domains/orders/types/orderType';
 
 interface OrderStatusLabelProps {
-  status: Order['status'];
+  status: RentalStatus;
 }
 
-const statusLabel: Record<Order['status'], string> = {
-  delivering: '배송중',
-  testing: '체험중',
-  returning: '반납중',
-  completed: '체험완료',
+const statusLabel: Record<RentalStatus, string> = {
+  PENDING: '배송중',
+  ACTIVE: '체험중',
+  IN_RETURN: '반납중',
+  COMPLETED: '체험완료',
 };
 
-const statusColor: Record<Order['status'], string> = {
-  delivering: 'bg-Status-Cautionary text-Label-Subtler',
-  testing: 'bg-Primary-Normal text-Label-Subtler',
-  returning: 'bg-Status-Positive text-Label-Subtler',
-  completed: 'bg-Fill-99 text-Label-Subnormal',
+const statusColor: Record<RentalStatus, string> = {
+  PENDING: 'bg-Status-Cautionary text-Label-Subtler',
+  ACTIVE: 'bg-Primary-Normal text-Label-Subtler',
+  IN_RETURN: 'bg-Status-Positive text-Label-Subtler',
+  COMPLETED: 'bg-Fill-99 text-Label-Subnormal',
 };
 
 export default function OrderStatusLabel({ status }: OrderStatusLabelProps) {

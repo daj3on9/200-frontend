@@ -6,10 +6,19 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import QuestionIcon from '@/public/icons/question.svg';
 import { COLORS } from '@/lib/colors';
+import { ProductDetailState } from '@/domains/products/types/ProductsType';
+import { getImageUrl } from '@/domains/common/utils/image';
+import Image from 'next/image';
+import { BRANDS } from '@/lib/brands';
 
-export default function ProductDetail() {
+interface Props {
+  detailData: ProductDetailState;
+}
+
+export default function ProductDetail({ detailData }: Props) {
   const [showPopover, setShowPopover] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
+  const brandInfo = BRANDS.find((b) => b.id === detailData.brand);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,7 +41,7 @@ export default function ProductDetail() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-[var(--container-width)] h-96 p-5">
+      <div className="w-[var(--container-width)] h-96">
         <Swiper
           className="w-full h-full"
           pagination={{
@@ -40,32 +49,52 @@ export default function ProductDetail() {
           }}
           modules={[Pagination]}
         >
-          {[1, 2, 3, 4, 5].map((num) => (
-            <SwiperSlide key={num}>Slide {num}</SwiperSlide>
+          {detailData.productThumbnailUrls.map((v) => (
+            <SwiperSlide key={v}>
+              <Image
+                key={v}
+                src={getImageUrl(v)}
+                alt={'상세 제품 이미지'}
+                width={390}
+                height={390}
+              />
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>
       <div className="self-stretch h-14 px-3.5 py-3 bg-Static-White border-t border-b border-Line-Subtler inline-flex justify-between items-center">
         <div className="flex justify-start items-center gap-2">
-          <div className="w-5 h-5 relative rounded-full border border-Line-Subtler body2-m"></div>
+          <div className="w-5 h-5">
+            <Image
+              src={brandInfo?.image ?? '/icons/Logo.png'}
+              alt={`${brandInfo?.name}_이미지`}
+              width={100}
+              height={100}
+              className="rounded-full"
+            />
+          </div>
 
-          <p className="justify-start text-Label-Normal body2-m">Brand</p>
+          <p className="justify-start text-Label-Normal body2-m">
+            {brandInfo?.name}
+          </p>
         </div>
       </div>
       <div className="self-stretch px-3.5 py-6 bg-Static-White flex flex-col justify-start items-start gap-3">
         <div className="flex flex-col justify-start items-start gap-2">
-          <div className="justify-start text-Label-Normal h3-b">Title</div>
+          <div className="justify-start text-Label-Normal h3-b">
+            {detailData.productName}
+          </div>
         </div>
         <div className="flex flex-col justify-start items-start gap-2">
           <p className="text-center justify-start text-Label-Assistive body2-m ">
             Option
           </p>
           <div className="bg-Static-White inline-flex justify-start items-start gap-2.5">
-            {['MidnightBlue', 'DeepPlum', 'SandStone'].map((item) => (
+            {detailData.colors.map((color) => (
               <div
-                key={item}
-                style={{ backgroundColor: COLORS[item] }}
-                className={`w-3 h-3 rounded-full`}
+                key={color}
+                style={{ backgroundColor: COLORS[color] }}
+                className={`w-3 h-3 rounded-full border-1 border-Line-Subtler`}
               ></div>
             ))}
           </div>
@@ -89,7 +118,9 @@ export default function ProductDetail() {
               )}
             </div>
           </div>
-          <p className="text-Label-Normal h4-b">일 Price 원</p>
+          <p className="text-Label-Normal h4-b">
+            일 {detailData.dailyRentalPrice} 원
+          </p>
         </div>
       </div>
     </div>

@@ -8,42 +8,48 @@ import ToastComponent from '@/domains/common/components/ToastComponent';
 import ModalComponent from '@/domains/common/components/ModalComponent';
 import { useToastStore } from '@/domains/common/store/toastStore';
 import { getAPI } from '@/domains/common/api';
+import { ProductDetailState } from '@/domains/products/types/ProductsType';
 
-interface ProductDetailType {
-  name: string;
-  price: number;
-  description: string;
-}
-
-export default function ProductWrap({ id }: { id: string }) {
-  const [detailData, setDetailData] = useState<ProductDetailType | null>(null);
+export default function ProductWrap({ id }: { id: number }) {
+  const [detailData, setDetailData] = useState<ProductDetailState | null>(null);
   const [showOptions, setShowOptions] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { show } = useToastStore.getState();
+  const show = useToastStore((s) => s.show);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await getAPI<ProductDetailType>(`/productDetail?${id}`);
-      setDetailData(res);
+      try {
+        const res = await getAPI<ProductDetailState>(`/product/${id}`);
+        setDetailData(res);
+      } catch (err) {
+        if (err instanceof Error) {
+          throw new Error(err.message);
+        }
+      }
     };
 
-    // TODO : api 연결 후 주석 해제
-    // getData();
+    getData();
   }, [id]);
+
+  if (!detailData)
+    return (
+      <p className="w-full h-[100vh] text-center content-evenly">Loading...</p>
+    );
 
   return (
     <>
       <div className="pb-3 flex flex-col gap-3 overflow-y-scroll h-[calc(100vh-135px)] no-scrollbar">
-        <ProductDetail />
-        <ProductDetailInfo />
+        <ProductDetail detailData={detailData} />
+        <ProductDetailInfo detailData={detailData} />
         <ProductDetailGuide />
       </div>
       <FooterBtn
-        id={id as string}
+        id={id as number}
         showOptions={showOptions}
         setShowOptions={setShowOptions}
         showModal={showModal}
         setShowModal={setShowModal}
+        detailData={detailData}
       />
       {showOptions && (
         <div className="absolute inset-0 bg-black opacity-30 z-40" />

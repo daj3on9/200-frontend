@@ -1,22 +1,18 @@
 'use client';
 
+import { BRANDS as ALL_BRANDS } from '@/lib/brands';
 import { BrandId } from '@/domains/products/types/ProductsType';
 import clsx from 'clsx';
 import { useMemo } from 'react';
 import debounce from 'lodash.debounce';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { FreeMode } from 'swiper/modules';
 
-const BRANDS: { id: BrandId; name: string }[] = [
-  { id: 'SONY', name: 'SONY' },
-  { id: 'APPLE', name: 'APPLE' },
-  { id: 'BOSE', name: 'BOSE' },
-  { id: 'SENNHEISER', name: 'SENNHEISER' },
-  { id: 'BANG_OLUFSEN', name: 'BANG & OLUFSEN' },
-  { id: 'BOWERS_WILKINS', name: 'BOWERS & WILKINS' },
-  { id: 'MARSHALL', name: 'MARSHALL' },
-  { id: 'DYSON', name: 'DYSON' },
-  { id: 'JBL', name: 'JBL' },
-  { id: 'NOTHING', name: 'NOTHING' },
-];
+const BRAND_OPTIONS: { id: BrandId; name: string }[] = ALL_BRANDS.map((b) => ({
+  id: b.id as BrandId,
+  name: b.name,
+}));
 
 export default function BrandTabs({
   selected,
@@ -43,24 +39,35 @@ export default function BrandTabs({
       <div className="w-20 shrink-0 border-r border-Line-Subtler flex justify-center items-center ">
         <div className="justify-start text-Label-Normal title2-sb">브랜드</div>
       </div>
-      <div className="flex-1 min-w-0">
-        <div className="no-scrollbar overflow-x-auto whitespace-nowrap flex items-center gap-2 px-3">
-          {BRANDS.map((b) => {
+      <div className="flex-1 min-w-0 w-full px-3">
+        <Swiper
+          modules={[FreeMode]}
+          slidesPerView={'auto'}
+          spaceBetween={8}
+          freeMode={true}
+        >
+          {BRAND_OPTIONS.map((b) => {
             const active = selected?.includes(b.id) ?? false;
             return (
-              <button
+              <SwiperSlide
                 key={b.id}
-                onClick={() => toggle(b.id)}
-                className={clsx(
-                  'body2-m px-2 py-1 rounded-full cursor-pointer',
-                  active ? 'text-Primary-Normal' : 'text-Label-Subnormal'
-                )}
+                style={{ width: 'auto' }}
               >
-                {b.name}
-              </button>
+                <button
+                  onClick={() => toggle(b.id)}
+                  onMouseDown={(e) => e.preventDefault()}
+                  tabIndex={-1}
+                  className={clsx(
+                    'body2-m px-2 py-1 rounded-full cursor-pointer focus:outline-none select-none',
+                    active ? 'text-Primary-Normal' : 'text-Label-Subnormal'
+                  )}
+                >
+                  {b.name}
+                </button>
+              </SwiperSlide>
             );
           })}
-        </div>
+        </Swiper>
       </div>
     </div>
   );
