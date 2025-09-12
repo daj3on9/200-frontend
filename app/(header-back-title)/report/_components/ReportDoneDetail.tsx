@@ -1,4 +1,3 @@
-import { getImageUrl } from '@/domains/common/utils/image';
 import { RentalItem } from '@/domains/rentalApply/types/RentalItemType';
 import Image from 'next/image';
 import React from 'react';
@@ -25,7 +24,7 @@ export default function ReportDoneDetail({ item }: Props) {
 
         <div className="w-24 h-24">
           <Image
-            src={getImageUrl(firstItem.productThumbnailUrl)}
+            src={firstItem.productThumbnailUrl}
             alt={firstItem.productName}
             width={100}
             height={100}

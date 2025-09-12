@@ -7,7 +7,6 @@ import { Pagination } from 'swiper/modules';
 import QuestionIcon from '@/public/icons/question.svg';
 import { COLORS } from '@/lib/colors';
 import { ProductDetailState } from '@/domains/products/types/ProductsType';
-import { getImageUrl } from '@/domains/common/utils/image';
 import Image from 'next/image';
 import { BRANDS } from '@/lib/brands';
 
@@ -53,7 +52,7 @@ export default function ProductDetail({ detailData }: Props) {
             <SwiperSlide key={v}>
               <Image
                 key={v}
-                src={getImageUrl(v)}
+                src={v}
                 alt={'상세 제품 이미지'}
                 width={390}
                 height={390}

@@ -1,4 +1,3 @@
-import { getImageUrl } from '@/domains/common/utils/image';
 import Image from 'next/image';
 import { formatDate } from '@/domains/common/utils/date';
 import { RentalItem } from '@/domains/rentalApply/types/RentalItemType';
@@ -22,7 +21,7 @@ export default function ReportItemDetail({
         <div className="flex justify-start items-center gap-3">
           <div className="w-20 h-20 relative">
             <Image
-              src={getImageUrl(item.productThumbnailUrl)}
+              src={item.productThumbnailUrl}
               alt={item.productName}
               width={100}
               height={100}

@@ -1,4 +1,3 @@
-import { getImageUrl } from '@/domains/common/utils/image';
 import { Product } from '@/domains/products/types/ProductsType';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,7 +12,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="relative w-full aspect-square">
           <Image
             className="self-stretch"
-            src={getImageUrl(product.thumbnailImageUrl)}
+            src={product.thumbnailImageUrl}
             alt={product.name}
             width={195}
             height={195}

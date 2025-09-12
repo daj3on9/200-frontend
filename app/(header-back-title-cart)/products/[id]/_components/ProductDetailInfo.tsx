@@ -1,11 +1,10 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import InfoIcon from '@/public/icons/info.svg';
 import ArrowDownIcon from '@/public/icons/arrow-down.svg';
 import ArrowUpIcon from '@/public/icons/arrow-up.svg';
 import { ProductDetailState } from '@/domains/products/types/ProductsType';
 import Image from 'next/image';
-import { getImageUrl } from '@/domains/common/utils/image';
 
 interface Props {
   detailData: ProductDetailState;
@@ -34,7 +33,7 @@ export default function ProductDetailInfo({ detailData }: Props) {
             <Image
               key={v}
               className="self-stretch"
-              src={getImageUrl(v)}
+              src={v}
               alt={'상세 내용'}
               width={390}
               height={390}
